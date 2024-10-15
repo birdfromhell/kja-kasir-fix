@@ -1,0 +1,120 @@
+@extends('layout.main')
+@section('content')
+<!-- content @s -->
+<div class="nk-content ">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Daftar Barang</h3>
+                        </div>
+                        <div class="nk-block-head-content">
+                            <div class="toggle-wrap nk-block-tools-toggle">
+                                <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1" data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
+                                <div class="toggle-expand-content" data-content="pageMenu">
+                                    <ul class="nk-block-tools g-3">
+                                        <li>
+                                            <div class="form-control-wrap">
+                                                <div class="form-icon form-icon-right">
+                                                    <em class="icon ni ni-search"></em>
+                                                </div>
+                                                <input type="text" class="form-control" id="default-04" placeholder="Search">
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="dropdown">
+                                                <a href="#" class="btn btn-outline-primary">Print</a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <ul class="link-list-opt no-bdr">
+                                                        <li><a href="#"><span>Item Baru</span></a></li>
+                                                        <li><a href="#"><span>Unggulan</span></a></li>
+                                                        <li><a href="#"><span>Stok Habis</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="nk-block-tools-opt">
+                                            <a href="#" data-target="addProduct" class="toggle btn btn-icon btn-primary d-md-none"><em class="icon ni ni-plus"></em></a>
+                                            <a href="#" data-target="addProduct" class="toggle btn btn-primary d-none d-md-inline-flex"><em class="icon ni ni-plus"></em><span>Add New</span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nk-block">
+                    <div class="card card-bordered">
+                        <div class="card-inner-group">
+                            <div class="card-inner p-0">
+                                <table class="table">
+                                    <thead class="thead-light">
+                                    <tr style="background-color: #d3d3d3; color: #000000;">
+                                        <th style="background-color: #d3d3d3; color: #000000;">#</th>
+                                        <th style="background-color: #d3d3d3; color: #000000;">Nomor Barang</th>
+                                        <th style="background-color: #d3d3d3; color: #000000;">Nama Barang</th>
+                                        <th style="background-color: #d3d3d3; color: #000000;">Satuan</th>
+                                        <th style="background-color: #d3d3d3; color: #000000;">Kategori</th>
+                                        <th style="background-color: #d3d3d3; color: #000000;">Kelompok Barang</th>
+                                        <th style="background-color: #d3d3d3; color: #000000;">Sistem</th>
+                                        <th style="background-color: #d3d3d3; color: #000000;">Phisik</th>
+                                        <th style="background-color: #d3d3d3; color: #000000;">Selisih</th>
+                                        <th style="background-color: #d3d3d3; color: #000000;">Aksi</th>
+                                        <th style="width: 50px; background-color: #d3d3d3; color: #000000;">
+                                            <div class="dropdown" style="display: flex; align-items: center;">
+                                                <button class="btn btn-icon btn-trigger dropdown-toggle" data-toggle="dropdown" style="padding: 0;">
+                                                    <em class="icon ni ni-more-v" style="transform: rotate(90deg);"></em>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <ul class="link-list-opt no-bdr">
+                                                        <li><a href="{{ url('barang/edit') }}"><em class="icon ni ni-edit"></em> Edit</a></li>
+                                                        <li><a href="#"><em class="icon ni ni-trash"></em> Delete</a></li>
+                                                        <li><a href="#"><em class="icon ni ni-file-text"></em> Print</a></li>
+                                                        <li><a href="#"><em class="icon ni ni-download"></em> Download</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($perusahaanData as $item)
+                                    <tr>
+                                        <th scope="row">{{ $loop->iteration }}</th>
+                                        <td>{{ $item->nomor_barang }}</td>
+                                        <td>{{ $item->nama_barang }}</td>
+                                        <td>{{ $item->satuan }}</td>
+                                        <td>{{ $item->kategori }}</td>
+                                        <td>{{ $item->kelompok_barang }}</td>
+                                        <td>{{ $item->sistem }}</td>
+                                        <td>{{ $item->phisik }}</td>
+                                        <td>{{ $item->selisih }}</td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm" onclick="window.location.href='{{ url('barang/edit') }}'">
+                                                <em class="icon ni ni-edit"></em>
+                                            </button>
+                                            <form action="{{ url('/barang/' . $item->id) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <em class="icon ni ni-trash"></em>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                                {{ $data->links() }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

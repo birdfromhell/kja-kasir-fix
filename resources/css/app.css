@@ -1,0 +1,11 @@
+.sidebar {
+    width: 250px;
+    background-color: #f31717;
+    color: white;
+    transition: transform 0.3s ease;
+    transform: translateX(0);
+}
+
+.sidebar.closed {
+    transform: translateX(-100%);
+}
