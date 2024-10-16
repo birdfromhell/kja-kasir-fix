@@ -134,10 +134,10 @@
                     </a>
                     <ul class="nk-menu-sub">
                         <li class="nk-menu-item">
-                            <a href="{{ url('laporanpembelian') }}" class="nk-menu-link"><span class="nk-menu-text">Laporan Pembelian</span></a>
+                            <a href="{{ url('laporan/pembelian') }}" class="nk-menu-link"><span class="nk-menu-text">Laporan Pembelian</span></a>
                         </li>
                         <li class="nk-menu-item">
-                            <a href="{{ url('laporanpenjualan') }}" class="nk-menu-link"><span class="nk-menu-text">Laporan Penjualan</span></a>
+                            <a href="{{ url('laporan/penjualan') }}" class="nk-menu-link"><span class="nk-menu-text">Laporan Penjualan</span></a>
                         </li>
                         <li class="nk-menu-item">
                             <a href="html/apps-file-manager.html" class="nk-menu-link"><span class="nk-menu-text">Laporan Neraca</span></a>
