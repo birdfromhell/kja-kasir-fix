@@ -212,15 +212,11 @@
     <p>Fitur untuk melakukan pemeliharaan barang dan relasi perusahaan.</p>
     <button class="pilih-btn" onclick="toggleOptions(this)">Pilih</button>
     <div class="options-menu">
-        <button onclick="window.location.href='{{ url('perusahaan') }}'">Daftar Relasi</button>
-
-        <button onclick="window.location.href='{{ url('barang') }}'">Daftar Barang</button>
-
+        <button onclick="window.location.href='{{ url('app/relasi') }}'">Daftar Relasi</button>
+        <button onclick="window.location.href='{{ url('app/barang') }}'">Daftar Barang</button>
         <button onclick="window.location.href='{{ url('kategori') }}'">Daftar Kategori</button>
-        <button onclick="window.location.href='{{ url('kelompok') }}'">Daftar Kelompok</button>
-        <button onclick="window.location.href='{{ url('fakturpembelian') }}'">Daftar Buku Besar</button>
-        <button>Print</button>
-        <button>Download</button>
+        <button onclick="window.location.href='{{ url('app/kelompok') }}'">Daftar Kelompok</button>
+        <button onclick="window.location.href='{{ url('bukubesar') }}'">Daftar Buku Besar</button>
     </div>
 </div>
 
@@ -234,13 +230,11 @@
     <p>Fitur untuk membeli barang melalui berbagai aksi.</p>
     <button class="pilih-btn" onclick="toggleOptions(this)">Pilih</button>
     <div class="options-menu">
-        <button onclick="window.location.href='{{ url('orderpembelian') }}'">Purchase Order</button>
+        <button onclick="window.location.href='{{ url('dataPO') }}'">Purchase Order</button>
 
-        <button onclick="window.location.href='{{ url('penerimaanbarang') }}'">Penerimaan Barang</button>
+        <button onclick="window.location.href='{{ url('dataPB') }}'">Penerimaan Barang</button>
 
-        <button onclick="window.location.href='{{ url('fakturpembelian') }}'">Faktur Beli</button>
-        <button>Print</button>
-        <button>Download</button>
+        <button onclick="window.location.href='{{ url('dataFB') }}'">Faktur Beli</button>
     </div>
 </div>
 <!-- Barang Keluar Card -->
@@ -255,8 +249,6 @@
         <button onclick="window.location.href='{{ url('suratorderpenjualan') }}'">Surat Order Penjualan</button>
         <button onclick="window.location.href='{{ url('kategori') }}'">Surat Jalan</button>
         <button onclick="window.location.href='{{ url('fakturpenjualan') }}'">Faktur Penjualan</button>
-        <button>Print</button>
-        <button>Download</button>
     </div>
 </div>
 
@@ -273,8 +265,6 @@
         <button onclick="window.location.href='{{ url('laporanpenjualan') }}'">Laporan Penjualan</button>
         <button onclick="window.location.href='{{ url('') }}'">Laporan Neraca</button>
         <button onclick="window.location.href='{{ url('') }}'">Laporan Laba Rugi</button>
-        <button>Print</button>
-        <button>Download</button>
     </div>
 </div>
 </div>
