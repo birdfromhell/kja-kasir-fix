@@ -242,7 +242,7 @@ Route::group(['middleware' => 'auth', 'verified'], function () {
     Route::get('/orderPenjualan', [OrderPenjualanController::class, 'OrderPenjualan']);
     Route::get('/orderPenjualan/laporan', [OrderPenjualanController::class, 'laporan']);
     Route::get('/orderPenjualan/create', [OrderPenjualanController::class, 'CreateOrderPenjualan']);
-    Route::get('/dataOP', [OrderPenjualanController::class, 'index']);
+    Route::get('/app/dataOP', [OrderPenjualanController::class, 'index']);
     Route::get('/dataOP/edit/{id}', [OrderPenjualanController::class, 'edit']);
 
     Route::post('/dataOP/detailop/edit/{id}', [DetailOpController::class, 'edit']);
@@ -251,7 +251,7 @@ Route::group(['middleware' => 'auth', 'verified'], function () {
     Route::get('/dataOP/print/laporan/{id_po}', [OrderPenjualanController::class, 'print']);
 
     //sulatjalan lo
-    Route::get('/dataSJ', [SuratJalanController::class, 'index']);
+    Route::get('/app/dataSJ', [SuratJalanController::class, 'index']);
     Route::get('/SuratJalan', [SuratJalanController::class, 'SuratJalan']);
     Route::get('/SuratJalan/create', [SuratJalanController::class, 'CreateSuratJalan']);
     Route::get('/dataSJ/laporan', [SuratJalanController::class, 'laporan']);
@@ -262,7 +262,7 @@ Route::group(['middleware' => 'auth', 'verified'], function () {
 
 
     // fj
-    Route::get('/dataFJ', [FakturJualController::class, 'index']);
+    Route::get('/app/dataFJ', [FakturJualController::class, 'index']);
     Route::get('/fakturjual/{id_sj}', [SuratJalanController::class, 'faktur']);
     Route::get('/fakturjual/{id}/create', [FakturJualController::class, 'createfj']);
     Route::get('/print/fakturjual/{id_fj}/{id_sj}', [FakturJualController::class, 'print']);

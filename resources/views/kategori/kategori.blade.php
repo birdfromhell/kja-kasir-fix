@@ -94,14 +94,10 @@
                                                     <span class="tb-sub">{{ $row->kategori_barang }}</span>
                                                 </div>
                                                 <div class="nk-tb-col nk-tb-col-tools">
-                                                    <ul class="nk-tb-actions gx-1 my-n1">
-                                                        <li class="mr-n1">
-                                                            <a href="/kategori-edit/{{ $row->id }}" class="btn btn-icon btn-trigger"><em class="icon ni ni-edit"></em></a>
-                                                        </li>
-                                                        <li class="mr-n1">
-                                                            <a href="/kategori-delete/{{ $row->id }}" class="btn btn-icon btn-trigger"><em class="icon ni ni-trash"></em></a>
-                                                        </li>
-                                                    </ul>
+                                                    <div style="display: flex; justify-content: flex-start; align-items: center; margin-left: -20px;">
+                                                        <a href="/kategori-edit/{{ $row->id }}" class="btn btn-icon btn-trigger" style="margin-right: 5px;"><em class="icon ni ni-edit"></em></a>
+                                                        <a href="/kategori-delete/{{ $row->id }}" class="btn btn-icon btn-trigger"><em class="icon ni ni-trash"></em></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         @endforeach

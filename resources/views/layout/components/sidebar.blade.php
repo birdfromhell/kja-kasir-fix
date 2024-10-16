@@ -109,13 +109,13 @@
                     </a>
                     <ul class="nk-menu-sub">
                         <li class="nk-menu-item">
-                            <a href="{{ url('suratorderpenjualan') }}" class="nk-menu-link"><span class="nk-menu-text">Surat Order Penjualan(SO)</span></a>
+                            <a href="{{ url('app/dataOP') }}" class="nk-menu-link"><span class="nk-menu-text">Surat Order Penjualan(SO)</span></a>
                         </li>
                         <li class="nk-menu-item">
-                            <a href="{{ url('suratjalan') }}" class="nk-menu-link"><span class="nk-menu-text">Surat Jalan (SJ)</span></a>
+                            <a href="{{ url('app/dataSJ') }}" class="nk-menu-link"><span class="nk-menu-text">Surat Jalan (SJ)</span></a>
                         </li>
                         <li class="nk-menu-item">
-                            <a href="{{ url('fakturpenjualan') }}" class="nk-menu-link"><span class="nk-menu-text">Faktur Penjualan (FJ)</span></a>
+                            <a href="{{ url('app/dataFJ') }}" class="nk-menu-link"><span class="nk-menu-text">Faktur Penjualan (FJ)</span></a>
                         </li>
                     </ul><!-- .nk-menu-sub -->
                 </li><!-- .nk-menu-item -->
