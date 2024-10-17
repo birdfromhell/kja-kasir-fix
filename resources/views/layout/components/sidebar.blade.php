@@ -140,10 +140,10 @@
                             <a href="{{ url('laporan/penjualan') }}" class="nk-menu-link"><span class="nk-menu-text">Laporan Penjualan</span></a>
                         </li>
                         <li class="nk-menu-item">
-                            <a href="html/apps-file-manager.html" class="nk-menu-link"><span class="nk-menu-text">Laporan Neraca</span></a>
+                            <a href="{{ url('laporan/neraca') }}" class="nk-menu-link"><span class="nk-menu-text">Laporan Neraca</span></a>
                         </li>
                         <li class="nk-menu-item">
-                            <a href="html/apps-chats.html" class="nk-menu-link"><span class="nk-menu-text">Laporan Laba Rugi</span></a>
+                            <a href="{{ url('laporan/laba-rugi') }}" class="nk-menu-link"><span class="nk-menu-text">Laporan Laba Rugi</span></a>
                         </li>
 
                     </ul><!-- .nk-menu-sub -->
@@ -163,7 +163,7 @@
                     </a>
                     <ul class="nk-menu-sub">
                         <li class="nk-menu-item">
-                            <a href="{{ url('jurnal') }}" class="nk-menu-link"><span class="nk-menu-text">Input Lain</span></a>
+                            <a href="{{ url('input-lain') }}" class="nk-menu-link"><span class="nk-menu-text">Input Lain</span></a>
                         </li>
 
                     </ul><!-- .nk-menu-sub -->
@@ -183,10 +183,10 @@
                     </a>
                     <ul class="nk-menu-sub">
                         <li class="nk-menu-item">
-                            <a href="{{ url('stokopnembarang') }}" class="nk-menu-link"><span class="nk-menu-text">Stok Opnem Barang</span></a>
+                            <a href="{{ url('so-barang-manual') }}" class="nk-menu-link"><span class="nk-menu-text">Stok Opnem Barang</span></a>
                         </li>
                         <li class="nk-menu-item">
-                            <a href="{{ url('cashopnem') }}" class="nk-menu-link"><span class="nk-menu-text">Cash Opnem</span></a>
+                            <a href="{{ url('cash-opnem') }}" class="nk-menu-link"><span class="nk-menu-text">Cash Opnem</span></a>
                         </li>
                     </ul><!-- .nk-menu-sub -->
                 </li><!-- .nk-menu-item -->

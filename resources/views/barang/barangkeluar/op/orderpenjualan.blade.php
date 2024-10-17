@@ -7,7 +7,6 @@
     gap: 20px;
     justify-content: center;
     }
-
     .card {
     background-color: #fff;
     border: 1px solid #007bff;
@@ -61,11 +60,10 @@
     </style>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <div id="content-page" class="content-page" style="margin-top: 75px">
-
         @if (session('error'))
             <div class="alert alert-warning">
                 {{ session('error') }}
-                <a class="btn btn-outline-success mb-3 float-right" href="/dataPB">Klik disini</a>
+                <a class="btn btn-outline-success mb-3 float-right" href="/dataSJ">Klik disini</a>
             </div>
             <script>
                 setTimeout(function() {
@@ -73,7 +71,7 @@
                     if (alert) {
                         alert.style.display = 'none';
                     }
-                }, 3000); // 3000 milidetik = 5 detik
+                }, 3000);
             </script>
         @endif
         @if (session('success'))
@@ -86,7 +84,7 @@
                     if (alert) {
                         alert.style.display = 'none';
                     }
-                }, 3000); // 3000 milidetik = 5 detik
+                }, 3000);
             </script>
         @endif
         @if (session('status'))
@@ -99,40 +97,40 @@
                     if (alert) {
                         alert.style.display = 'none';
                     }
-                }, 3000); // 3000 milidetik = 5 detik
+                }, 3000);
             </script>
         @endif
         <div class="container-fluid">
             <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
                     <div class="iq-header-title">
-                        <h4 class="card-title">Purchase Order (PO)</h4>
+                        <h4 class="card-title">Surat Order (SO)</h4>
                     </div>
                 </div>
                 <div class="iq-card-body">
-                    <p>Input Pembelian</p>
-                    <form class="form-horizontal" action="/purchaseOrder/create" method="POST" id="poForm">
+                    <p>Input Penjualan</p>
+                    <form class="form-horizontal" action="/orderPenjualan/create" method="POST" id="soForm">
                         @csrf
                         <div class="form-group row">
-                            <label class="control-label col-sm-2 align-self-center mb-0" for="tanggal_po">ID Purchase Order
-                                (PO)</label>
+                            <label class="control-label col-sm-2 align-self-center mb-0" for="tanggal_op">ID Surat Order
+                                (SO)</label>
                             <div class="col-sm-3">
-                                <input type="Date" class="form-control" id="tanggal_po" name="tanggal_po"
-                                    placeholder="Masukkan tanggal_po" value="{{ $tanggalHariIni }}">
+                                <input type="Date" class="form-control" id="tanggal_op" name="tanggal_op"
+                                       placeholder="Masukkan tanggal_op" value="{{ $tanggalHariIni }}">
                             </div>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" id="po" name="po" placeholder=""
-                                    value="{{ $purchaseOrderId }}" readonly="true">
+                                <input type="text" class="form-control" id="op" name="op" placeholder=""
+                                       value="{{ $OrderPenjualanId }}" readonly="true">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="control-label col-sm-2 align-self-center mb-0" for="nama_perusahaan">Nama
-                                Supplier:</label>
+                                Konsumen:</label>
                             <div class="col-sm-8">
                                 <select class="form-control" id="kode_perusahaan" name="kode_perusahaan">
                                     <option value="" selected disabled> </option>
                                     @foreach ($Perusahaan as $p)
-                                        @if ($p->jenis == 'Supplier')
+                                        @if ($p->jenis == 'Konsumen')
                                             <option value="{{ $p->kode_perusahaan }}">{{ $p->kode_perusahaan }} -
                                                 {{ $p->nama_perusahaan }}</option>
                                         @endif
@@ -141,7 +139,7 @@
                             </div>
                             <div class="col-sm-2">
                                 <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                                    data-target="#barangModal">Tambah Barang</button>
+                                        data-target="#barangModal">Tambah Barang</button>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -214,12 +212,11 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary" id="poFormSubmit">Tambah</button>
+                            <button type="submit" class="btn btn-primary" id="soFormSubmit">Tambah</button>
                             <button type="reset" class="btn iq-bg-danger">Reset</button>
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
@@ -227,10 +224,10 @@
     <script>
         $(document).ready(function() {
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
-            $('#poFormSubmit').click(function(event) {
+            $('#opFormSubmit').click(function(event) {
                 event.preventDefault();
-                var tanggal_po = $('#tanggal_po').val();
-                var id_po = $('#po').val();
+                var tanggal_op = $('#tanggal_op').val();
+                var id_op = $('#op').val();
                 var kode_perusahaan = $('#kode_perusahaan').val();
                 var termin = $('#termin').val();
                 var jatuh_tempo = $('#jatuh_tempo').val();
@@ -239,7 +236,7 @@
 
                 var formData = {
                     _token: csrfToken,
-                    tanggal_po: tanggal_po,
+                    tanggal_op: tanggal_op,
                     kode_perusahaan: kode_perusahaan,
                     termin: termin,
                     jatuh_tempo: jatuh_tempo,
@@ -248,8 +245,8 @@
                 };
 
                 var method = 'get'; // Changed method to POST
-                var action = 'Purchase Order';
-                var url = '/purchaseOrder/create';
+                var action = 'Order Penjualan';
+                var url = '/orderPenjualan/create';
 
                 Swal.fire({
                     title: 'warning',
@@ -269,10 +266,10 @@
                                     icon: 'success',
                                     text: 'Berhasil membuat ' +
                                         action + ' dengan id : ' +
-                                        id_po // Added space before action
+                                        id_op // Added space before action
                                 }).then(() => { // Corrected syntax for then function
                                     window.location.href =
-                                        '/dataPO' // Update URL without reloading
+                                        '/dataOP' // Update URL without reloading
                                 });
                             },
                             error: function(xhr, status, error) {
@@ -299,7 +296,7 @@
         }
 
         // Ambil elemen input
-        const tanggalPoInput = document.getElementById('tanggal_po');
+        const tanggalPoInput = document.getElementById('tanggal_op');
         const jatuhTempoInput = document.getElementById('jatuh_tempo');
         const tanggalTerminInput = document.getElementById('tanggal_termin');
         const tanggalTerminInput2 = document.getElementById('tanggal_termin2');
@@ -432,8 +429,6 @@
             function setSessionData(data) {
                 sessionStorage.setItem('selectedItems', JSON.stringify(data));
             }
-
-
             submitModalBtn.addEventListener('click', function(event) {
                 event.preventDefault();
 
@@ -528,6 +523,8 @@
             });
 
 
+
+
             function getSessionData() {
                 return JSON.parse(sessionStorage.getItem('selectedItems')) || [];
             }
@@ -536,7 +533,98 @@
                 sessionStorage.setItem('selectedItems', JSON.stringify(data));
             }
 
+            submitModalBtn.addEventListener('click', function(event) {
+                event.preventDefault();
 
+                const selectedItems = [];
+                const cards = document.querySelectorAll('.card');
+
+                cards.forEach(card => {
+                    const cardTitle = card.querySelector('.card-title');
+                    const cardTextKodeBarang = card.querySelector('[data-kodebarang]');
+                    const cardTextSatuan = card.querySelector('[data-satuanbarang]');
+                    const quantityInput = card.querySelector('.quantity-input');
+                    const priceInput = card.querySelector('.price-input');
+                    const discountPersenInput = card.querySelector('.discount-persen');
+                    const discountInput = card.querySelector('.discount-input');
+
+                    if (cardTitle && cardTextKodeBarang && cardTextSatuan && quantityInput &&
+                        priceInput && discountPersenInput && discountInput) {
+                        const id = cardTitle.textContent.split(': ')[1];
+                        const barang_id = cardTextKodeBarang.getAttribute('data-kodebarang');
+                        const nama_barang = cardTextKodeBarang.textContent.split(':')[1].trim();
+                        const satuan = cardTextSatuan.getAttribute('data-satuanbarang');
+
+                        const quantity = parseInt(quantityInput.value);
+                        const price = parseFloat(priceInput.value);
+                        const discountpersen = parseFloat(discountPersenInput.value);
+                        const discount = parseFloat(discountInput.value);
+                        let total = 0;
+
+                        if (quantity > 0) {
+                            const a = quantity * price;
+                            const b = a * (discountpersen / 100);
+                            const c = quantity * discount;
+                            total = a - b - c;
+
+                            if (total < 0) {
+                                total = 0;
+                                alert('Pastikan lagi pada saat masukkan barang agar tidak minus.');
+                            }
+                            selectedItems.push({
+                                id,
+                                barang_id,
+                                nama_barang,
+                                satuan,
+                                quantity,
+                                price,
+                                discountpersen,
+                                discount,
+                                total
+                            });
+                        }
+                    }
+                });
+
+                const existingData = JSON.parse(sessionStorage.getItem('selectedItems')) || [];
+                const existingDataMap = new Map(existingData.map(item => [item.id, item]));
+
+                selectedItems.forEach(newItem => {
+                    const existingItem = existingDataMap.get(newItem.id);
+                    if (existingItem) {
+                        existingItem.quantity = newItem.quantity;
+                    } else {
+                        existingDataMap.set(newItem.id, newItem);
+                    }
+                });
+
+                const updatedData = Array.from(existingDataMap.values());
+                sessionStorage.setItem('selectedItems', JSON.stringify(updatedData));
+
+                if (selectedItems.length > 0) {
+                    const resultElement = document.getElementById('result');
+                    resultElement.innerHTML = '';
+
+                    const table = document.createElement('table');
+                    table.classList.add('table');
+                    const headerRow = table.insertRow();
+                    headerRow.innerHTML =
+                        '<th>Nama Barang</th><th>Quantity</th><th>Harga</th><th>Diskon Persen</th><th>Potongan</th><th>Total</th>';
+
+                    selectedItems.forEach(item => {
+                        const row = table.insertRow();
+                        row.innerHTML =
+                            `<td>${item.nama_barang}</td><td>${item.quantity}</td><td>${item.price}</td><td>${item.discountpersen}%</td><td>${item.discount}</td><td>${item.total}</td>`;
+                    });
+
+                    resultElement.appendChild(table);
+                }
+
+                setSessionData(selectedItems);
+                document.getElementById('selectedItemsInput').value = sessionStorage.getItem(
+                    'selectedItems');
+                $('#barangModal').modal('hide');
+            });
 
             populateModalCards(dataBarangPerusahaan.barang);
             resetModalBtn.addEventListener('click', function(event) {
