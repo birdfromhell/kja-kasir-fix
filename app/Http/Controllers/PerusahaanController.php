@@ -45,17 +45,17 @@ class PerusahaanController extends Controller
                 'plafon_debit' => 'nullable',
                 'plafon_kredit' => 'nullable',
             ]);
-    
+
             // Simpan data perusahaan
             Perusahaan::create($validatedData);
-    
+
             // Redirect dengan pesan sukses
             return redirect('/app/relasi')->with('success', 'Perusahaan berhasil ditambahkan.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
-    
+
 
     public function edit($id)
     {
@@ -79,12 +79,12 @@ class PerusahaanController extends Controller
             'plafon_debit' => 'nullable|numeric',
             'plafon_kredit' => 'nullable|numeric',
         ]);
-    
+
         $perusahaan = Perusahaan::findOrFail($id);
         $perusahaan->update($validated);
-    
+
         return response()->json(['message' => 'Perusahaan berhasil diperbarui!']);
- 
+
 }
 
 
@@ -102,7 +102,7 @@ public function destroy($id)
 
     public function profile()
     {
-        return view('relasi.profile');
+        return view('account.profile');
     }
 
     public function profileedit()

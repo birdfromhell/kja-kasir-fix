@@ -9,8 +9,8 @@
 
             <div class="nk-header-brand d-xl-none">
                 <a href="{{ url('app/dashboard') }}" class="logo-link">
-                    <img class="logo-light logo-img" src="{{ asset('images/pogo.png') }}" srcset="./images/logo2x.png 2x" alt="logo">
-                    <img class="logo-dark logo-img" src="{{ asset('images/pogo.png') }}" srcset="./images/logo-dark2x.png 2x" alt="logo-dark">
+                    <img class="logo-light logo-img" src="{{ asset('images/pogo.png') }}" srcset="{{ asset('images/pogo.png') }} 2x" alt="logo">
+                    <img class="logo-dark logo-img" src="{{ asset('images/pogo.png') }}" srcset="{{ asset('images/pogo.png') }} 2x" alt="logo-dark">
                 </a>
             </div>
 
@@ -21,6 +21,12 @@
 
             <div class="nk-header-tools">
                 <ul class="nk-quick-nav">
+                    <!-- Tombol Fullscreen -->
+                    <li>
+                        <button id="fullscreenButton" class="btn btn-icon btn-sm btn-trigger">
+                            <em class="icon ni ni-expand"></em>
+                        </button>
+                    </li>
 
                     <!-- User Dropdown -->
                     <li class="dropdown user-dropdown">
@@ -30,7 +36,7 @@
                                     <span>{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
                                 </div>
                                 <div class="user-info d-none d-xl-block">
-                                    <div class="user-name dropdown-indicator">{{ Auth::user()->name  }}</div>
+                                    <div class="user-name dropdown-indicator">{{ Auth::user()->name }}</div>
                                 </div>
                             </div>
                         </a>
@@ -41,16 +47,16 @@
                                         <span>{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
                                     </div>
                                     <div class="user-info">
-                                        <span class="lead-text">{{ Auth::user()->name  }}</span>
+                                        <span class="lead-text">{{ Auth::user()->name }}</span>
                                         <span class="sub-text">{{ Auth::user()->email }}</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="dropdown-inner">
                                 <ul class="link-list">
-                                    <li><a href="html/user-profile-regular.html"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
-                                    <li><a href="html/user-profile-setting.html"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
-                                    <li><a href="html/user-profile-activity.html"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
+                                    <li><a href="{{ url('app/user/profile') }}"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
+                                    <li><a href="{{ url('setting') }}"><em class="icon ni ni-setting-alt"></em><span>Setting Aplikasi</span></a></li>
+                                    <li><a href="{{ url('app/user/profile#accountSettings') }}"><em class="icon ni ni-activity-alt"></em><span>Profile Perusahaan</span></a></li>
                                     <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
                                 </ul>
                             </div>
@@ -68,7 +74,83 @@
                             </div>
                         </div>
                     </li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var fullscreenButton = document.getElementById('fullscreenButton');
+            var icon = fullscreenButton.querySelector('em');
+
+            if (!fullscreenButton) {
+                console.error('Fullscreen button not found');
+                return;
+            }
+
+            if (!icon) {
+                console.error('Icon element not found');
+                return;
+            }
+
+            function toggleFullScreen() {
+                if (!document.fullscreenElement &&
+                    !document.mozFullScreenElement &&
+                    !document.webkitFullscreenElement &&
+                    !document.msFullscreenElement) {
+                    if (document.documentElement.requestFullscreen) {
+                        document.documentElement.requestFullscreen();
+                    } else if (document.documentElement.msRequestFullscreen) {
+                        document.documentElement.msRequestFullscreen();
+                    } else if (document.documentElement.mozRequestFullScreen) {
+                        document.documentElement.mozRequestFullScreen();
+                    } else if (document.documentElement.webkitRequestFullscreen) {
+                        document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                    }
+                    icon.classList.remove('ni-expand');
+                    icon.classList.add('ni-shrink');
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    }
+                    icon.classList.remove('ni-shrink');
+                    icon.classList.add('ni-expand');
+                }
+            }
+
+            fullscreenButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Fullscreen button clicked');
+                toggleFullScreen();
+            });
+
+            document.addEventListener('fullscreenchange', updateFullscreenButton);
+            document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+            document.addEventListener('mozfullscreenchange', updateFullscreenButton);
+            document.addEventListener('MSFullscreenChange', updateFullscreenButton);
+
+            function updateFullscreenButton() {
+                console.log('Fullscreen state changed');
+                if (!document.fullscreenElement &&
+                    !document.webkitIsFullScreen &&
+                    !document.mozFullScreen &&
+                    !document.msFullscreenElement) {
+                    icon.classList.remove('ni-shrink');
+                    icon.classList.add('ni-expand');
+                } else {
+                    icon.classList.remove('ni-expand');
+                    icon.classList.add('ni-shrink');
+                }
+            }
+        });
+    </script>
+@endpush

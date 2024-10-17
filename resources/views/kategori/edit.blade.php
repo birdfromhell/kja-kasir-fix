@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.app')
 @section('content')
     <div class="nk-content">
         <div class="container-fluid">

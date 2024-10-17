@@ -128,7 +128,7 @@ class PerusahaanRepository
 
     public function profile()
     {
-        return view('relasi.profile');
+        return view('account.profile');
     }
 
     public function profileedit()

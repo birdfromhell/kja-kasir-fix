@@ -55,7 +55,6 @@ Route::get('/app/user/login', [UsersController::class, 'login'])->name('login');
 
 Route::get('forget-password', function () {
     return view('account.forget-password');
-
 });
 
 Route::post('/app/user/login', [UsersController::class, 'loginUser']);
@@ -89,7 +88,7 @@ Route::get('/homeUser', [UsersController::class, 'homeuser'])->name('homeUser')-
 Route::get('/email/verify', function () {
 
     if (auth()->user()->email_verified_at === null) {
-        return view('account.verify-email-new');
+        return view('account.verify-email');
     } else {
         return redirect('/home');
     }

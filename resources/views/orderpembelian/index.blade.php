@@ -1,11 +1,11 @@
-@extends('layout.main')
+@extends('layout.app')
 @section('content')
 <!-- content @s -->
-<div class="nk-content ">    
+<div class="nk-content ">
     <div class="container-fluid">
         <div class="nk-content-inner">
-            <div class="nk-content-body">  
-                <div class="nk-block-head nk-block-head-sm">     
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
                     <div class="nk-block-between">
                         <div class="nk-block-head-content">
                             <h3 class="nk-block-title page-title">Daftar Purchase Order</h3>
@@ -59,10 +59,10 @@
                                             <th style="background-color: #d3d3d3; color: #000000;">Tanggal PO</th>
                                             <th style="background-color: #d3d3d3; color: #000000;">Nama Supplier</th>
                                             <th style="background-color: #d3d3d3; color: #000000;">Detail PO</th>
-                                            <th style="background-color: #d3d3d3; color: #000000;">Jumlah Barang</th>    
+                                            <th style="background-color: #d3d3d3; color: #000000;">Jumlah Barang</th>
                                             <th style="background-color: #d3d3d3; color: #000000;">Total Harga</th>
-                                            <th style="background-color: #d3d3d3; color: #000000;">Status</th>  
-                                            <th style="background-color: #d3d3d3; color: #000000;">Jatuh Tempo</th>                                  
+                                            <th style="background-color: #d3d3d3; color: #000000;">Status</th>
+                                            <th style="background-color: #d3d3d3; color: #000000;">Jatuh Tempo</th>
                                             <th style="background-color: #d3d3d3; color: #000000;">Aksi</th>
                                             <th style="width: 50px; background-color: #d3d3d3; color: #000000;">
                                                 <div class="dropdown" style="display: flex; align-items: center;">
@@ -102,7 +102,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Anda yakin ingin menghapus?')">
-                                                        <em class="icon ni ni-trash"></em> 
+                                                        <em class="icon ni ni-trash"></em>
                                                     </button>
                                                 </form>
                                             </td>
@@ -127,7 +127,7 @@
                                     <input type="date" class="form-control" id="id-purchase-order" name="id-purchase-order">
                                 </div>
                             </div>
-                        
+
                             <div class="col-md-6"> <!-- Kolom kosong di samping kolom tanggal -->
                                 <div class="form-group mb-0"> <!-- Menghapus margin bawah untuk sejajar -->
                                     <label class="form-label" for="harga-beli"></label>
@@ -144,7 +144,7 @@
                                 <div class="form-group">
                                     <label class="form-label" for="barang-yang-terpilih">Barang Yang Terpilih</label>
                                     <input type="text" class="form-control" id="barang-yang-terpilih" name="barang-yang-terpilih" placeholder="Masukkan Barang Yang Terplih">
-                        
+
                                 </div>
                             </div>
                             <div class="col-12">
@@ -161,7 +161,7 @@
                                     <input type="date" class="form-control" id="tanggal" name="tanggal">
                                 </div>
                             </div>
-                        
+
                             <div class="col-md-6"> <!-- Kolom kosong di samping kolom tanggal -->
                                 <div class="form-group mb-0"> <!-- Menghapus margin bawah untuk sejajar -->
                                     <label class="form-label" for="harga-beli">Harga Beli</label>
@@ -197,9 +197,9 @@
         </div>
     </div>
 </div>
-                
-                
-                
+
+
+
 <!-- content @e -->
 
 <script>

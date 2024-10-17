@@ -1,11 +1,11 @@
-@extends('layout.main')
+@extends('layout.app')
 @section('content')
 <!-- content @s -->
-<div class="nk-content ">    
+<div class="nk-content ">
     <div class="container-fluid">
         <div class="nk-content-inner">
-            <div class="nk-content-body">  
-                <div class="nk-block-head nk-block-head-sm">     
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
                     <div class="nk-block-between">
                         <div class="nk-block-head-content">
                             <h3 class="nk-block-title page-title">Daftar Penerimaan Barang</h3>
@@ -59,7 +59,7 @@
                                             <th style="background-color: #d3d3d3; color: #000000;">Tanggal</th>
                                             <th style="background-color: #d3d3d3; color: #000000;">Detail PO</th>
                                             <th style="background-color: #d3d3d3; color: #000000;">Detail PB</th>
-                                            <th style="background-color: #d3d3d3; color: #000000;">Status</th>                                   
+                                            <th style="background-color: #d3d3d3; color: #000000;">Status</th>
                                             <th style="background-color: #d3d3d3; color: #000000;">Aksi</th>
                                             <th style="width: 50px; background-color: #d3d3d3; color: #000000;">
                                                 <div class="dropdown" style="display: flex; align-items: center;">
@@ -87,7 +87,7 @@
                                             <td>Kategori A</td>
                                             <td>Kelompok A</td>
                                             <td>Sistem A</td>
-                                            
+
                                             <td>
                                                 <button class="btn btn-primary btn-sm" onclick="window.location.href='{{ url('barang/edit') }}'">
                                                     <em class="icon ni ni-edit"></em>
@@ -96,7 +96,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Anda yakin ingin menghapus?')">
-                                                        <em class="icon ni ni-trash"></em> 
+                                                        <em class="icon ni ni-trash"></em>
                                                     </button>
                                                 </form>
                                             </td>
@@ -158,7 +158,7 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="col-12">
                                 <button class="btn btn-primary">
                                     <em class="icon ni ni-plus"></em><span>Add New</span>
@@ -170,7 +170,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
