@@ -34,7 +34,7 @@ class KategoriRepository
      */
     public function store($validatedData)
     {
-        try {           
+        try {
 
             // Simpan data kategori ke dalam database menggunakan model
             $kategori = new Kategori();
@@ -44,7 +44,7 @@ class KategoriRepository
             $kategori->save();
 
             // Redirect ke halaman lain atau tampilkan pesan sukses jika diperlukan
-            return redirect('/kategori')->with('success', 'Kategori Barang <strong>' . $validatedData['kategori_barang'] . '</strong> berhasil ditambahkan.');
+            return redirect('/app/kategori')->with('success', 'Kategori Barang <strong>' . $validatedData['kategori_barang'] . '</strong> berhasil ditambahkan.');
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -63,13 +63,13 @@ class KategoriRepository
     public function update($validatedData, $id)
     {
         try {
-            $data = Kategori::find($id);        
+            $data = Kategori::find($id);
 
             $data->update($validatedData);
 
             $kategori = $data->kategori_barang;
 
-            return redirect('/kategori')->with('update', 'Kategori Barang <strong>' . $kategori . '</strong> berhasil diupdate.');
+            return redirect('/app/kategori')->with('update', 'Kategori Barang <strong>' . $kategori . '</strong> berhasil diupdate.');
             //
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
@@ -88,7 +88,7 @@ class KategoriRepository
 
             $kategori = $data->kategori_barang;
 
-            return redirect('/kategori')->with('delete', 'Kategori Barang <strong>' . $kategori . '</strong> berhasil dihapus.');
+            return redirect('/app/kategori')->with('delete', 'Kategori Barang <strong>' . $kategori . '</strong> berhasil dihapus.');
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }

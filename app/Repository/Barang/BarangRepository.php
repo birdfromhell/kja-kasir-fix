@@ -26,7 +26,7 @@ class BarangRepository
             $kelompokOptions = Kelompok::all();
             $perusahaan = Perusahaan::all();
 
-            return view('barang.barang', ['data' => $userBarang], compact('kelompokOptions', 'kategori', 'perusahaan'));
+            return view('barang.barang-new', ['data' => $userBarang], compact('kelompokOptions', 'kategori', 'perusahaan'));
         } catch (\Exception $e) {
             // If this is a web route, you might want to redirect with an error message
             return response()->json(['error' => $e->getMessage()], 400);
@@ -48,7 +48,7 @@ class BarangRepository
                 ->get();
 
             $data = Barang::paginate(15);
-            return view('barang.barang', compact('data', 'kategori', 'kelompok', 'perusahaan', 'kelompokOptions'));
+            return view('barang.barang-new', compact('data', 'kategori', 'kelompok', 'perusahaan', 'kelompokOptions'));
 
             // return view('barang.create', compact('kategori', 'kelompok', 'perusahaan', 'kelompokOptions'));
         } catch (\Exception $e) {
@@ -89,7 +89,7 @@ class BarangRepository
                 'harga_jual' => $hargaJualDefault,
             ]);
             // Redirect ke halaman lain atau tampilkan pesan sukses jika diperlukan
-            return redirect('/barang')->with('success', 'Barang berhasil ditambahkan.');
+            return redirect('/app/barang')->with('success', 'Barang berhasil ditambahkan.');
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -127,7 +127,7 @@ class BarangRepository
         $barang = $data->nama_barang;
         $data->update($validatedData);
 
-        return redirect('/barang')->with('update', 'Barang <strong>' . $barang . '</strong> telah diupdate');
+        return redirect('/app/barang')->with('update', 'Barang <strong>' . $barang . '</strong> telah diupdate');
     }
 
 
@@ -140,7 +140,7 @@ class BarangRepository
             $data = Barang::find($id);
             $barang = $data->nama_barang;
             $data->delete();
-            return redirect('/barang')->with('delete', 'Barang <strong>' . $barang . '</strong> telah dihapus');
+            return redirect('/app/barang')->with('delete', 'Barang <strong>' . $barang . '</strong> telah dihapus');
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }

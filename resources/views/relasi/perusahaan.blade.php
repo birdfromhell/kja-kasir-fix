@@ -12,7 +12,9 @@
                             </div>
                             <div class="nk-block-head-content">
                                 <div class="toggle-wrap nk-block-tools-toggle">
-                                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#relasiModal">Tambah</button>
+                                    <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                                            data-target="#relasiModal">Tambah
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -66,11 +68,17 @@
                                                 <ul class="nk-tb-actions gx-1 my-n1">
                                                     <li class="mr-n1">
                                                         <div class="dropdown">
-                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
+                                                               data-toggle="dropdown"><em
+                                                                    class="icon ni ni-more-h"></em></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <ul class="link-list-opt no-bdr">
-                                                                    <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit Selected</span></a></li>
-                                                                    <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Selected</span></a></li>
+                                                                    <li><a href="#"><em
+                                                                                class="icon ni ni-edit"></em><span>Edit Selected</span></a>
+                                                                    </li>
+                                                                    <li><a href="#"><em
+                                                                                class="icon ni ni-trash"></em><span>Remove Selected</span></a>
+                                                                    </li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -81,9 +89,12 @@
                                         @foreach ($data as $row)
                                             <div class="nk-tb-item">
                                                 <div class="nk-tb-col nk-tb-col-check">
-                                                    <div class="custom-control custom-control-sm custom-checkbox notext">
-                                                        <input type="checkbox" class="custom-control-input" id="pid{{ $row->id }}">
-                                                        <label class="custom-control-label" for="pid{{ $row->id }}"></label>
+                                                    <div
+                                                        class="custom-control custom-control-sm custom-checkbox notext">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               id="pid{{ $row->id }}">
+                                                        <label class="custom-control-label"
+                                                               for="pid{{ $row->id }}"></label>
                                                     </div>
                                                 </div>
                                                 <div class="nk-tb-col tb-col-sm">
@@ -120,13 +131,19 @@
                                                 <div class="nk-tb-col nk-tb-col-tools">
                                                     <ul class="nk-tb-actions gx-1 my-n1">
                                                         <li class="mr-n1">
-                                                            <a href="{{ url('app/relasi/edit/' . $row->id) }}" class="btn btn-icon btn-trigger"><em class="icon ni ni-edit"></em></a>
+                                                            <a href="{{ url('/app/relasi/edit/' . $row->id) }}"
+                                                               class="btn btn-icon btn-trigger"><em
+                                                                    class="icon ni ni-edit"></em></a>
                                                         </li>
                                                         <li class="mr-n1">
-                                                            <form action="{{ url('/app/relasi/delete/' . $row->id) }}" method="POST" style="display: inline;" class="delete-form">
+                                                            <form action="{{ url('/app/relasi/delete/' . $row->id) }}"
+                                                                  method="POST" style="display: inline;"
+                                                                  class="delete-form">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="button" class="btn btn-icon btn-trigger delete-button"><em class="icon ni ni-trash"></em></button>
+                                                                <button type="button"
+                                                                        class="btn btn-icon btn-trigger delete-button">
+                                                                    <em class="icon ni ni-trash"></em></button>
                                                             </form>
                                                         </li>
                                                     </ul>
@@ -142,7 +159,7 @@
                     <div class="d-flex justify-content-end">
                         {{ $data->links() }}
                     </div>
-                    @include('relasi.create-new')
+                    @include('relasi.create')
                 </div>
             </div>
         </div>
@@ -153,8 +170,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        $(document).ready(function() {
-            $('.delete-button').on('click', function() {
+        $(document).ready(function () {
+            $('.delete-button').on('click', function () {
                 var form = $(this).closest('form'); // Mendapatkan form terdekat
 
                 Swal.fire({
@@ -168,9 +185,9 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             url: form.attr('action'),
-                            type: 'POST', // Menggunakan POST untuk mengirim data
+                            type: 'GET', // Menggunakan POST untuk mengirim data
                             data: form.serialize(), // Menyertakan data dari form
-                            success: function(response) {
+                            success: function (response) {
                                 Swal.fire({
                                     title: 'Sukses!',
                                     text: 'Perusahaan berhasil dihapus.',
@@ -181,7 +198,7 @@
                                     location.reload(); // Reload halaman setelah sukses
                                 });
                             },
-                            error: function(xhr) {
+                            error: function (xhr) {
                                 let errorMessage = 'Terjadi kesalahan.';
                                 if (xhr.status === 404) {
                                     errorMessage = 'Perusahaan tidak ditemukan.';

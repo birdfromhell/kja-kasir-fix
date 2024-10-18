@@ -20,8 +20,9 @@ class BukuBesarRepository
             $data = BukuBesar::all();
             $BukuBesar = BukuBesar::with('subBukuBesar')
                 ->orderBy('no_bukubesar', 'asc')
-                ->get();
+                ->paginate(10);
 
+            $BukuBesar = BukuBesar::paginate(10);
             $bukubesar = BukuBesar::all();
 
             // Add this line to get the previous no_bukubesar

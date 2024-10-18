@@ -100,10 +100,10 @@
                                                 <div class="nk-tb-col nk-tb-col-tools">
                                                     <ul class="nk-tb-actions gx-1 my-n1">
                                                         <li class="mr-n1">
-                                                            <a href="/kelompok-edit/{{ $row->id }}" class="btn btn-icon btn-trigger"><em class="icon ni ni-edit"></em></a>
+                                                            <a href="/app/kelompok/edit/{{ $row->id }}" class="btn btn-icon btn-trigger"><em class="icon ni ni-edit"></em></a>
                                                         </li>
                                                         <li class="mr-n1">
-                                                            <a href="/kelompok-delete/{{ $row->id }}" class="btn btn-icon btn-trigger"><em class="icon ni ni-trash"></em></a>
+                                                            <a href="/app/kelompok/delete/{{ $row->id }}" class="btn btn-icon btn-trigger"><em class="icon ni ni-trash"></em></a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -232,7 +232,7 @@
                                 }).then((willAdd) => {
                                     if (willAdd) {
                                         $.ajax({
-                                            url: "/kelompok-insert",
+                                            url: "/app/kelompok/insert",
                                             type: "POST",
                                             data: $("#formTambahKelompok").serialize(),
                                             success: function(response) {
@@ -241,7 +241,7 @@
                                                     icon: 'success',
                                                     text: 'Kelompok berhasil ditambahkan!'
                                                 }).then((value) => {
-                                                    window.location.href = "/kelompok";
+                                                    window.location.href = "/app/kelompok";
                                                 });
                                             },
                                             error: function(xhr, status, error) {

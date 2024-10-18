@@ -9,7 +9,7 @@
                     </div>
                 </div>
                 <div class="iq-card-body">
-                    <form id="formUpdateKelompok" class="form-horizontal" action="{{ url('/kelompok-update/' . $kelompokData->id) }}" method="POST">
+                    <form id="formUpdateKelompok" class="form-horizontal" action="{{ url('/app/kelompok/update/' . $kelompokData->id) }}" method="POST">
                         @csrf
                         @method('POST')
                         <div class="form-group row">

@@ -55,8 +55,8 @@
                             <div class="dropdown-inner">
                                 <ul class="link-list">
                                     <li><a href="{{ url('app/user/profile') }}"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
-                                    <li><a href="{{ url('setting') }}"><em class="icon ni ni-setting-alt"></em><span>Setting Aplikasi</span></a></li>
-                                    <li><a href="{{ url('app/user/profile#accountSettings') }}"><em class="icon ni ni-activity-alt"></em><span>Profile Perusahaan</span></a></li>
+                                    <li><a href="{{ url('/app/setting') }}"><em class="icon ni ni-setting-alt"></em><span>Setting Aplikasi</span></a></li>
+                                    <li><a href="{{ url('app/user/profile#accounbtSettings') }}"><em class="icon ni ni-activity-alt"></em><span>Profile Perusahaan</span></a></li>
                                     <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
                                 </ul>
                             </div>

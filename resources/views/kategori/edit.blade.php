@@ -53,7 +53,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "/kategori-update/{{ $data->id }}",
+                            url: "/app/kategori/update/{{ $data->id }}",
                             type: "POST",
                             data: $("#formUpdateKategori").serialize(),
                             success: function(response) {
@@ -62,7 +62,7 @@
                                     icon: 'success',
                                     text: 'Kategori barang berhasil diupdate!',
                                 }).then((value) => {
-                                    window.location.href = "/kategori"
+                                    window.location.href = "/app/kategori"
                                 });
                             },
                             error: function(xhr, status, error) {

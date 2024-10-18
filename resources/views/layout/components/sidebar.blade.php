@@ -56,14 +56,14 @@
                                 <a href="{{ url('app/barang')}}" class="nk-menu-link"><span class="nk-menu-text">Daftar Barang</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="{{ url('kategori')}}" class="nk-menu-link"><span class="nk-menu-text">Daftar Kategori</span></a>
+                                <a href="{{ url('app/kategori')}}" class="nk-menu-link"><span class="nk-menu-text">Daftar Kategori</span></a>
                             </li>
                             <li class="nk-menu-item">
                                 <a href="{{ url('app/kelompok') }}" class="nk-menu-link"><span class="nk-menu-text">Daftar Kelompok</span></a>
 
                             </li>
                             <li class="nk-menu-item">
-                                <a href="{{ url('bukubesar')}}" class="nk-menu-link"><span class="nk-menu-text">Daftar Buku Besar</span></a>
+                                <a href="{{ url('app/bukubesar')}}" class="nk-menu-link"><span class="nk-menu-text">Daftar Buku Besar</span></a>
                             </li>
                         </ul>
                     </li>
@@ -83,13 +83,13 @@
                         </a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="{{ url('dataPO') }}" class="nk-menu-link"><span class="nk-menu-text">Order Pembelian (PO)</span></a>
+                                <a href="{{ url('app/purchaseorder/data') }}" class="nk-menu-link"><span class="nk-menu-text">Order Pembelian (PO)</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="{{ url('dataPB') }}" class="nk-menu-link"><span class="nk-menu-text">Penerimaan Barang (PB)</span></a>
+                                <a href="{{ url('app/penerimaanbarang/data') }}" class="nk-menu-link"><span class="nk-menu-text">Penerimaan Barang (PB)</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="{{ url('dataFB') }}" class="nk-menu-link"><span class="nk-menu-text">Faktur Pembelian (FB)</span></a>
+                                <a href="{{ url('app/fakturbeli/data') }}" class="nk-menu-link"><span class="nk-menu-text">Faktur Pembelian (FB)</span></a>
                             </li>
                     </li>
                 </ul><!-- .nk-menu-sub -->
@@ -109,13 +109,13 @@
                     </a>
                     <ul class="nk-menu-sub">
                         <li class="nk-menu-item">
-                            <a href="{{ url('app/dataOP') }}" class="nk-menu-link"><span class="nk-menu-text">Surat Order Penjualan(SO)</span></a>
+                            <a href="{{ url('app/orderpenjualan') }}" class="nk-menu-link"><span class="nk-menu-text">Surat Order Penjualan(SO)</span></a>
                         </li>
                         <li class="nk-menu-item">
-                            <a href="{{ url('app/dataSJ') }}" class="nk-menu-link"><span class="nk-menu-text">Surat Jalan (SJ)</span></a>
+                            <a href="{{ url('app/suratjalan/data') }}" class="nk-menu-link"><span class="nk-menu-text">Surat Jalan (SJ)</span></a>
                         </li>
                         <li class="nk-menu-item">
-                            <a href="{{ url('app/dataFJ') }}" class="nk-menu-link"><span class="nk-menu-text">Faktur Penjualan (FJ)</span></a>
+                            <a href="{{ url('app/fakturjual/data') }}" class="nk-menu-link"><span class="nk-menu-text">Faktur Penjualan (FJ)</span></a>
                         </li>
                     </ul><!-- .nk-menu-sub -->
                 </li><!-- .nk-menu-item -->
@@ -134,16 +134,16 @@
                     </a>
                     <ul class="nk-menu-sub">
                         <li class="nk-menu-item">
-                            <a href="{{ url('laporan/pembelian') }}" class="nk-menu-link"><span class="nk-menu-text">Laporan Pembelian</span></a>
+                            <a href="{{ url('app/laporan/pembelian') }}" class="nk-menu-link"><span class="nk-menu-text">Laporan Pembelian</span></a>
                         </li>
                         <li class="nk-menu-item">
-                            <a href="{{ url('laporan/penjualan') }}" class="nk-menu-link"><span class="nk-menu-text">Laporan Penjualan</span></a>
+                            <a href="{{ url('app/laporan/penjualan') }}" class="nk-menu-link"><span class="nk-menu-text">Laporan Penjualan</span></a>
                         </li>
                         <li class="nk-menu-item">
-                            <a href="{{ url('laporan/neraca') }}" class="nk-menu-link"><span class="nk-menu-text">Laporan Neraca</span></a>
+                            <a href="{{ url('app/laporan/neraca') }}" class="nk-menu-link"><span class="nk-menu-text">Laporan Neraca</span></a>
                         </li>
                         <li class="nk-menu-item">
-                            <a href="{{ url('laporan/laba-rugi') }}" class="nk-menu-link"><span class="nk-menu-text">Laporan Laba Rugi</span></a>
+                            <a href="{{ url('app/laporan/laba-rugi') }}" class="nk-menu-link"><span class="nk-menu-text">Laporan Laba Rugi</span></a>
                         </li>
 
                     </ul><!-- .nk-menu-sub -->
@@ -163,7 +163,7 @@
                     </a>
                     <ul class="nk-menu-sub">
                         <li class="nk-menu-item">
-                            <a href="{{ url('input-lain') }}" class="nk-menu-link"><span class="nk-menu-text">Input Lain</span></a>
+                            <a href="{{ url('app/jurnal/input-lain') }}" class="nk-menu-link"><span class="nk-menu-text">Input Lain</span></a>
                         </li>
 
                     </ul><!-- .nk-menu-sub -->
@@ -183,17 +183,15 @@
                     </a>
                     <ul class="nk-menu-sub">
                         <li class="nk-menu-item">
-                            <a href="{{ url('so-barang-manual') }}" class="nk-menu-link"><span class="nk-menu-text">Stok Opnem Barang</span></a>
+                            <a href="{{ url('app/barang/so-manual') }}" class="nk-menu-link"><span class="nk-menu-text">Stok Opnem Barang</span></a>
                         </li>
                         <li class="nk-menu-item">
-                            <a href="{{ url('cash-opnem') }}" class="nk-menu-link"><span class="nk-menu-text">Cash Opnem</span></a>
+                            <a href="{{ url('app/cash-opnem') }}" class="nk-menu-link"><span class="nk-menu-text">Cash Opnem</span></a>
                         </li>
                     </ul><!-- .nk-menu-sub -->
                 </li><!-- .nk-menu-item -->
-
-                </li>
-                </ul><!-- .nk-menu -->
-            </div><!-- .nk-sidebar-menu -->
-        </div><!-- .nk-sidebar-content -->
-    </div><!-- .nk-sidebar-element -->
+            </div>
+        </div>
+    </div>
 </div>
+

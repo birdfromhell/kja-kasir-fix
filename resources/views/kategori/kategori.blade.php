@@ -95,8 +95,8 @@
                                                 </div>
                                                 <div class="nk-tb-col nk-tb-col-tools">
                                                     <div style="display: flex; justify-content: flex-start; align-items: center; margin-left: -20px;">
-                                                        <a href="/kategori-edit/{{ $row->id }}" class="btn btn-icon btn-trigger" style="margin-right: 5px;"><em class="icon ni ni-edit"></em></a>
-                                                        <a href="/kategori-delete/{{ $row->id }}" class="btn btn-icon btn-trigger"><em class="icon ni ni-trash"></em></a>
+                                                        <a href="/app/kategori/edit/{{ $row->id }}" class="btn btn-icon btn-trigger" style="margin-right: 5px;"><em class="icon ni ni-edit"></em></a>
+                                                        <a href="/app/kategori/delete/{{ $row->id }}" class="btn btn-icon btn-trigger"><em class="icon ni ni-trash"></em></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -114,7 +114,7 @@
                     <div class="form-group row">
                         <div class="modal fade bd-example-modal-l" tabindex="-1" role="dialog" id="tipeModal">
                             <div class="modal-dialog modal-l" role="document">
-                                <form action="/kategori-insert" method="POST">
+                                <form action="/app/kategori/insert/" method="POST">
                                     @csrf
                                     <div class="modal-content">
                                         <div class="modal-header">

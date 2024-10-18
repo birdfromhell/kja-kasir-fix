@@ -1,22 +1,5 @@
-@extends('layout.admin')
-@section('active-so-barang')
-    active
-@endsection
-@section('active-so-barang-manual')
-    active
-@endsection
-@section('judul')
-    Opname
-@endsection
-@section('link')
-@endsection
-@section('sub-judul')
-    Stok Opname
-@endsection
-@section('aksi-judul')
-    Data
-@endsection
-@section('barang')
+@extends('layout.app')
+@section('content')
     <div id="content-page" class="content-page">
         <div class="container-fluid">
             <div class="iq-card-body">

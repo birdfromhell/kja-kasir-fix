@@ -6,7 +6,7 @@
                 <!-- Modal -->
                 <div class="modal fade" id="relasiModal" tabindex="-1" role="dialog" aria-labelledby="relasiModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl" role="document">
-                        <form class="form-horizontal" action="/barang/{{ route('barang.create') }}" method="POST">
+                        <form class="form-horizontal" action="{{ url('app/barang/insert') }}" method="POST">
                             @csrf
                             <div class="modal-content">
                                 <div class="modal-header">

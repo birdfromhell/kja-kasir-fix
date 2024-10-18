@@ -8,14 +8,14 @@
                     <div class="nk-block-head nk-block-head-lg wide-sm">
                         <div class="nk-block-head-content">
                             <div class="nk-block-head-sub">
-                                <a class="back-to" href="{{ url('/barang') }}">
+                                <a class="back-to" href="{{ url('app/barang') }}">
                                     <em class="icon ni ni-arrow-left"></em>
                                     <span>Back to Barang</span>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="nk-block nk-block-lg">
                         <div class="card card-bordered">
                             <div class="card-inner">
@@ -27,8 +27,8 @@
                                         </button>
                                     </div>
                                 @endif
-                                
-                                <form class="form-validate" id="formUpdateBarang" action="{{ url('/barang-update/' . $barang->id) }}" method="POST">
+
+                                <form class="form-validate" id="formUpdateBarang" action="{{ url('app/barang/update/' . $barang->id) }}" method="POST">
                                     @csrf
                                     <div class="row g-gs">
                                         <div class="col-md-6">
@@ -39,7 +39,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-label" for="satuan">Satuan</label>
@@ -48,7 +48,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-label" for="kategori">Kategori</label>
@@ -61,7 +61,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-label" for="kelompok">Kelompok</label>
@@ -74,7 +74,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-label" for="harga_beli">Harga Beli</label>
@@ -83,7 +83,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <button type="button" class="btn btn-primary" id="btnUpdateBarang">Update</button>

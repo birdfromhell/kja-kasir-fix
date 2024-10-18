@@ -1,31 +1,23 @@
 @extends('layout.app')
 @section('content')
-    <style>
-        table {
-            width: 100%;
-        }
-
-        th:nth-child(1) {
-            width: 10%;
-        }
-
-        th:nth-child(2) {
-            width: 30%;
-        }
-
-        th:nth-child(3) {
-            width: 30%;
-        }
-
-        th:nth-child(4) {
-            width: 30%;
-        }
-    </style>
-
-    <div id="content-page" class="content-page" style="margin-top: 75px">
+    <div class="nk-content">
         <div class="container-fluid">
-            <div class="iq-card-body">
-                <div class="iq-header-title">
+            <div class="nk-content-inner">
+                <div class="nk-content-body">
+                    <div class="nk-block-head nk-block-head-sm">
+                        <div class="nk-block-between">
+                            <div class="nk-block-head-content">
+                                <h3 class="nk-block-title page-title">Daftar Buku Besar</h3>
+                            </div>
+                            <div class="nk-block-head-content">
+                                <div class="toggle-wrap nk-block-tools-toggle">
+                                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#tipeModal">Buku Besar</button>
+                                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#tipeSub">Sub Buku Besar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     @if (session('success'))
                         <div class="alert text-white bg-primary" role="alert">
                             <div class="iq-alert-text">{!! session('success') !!}</div>
@@ -35,11 +27,11 @@
                         </div>
                         <script>
                             setTimeout(function() {
-                                var alert = document.querySelector('.alert'); // Change to .alert
+                                var alert = document.querySelector('.alert');
                                 if (alert) {
                                     alert.style.display = 'none';
                                 }
-                            }, 5000); // 3000 milliseconds = 3 seconds
+                            }, 5000);
                         </script>
                     @endif
                     @if (session('delete'))
@@ -51,27 +43,11 @@
                         </div>
                         <script>
                             setTimeout(function() {
-                                var alert = document.querySelector('.alert'); // Change to .alert
+                                var alert = document.querySelector('.alert');
                                 if (alert) {
                                     alert.style.display = 'none';
                                 }
-                            }, 5000); // 3000 milliseconds = 3 seconds
-                        </script>
-                    @endif
-                    @if (session('error'))
-                        <div class="alert text-white bg-danger" role="alert">
-                            <div class="iq-alert-text">{!! session('error') !!}</div>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <i class="ri-close-line"></i>
-                            </button>
-                        </div>
-                        <script>
-                            setTimeout(function() {
-                                var alert = document.querySelector('.alert'); // Change to .alert
-                                if (alert) {
-                                    alert.style.display = 'none';
-                                }
-                            }, 5000); // 3000 milliseconds = 3 seconds
+                            }, 5000);
                         </script>
                     @endif
                     @if (session('update'))
@@ -83,260 +59,174 @@
                         </div>
                         <script>
                             setTimeout(function() {
-                                var alert = document.querySelector('.alert'); // Change to .alert
+                                var alert = document.querySelector('.alert');
                                 if (alert) {
                                     alert.style.display = 'none';
                                 }
-                            }, 5000); // 3000 milliseconds = 3 seconds
+                            }, 5000);
                         </script>
                     @endif
-                        <div class="iq-header-title">
-                            <h4 class="card-title">Daftar Buku Besar</h4>
-                            <div class="iq-email-to-list">
-                                <div class="iq-email-search d-flex justify-content-between align-items-center">
-                                    <form class="position-relative mr-3" action="/kategori" id="searchForm">
-                                        <div class="form-group mb-0">
-                                            <input type="text" class="form-control" id="search" name="search" placeholder="Search..." oninput="filterTable()">
-                                            <a class="search-link" href="#" onclick="submitForm(); return false;">
-                                                <i class="ri-search-line"></i>
-                                            </a>
+
+                    <div class="nk-block">
+                        <div class="card card-bordered">
+                            <div class="card-inner-group">
+                                <div class="card-inner p-0">
+                                    <div class="nk-tb-list">
+                                        <div class="nk-tb-item nk-tb-head">
+                                            <div class="nk-tb-col"><span>#</span></div>
+                                            <div class="nk-tb-col tb-col-sm"><span>No. Buku Besar</span></div>
+                                            <div class="nk-tb-col"><span>Keterangan</span></div>
+                                            <div class="nk-tb-col"><span>Aksi</span></div>
                                         </div>
-                                    </form>
-                                    <ul class="list-inline mb-0">
-                                        <li class="list-inline-item">
-                                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#tipeModal">Buku Besar</button>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#tipeSub">Sub Buku Besar</button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <p></p>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-                            <div class="iq-card-header d-flex justify-content-between">
-                                <div class="iq-card-header-toolbar d-flex align-items-center">
-                                    <div class="dropdown">
-                                        <span class="dropdown-toggle text-primary" id="dropdownMenuButton5"
-                                              data-toggle="dropdown">
-                                            <i class="ri-more-2-fill"></i>
-                                        </span>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>View</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="ri-delete-bin-6-fill mr-2"></i>Delete</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="ri-pencil-fill mr-2"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="ri-printer-fill mr-2"></i>Print</a>
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="ri-file-download-fill mr-2"></i>Download</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="iq-card-body">
-                                <div class="table-responsive">
-                                    <table class="table mb-0 table-borderless">
-                                        <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">No. Buku Besar</th>
-                                            <th scope="col">Keterangan</th>
-                                            <th scope="col">Aksi</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
                                         @foreach ($BukuBesar as $row)
-                                            <tr>
-                                                <td style="border-top: 2px solid #ddd; border-bottom: 1px solid #ddd;">
-                                                    {{ $loop->iteration }}
-                                                </td>
-                                                <td style="border-top: 2px solid #ddd; border-bottom: 1px solid #ddd;">
-                                                    {{ $row->no_bukubesar }}
-                                                </td>
-                                                <td style="border-top: 2px solid #ddd; border-bottom: 1px solid #ddd;">
-                                                    {{ $row->ket }}
-                                                </td>
-                                                <td style="border-top: 2px solid #ddd; border-bottom: 1px solid #ddd;">
-                                                    <div class="flex align-items-center list-user-action">
-                                                        {{-- <a data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Print"
-                                                            href="/laporan/bukubesar/{{ $row->no_bukubesar }}"><i
-                                                                class="fa fa-file"></i></a> --}}
-                                                        <a data-toggle="tooltip" data-placement="top" title=""
-                                                           data-original-title="Edit" class="edit-link"
-                                                           data-id="{{ $row->id }}" href="#"><i
-                                                                class="ri-pencil-line"></i></a>
-                                                        <a class="sub-buku-besar-button" data-toggle="tooltip"
-                                                           data-placement="top" title="Sub Buku Besar"
-                                                           data-target-row="{{ $row->no_bukubesar }}">
-                                                            <i class="fa fa-book" aria-hidden="true"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <thead class="thead-light">
-                                            <tr class="sub-buku-besar-row" data-row-id="{{ $row->no_bukubesar }}"
-                                                style="display: none;">
-                                                <th scope="col">#</th>
-                                                <th scope="col">No. Sub Buku Besar</th>
-                                                <th scope="col">Keterangan</th>
-                                                <th scope="col">Aksi</th>
-                                            </tr>
-                                            </thead>
+                                            <div class="nk-tb-item">
+                                                <div class="nk-tb-col">
+                                                    <span>{{ $loop->iteration }}</span>
+                                                </div>
+                                                <div class="nk-tb-col tb-col-sm">
+                                                    <span class="tb-product">
+                                                        <span class="title">{{ $row->no_bukubesar }}</span>
+                                                    </span>
+                                                </div>
+                                                <div class="nk-tb-col">
+                                                    <span class="tb-sub">{{ $row->ket }}</span>
+                                                </div>
+                                                <div class="nk-tb-col nk-tb-col-tools">
+                                                    <ul class="nk-tb-actions gx-1 my-n1">
+                                                        <li class="mr-n1">
+                                                            <a href="#" class="btn btn-icon btn-trigger edit-link" data-id="{{ $row->id }}"><em class="icon ni ni-edit"></em></a>
+                                                        </li>
+                                                        <li class="mr-n1">
+                                                            <a href="#" class="btn btn-icon btn-trigger sub-buku-besar-button" data-target-row="{{ $row->no_bukubesar }}"><em class="icon ni ni-book"></em></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="nk-tb-item sub-buku-besar-row" data-row-id="{{ $row->no_bukubesar }}" style="display: none;">
+                                                <div class="nk-tb-col"><span></span></div>
+                                                <div class="nk-tb-col tb-col-sm"><span>No. Sub Buku Besar</span></div>
+                                                <div class="nk-tb-col"><span>Keterangan</span></div>
+                                                <div class="nk-tb-col"><span>Aksi</span></div>
+                                            </div>
                                             @foreach ($row->subBukuBesar as $item)
-                                                <tr class="sub-buku-besar-row" data-row-id="{{ $row->no_bukubesar }}"
-                                                    style="display: none;">
-                                                    <td></td>
-                                                    <td>{{ $item->no_subbukubesar }}</td>
-                                                    <td>{{ $item->ket }}</td>
-                                                    <td>
-                                                        <div class="flex align-items-center list-user-action">
-                                                            <a data-toggle="tooltip" data-placement="top"
-                                                               title="Edit" class="edit-item"
-                                                               href="/subbukuBesar/edit/{{ $item->id }}">
-                                                                <i class="ri-pencil-line"></i>
-                                                            </a>
-                                                            <a data-toggle="tooltip" data-placement="top"
-                                                               title="Print" class="print-item"
-                                                               href="/laporan/bukubesar/{{ $item->no_subbukubesar }}">
-                                                                <i class="fa fa-print"></i>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                <div class="nk-tb-item sub-buku-besar-row" data-row-id="{{ $row->no_bukubesar }}" style="display: none;">
+                                                    <div class="nk-tb-col"><span></span></div>
+                                                    <div class="nk-tb-col tb-col-sm">
+                                                        <span class="tb-product">
+                                                            <span class="title">{{ $item->no_subbukubesar }}</span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="nk-tb-col">
+                                                        <span class="tb-sub">{{ $item->ket }}</span>
+                                                    </div>
+                                                    <div class="nk-tb-col nk-tb-col-tools">
+                                                        <ul class="nk-tb-actions gx-1 my-n1">
+                                                            <li class="mr-n1">
+                                                                <a href="/app/subbukubesar/edit/{{ $item->id }}" class="btn btn-icon btn-trigger edit-item"><em class="icon ni ni-edit"></em></a>
+                                                            </li>
+                                                            <li class="mr-n1">
+                                                                <a href="/app/laporan/bukubesar/{{ $item->no_subbukubesar }}" class="btn btn-icon btn-trigger print-item"><em class="icon ni ni-printer"></em></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                             @endforeach
                                         @endforeach
-                                        </tbody>
-                                    </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                {{-- Tambah Kelompok --}}
-                <div class="form-group row">
-                    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" id="tipeModal">
-                        <div class="modal-dialog modal-xl" role="document">
-                            <form id="formTambahBukuBesar">
-                                @csrf
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Tambah Buku Besar : </h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body" id="akunBaruContainer">
-                                        <!-- Bidang formulir Akun awal -->
-                                        <div class="form-group row">
-                                            <label class="control-label col-sm-2 align-self-center mb-0"
-                                                   for="tipe">Tipe :</label>
-                                            <div class="col-sm-10">
-                                                <select class="form-control" id="tipe" name="tipe" required>
-                                                    @foreach ($tipe as $item)
-                                                        <option value="{{ $item->tipe }}">
-                                                            {{ $item->tipe }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+
+                    <div class="d-flex justify-content-end">
+                        {{ $BukuBesar->links() }}
+                    </div>
+
+                    <!-- Modal for adding Buku Besar -->
+                    <div class="modal fade" id="tipeModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Tambah Buku Besar</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form id="formTambahBukuBesar">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label class="form-label" for="tipe">Tipe</label>
+                                            <select class="form-control" id="tipe" name="tipe" required>
+                                                @foreach ($tipe as $item)
+                                                    <option value="{{ $item->tipe }}">{{ $item->tipe }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="control-label col-sm-2 align-self-center mb-0"
-                                                   for="no_bukubesar">No. Buku Besar :</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="no_bukubesar"
-                                                       name="no_bukubesar" placeholder="Masukkan Nomor Buku Besar"
-                                                       value="{{ $previousNoBukuBesar + 1 }}">
-                                            </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="no_bukubesar">No. Buku Besar</label>
+                                            <input type="text" class="form-control" id="no_bukubesar" name="no_bukubesar" value="{{ $previousNoBukuBesar ? $previousNoBukuBesar + 1 : 1 }}" required>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="control-label col-sm-2 align-self-center mb-0"
-                                                   for="keterangan">Keterangan :</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="keterangan"
-                                                       name="keterangan" placeholder="Masukkan Keterangan">
-                                            </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="keterangan">Keterangan</label>
+                                            <input type="text" class="form-control" id="keterangan" name="keterangan" required>
                                         </div>
-                                        <!-- Bidang formulir Akun yang dapat diulang akan ditambahkan di sini secara dinamis -->
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary"
-                                                id="btnTambahBukuBesar">Tambah</button>
+                                        <button type="button" class="btn btn-primary" id="btnTambahBukuBesar">Tambah</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="tipeSub">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <form action="/subbukuBesar/insert" method="POST">
-                                @csrf
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Tambah Sub Buku Besar : </h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                                                onchange="">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+
+                    <!-- Modal for adding Sub Buku Besar -->
+                    <div class="modal fade" id="tipeSub" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Tambah Sub Buku Besar</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="/app/subbukubesar/insert" method="POST">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label class="form-label" for="no_bukubesar">Akun Buku Besar</label>
+                                            <select class="form-control" id="no_bukubesar" name="no_bukubesar" required>
+                                                @foreach ($bukubesar as $item)
+                                                    <option value="{{ $item->no_bukubesar }}">{{ $item->no_bukubesar }} - {{ $item->ket }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="no_subbukubesar">No. Sub Buku Besar</label>
+                                            <input type="text" class="form-control" id="no_subbukubesar" name="no_subbukubesar" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="ket">Keterangan</label>
+                                            <input type="text" class="form-control" id="ket" name="ket" required>
+                                        </div>
                                     </div>
-                                    <div class="modal-body" id="akunBaruContainer">
-                                        <!-- Bidang formulir Akun awal -->
-                                        <div class="form-group row">
-                                            <label class="control-label col-sm-2 align-self-center mb-0"
-                                                   for="email">Akun
-                                                Buku Besar:</label>
-                                            <div class="col-sm-10">
-                                                <select class="form-control" id="no_bukubesar" name="no_bukubesar"
-                                                        required>
-                                                    @foreach ($bukubesar as $item)
-                                                        <option value="{{ $item->no_bukubesar }}">
-                                                            {{ $item->no_bukubesar }} - {{ $item->ket }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="control-label col-sm-2 align-self-center mb-0"
-                                                   for="email">No. SubBuku Besar:</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="no_subbukubesar"
-                                                       name="no_subbukubesar" placeholder="Masukkan Nomor Buku Besar">
-                                                {{-- value="{{ $previousNoSubBukuBesar + 1 }}"> --}}
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="control-label col-sm-2 align-self-center mb-0"
-                                                   for="email">Keterangan :</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="ket" name="ket"
-                                                       placeholder="Masukkan Keterangan">
-                                            </div>
-                                        </div>
-                                        <!-- Bidang formulir Akun yang dapat diulang akan ditambahkan di sini secara dinamis -->
-                                    </div>
-                                    <!-- disini -->
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary" id="btnTambahAkun">Tambah
-                                        </button>
+                                        <button type="submit" class="btn btn-primary">Tambah</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
     {{-- Function Search --}}
     <script>
@@ -353,7 +243,7 @@
                     cancelButtonText: "Batal"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "/bukuBesar/edit/" + id;
+                        window.location.href = "/app/bukubesar/edit/" + id;
                     }
                 });
             });

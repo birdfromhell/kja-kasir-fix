@@ -47,7 +47,7 @@ class KelompokRepository
             $kelompok->save();
 
             // Redirect ke halaman lain atau tampilkan pesan sukses jika diperlukan
-            return redirect('/kelompok')->with('success', 'Kategori Barang <strong>' . $validatedData['kelompok_barang'] . '</strong> berhasil ditambahkan.');
+            return redirect('/app/kelompok')->with('success', 'Kategori Barang <strong>' . $validatedData['kelompok_barang'] . '</strong> berhasil ditambahkan.');
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -78,7 +78,7 @@ class KelompokRepository
             $data->update($validatedData);
             $kelompok = $data->kelompok_barang;
 
-            return redirect('/kelompok')->with('update', 'Kategori Barang <strong>' . $kelompok . '</strong> berhasil diupdate.');
+            return redirect('/app/kelompok')->with('update', 'Kategori Barang <strong>' . $kelompok . '</strong> berhasil diupdate.');
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -93,7 +93,7 @@ class KelompokRepository
             $data = Kelompok::find($id);
             $data->delete();
             $kelompok = $data->kelompok_barang;
-            return redirect('/kelompok')->with('delete', 'Kategori Barang <strong>' . $kelompok . '</strong> berhasil dihapus.');
+            return redirect('/app/kelompok')->with('delete', 'Kategori Barang <strong>' . $kelompok . '</strong> berhasil dihapus.');
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }

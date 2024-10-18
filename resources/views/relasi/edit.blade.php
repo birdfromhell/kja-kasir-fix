@@ -26,7 +26,7 @@
                                         </button>
                                     </div>
                                 @endif
-                                <form class="form-validate" id="formUpdatePerusahaan" action="/relasi-update/{{ $data->id }}" method="post">
+                                <form class="form-validate" id="formUpdatePerusahaan" action="/app/relasi/update/{{ $data->id }}" method="post">
                                     @csrf
                                     <div class="row g-gs">
                                         <div class="col-md-6">
@@ -97,58 +97,54 @@
                                             </div>
                                         </div>
                                         </div>
-                                        
+
                                         </div>
                                         </div>
                                     </div>
                                 </form>
-                                
+
                             </div>
                         </div>
                     </div><!-- .nk-block -->
                 </div>
-            </div>
-        </div>
-    </div>
-    <script>
       <script>
-$(document).ready(function() {
-    $('#btnUpdatePerusahaan').click(function() {
-        Swal.fire({
-            title: "Do you want to save the changes?",
-            showCancelButton: true,
-            confirmButtonText: "Confirm",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: $("#formUpdatePerusahaan").attr('action'),
-                    type: "POST",
-                    data: $("#formUpdatePerusahaan").serialize(),
-                    success: function(response) {
-                        Swal.fire({
-                            title: 'Success',
-                            icon: 'success',
-                            text: 'Perusahaan berhasil diperbarui!',
-                        }).then(() => {
-                            window.location.href = '/app/relasi'; // Redirect setelah sukses
-                        });
-                    },
-                    error: function(xhr) {
-                        let errorMessage = 'Gagal memperbarui perusahaan.';
-                        if (xhr.status === 422) {
-                            errorMessage = xhr.responseJSON.message || 'Ada kesalahan dalam input data.';
+    $(document).ready(function() {
+        $('#btnUpdatePerusahaan').click(function() {
+            Swal.fire({
+                title: "Do you want to save the changes?",
+                showCancelButton: true,
+                confirmButtonText: "Confirm",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: $("#formUpdatePerusahaan").attr('action'),
+                        type: "POST",
+                        data: $("#formUpdatePerusahaan").serialize(),
+                        success: function(response) {
+                            Swal.fire({
+                                title: 'Success',
+                                icon: 'success',
+                                text: 'Perusahaan berhasil diperbarui!',
+                            }).then(() => {
+                                window.location.href = '/app/relasi'; // Redirect setelah sukses
+                            });
+                        },
+                        error: function(xhr) {
+                            let errorMessage = 'Gagal memperbarui perusahaan.';
+                            if (xhr.status === 422) {
+                                errorMessage = xhr.responseJSON.message || 'Ada kesalahan dalam input data.';
+                            }
+                            Swal.fire({
+                                title: 'Error',
+                                text: errorMessage,
+                                icon: 'error'
+                            });
                         }
-                        Swal.fire({
-                            title: 'Error',
-                            text: errorMessage,
-                            icon: 'error'
-                        });
-                    }
-                });
-            }
+                    });
+                }
+            });
         });
     });
-});
 </script>
 
 @endsection
