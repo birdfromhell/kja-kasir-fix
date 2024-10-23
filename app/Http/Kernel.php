@@ -67,5 +67,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'check-kehadiran' => \App\Http\Middleware\CheckKehadiran::class,
         'AdminvDev' => \App\Http\Middleware\AdminvDev::class,
+        'detect.mobile' => \App\Http\Middleware\CheckMobileDevice::class,
+
     ];
 }

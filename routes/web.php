@@ -86,7 +86,7 @@ Route::get('/homeUser', [UsersController::class, 'homeuser'])->name('homeUser')-
 Route::get('/email/verify', function () {
 
     if (auth()->user()->email_verified_at === null) {
-        return view('account.verify-email-new');
+        return view('account.verify-email');
     } else {
         return redirect('/home');
     }

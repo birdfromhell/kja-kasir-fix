@@ -80,19 +80,21 @@
     });
 </script>
 
-{{--<script>--}}
-{{--    document.addEventListener('DOMContentLoaded', function() {--}}
-{{--        var userAgent = navigator.userAgent.toLowerCase();--}}
-{{--        var isMobile = /mobile|android|iphone|ipad|phone/i.test(userAgent);--}}
-{{--        var currentUrl = window.location.href;--}}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var userAgent = navigator.userAgent.toLowerCase();
+        var isMobile = /mobile|android|iphone|ipad|phone/i.test(userAgent);
+        var currentUrl = window.location.href;
 
-{{--        if (isMobile && !currentUrl.includes('redirected=true')) {--}}
-{{--            window.location.href = "{{ url('/app/dashboard/mobile') }}?redirected=true";--}}
-{{--        } else if (!isMobile && !currentUrl.includes('redirected=true')) {--}}
-{{--            window.location.href = "{{ url('/app/dashboard/') }}?redirected=true";--}}
-{{--        }--}}
-{{--    });--}}
-{{--</script>--}}
+        if (currentUrl.includes('/app/dashboard') && !currentUrl.includes('redirected=true')) {
+            if (isMobile) {
+                window.location.href = "{{ url('/app/dashboard/mobile') }}?redirected=true";
+            } else {
+                window.location.href = "{{ url('/app/dashboard') }}?redirected=true";
+            }
+        }
+    });
+</script>
 
 </body>
 </html>
