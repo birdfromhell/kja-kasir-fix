@@ -112,27 +112,40 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="modal fade bd-example-modal-l" tabindex="-1" role="dialog" id="tipeModal">
-                            <div class="modal-dialog modal-l" role="document">
-                                <form action="/app/kategori/insert/" method="POST">
+                        <div class="modal fade" id="tipeModal" tabindex="-1" role="dialog" aria-labelledby="tipeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                                <form id="formTambahKategori" action="/app/kategori/insert" method="POST">
                                     @csrf
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Tambah Kategori : </h5>
+                                            <h5 class="modal-title" id="tipeModalLabel">Tambah Kategori</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body" id="akunBaruContainer">
-                                            <div class="form-group row">
-                                                <label class="control-label col-sm-2 align-self-center mb-0" for="kategori_barang">Kategori:</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="kategori_barang" name="kategori_barang" placeholder="Masukkan Kategori">
+                                        <div class="modal-body">
+                                            <div class="row g-3">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="kategori_barang">Kategori Barang</label>
+                                                        <div class="form-control-wrap">
+                                                            <input type="text" class="form-control" id="kategori_barang" name="kategori_barang" placeholder="Masukkan Kategori Barang">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="kode_kategori">Kode Kategori</label>
+                                                        <div class="form-control-wrap">
+                                                            <input type="text" class="form-control" id="kode_kategori" name="kode_kategori" placeholder="Masukkan Kode Kategori">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary" id="btnTambahAkun">Tambah</button>
+                                            <button type="submit" class="btn btn-primary">Tambah</button>
+                                            <button type="reset" class="btn btn-danger">Reset</button>
                                         </div>
                                     </div>
                                 </form>

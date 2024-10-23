@@ -4,7 +4,7 @@
             <div class="nk-content-body">
 
                 <!-- Modal -->
-                <div class="modal fade" id="relasiModal" tabindex="-1" role="dialog" aria-labelledby="relasiModalLabel" aria-hidden="true">
+                <div class="modal fade" id="#tipeModal" tabindex="-1" role="dialog" aria-labelledby="relasiModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl" role="document">
                         <form class="form-horizontal" action="{{ url('app/barang/insert') }}" method="POST">
                             @csrf

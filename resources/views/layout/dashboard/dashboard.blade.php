@@ -93,14 +93,14 @@
         }
 
         .pilih-btn {
-    background: #fff;
-    border: none;
-    padding: 0.75rem;
-    border-radius: 1rem ; /* Lengkung pada semua sudut */
-    width: 100%;
-    font-size: 1rem;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: #fff;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 1rem ; /* Lengkung pada semua sudut */
+            width: 100%;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 
@@ -121,25 +121,25 @@
             display: block;
         }
 
-      .options-menu button {
-    width: 100%;
-    padding: 0.5rem;
-    text-align: left;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
+              .options-menu button {
+            width: 100%;
+            padding: 0.5rem;
+            text-align: left;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
 
 /* Tambahkan ini untuk mengatur border-radius pada tombol dalam menu */
-.options-menu button:first-child {
-    border-top-left-radius: 0.5rem; /* Sudut kiri atas melengkung */
-    border-top-right-radius: 0.5rem; /* Sudut kanan atas melengkung */
-}
+    .options-menu button:first-child {
+        border-top-left-radius: 0.5rem; /* Sudut kiri atas melengkung */
+        border-top-right-radius: 0.5rem; /* Sudut kanan atas melengkung */
+    }
 
-.options-menu button:last-child {
-    border-bottom-left-radius: 0.25rem; /* Sudut kiri bawah tetap kotak */
-    border-bottom-right-radius: 0.25rem; /* Sudut kanan bawah tetap kotak */
-}
+    .options-menu button:last-child {
+        border-bottom-left-radius: 0.25rem; /* Sudut kiri bawah tetap kotak */
+        border-bottom-right-radius: 0.25rem; /* Sudut kanan bawah tetap kotak */
+    }
 
 
         .options-menu button:hover {
@@ -291,6 +291,8 @@
             }
         });
     </script>
+        </div>
+    </div>
 
 </body>
 </html>

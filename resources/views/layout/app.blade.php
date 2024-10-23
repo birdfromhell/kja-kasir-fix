@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
 
-    <link rel="shortcut icon" href="{{ asset('images/logooo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}">
     <title>Erka Solution Group</title>
 
     <link rel="stylesheet" href="{{ asset('material/assets/css/dashlite.css?ver=2.9.0') }}">
@@ -79,6 +79,20 @@
         });
     });
 </script>
+
+{{--<script>--}}
+{{--    document.addEventListener('DOMContentLoaded', function() {--}}
+{{--        var userAgent = navigator.userAgent.toLowerCase();--}}
+{{--        var isMobile = /mobile|android|iphone|ipad|phone/i.test(userAgent);--}}
+{{--        var currentUrl = window.location.href;--}}
+
+{{--        if (isMobile && !currentUrl.includes('redirected=true')) {--}}
+{{--            window.location.href = "{{ url('/app/dashboard/mobile') }}?redirected=true";--}}
+{{--        } else if (!isMobile && !currentUrl.includes('redirected=true')) {--}}
+{{--            window.location.href = "{{ url('/app/dashboard/') }}?redirected=true";--}}
+{{--        }--}}
+{{--    });--}}
+{{--</script>--}}
 
 </body>
 </html>

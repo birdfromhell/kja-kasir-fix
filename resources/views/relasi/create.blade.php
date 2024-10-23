@@ -99,6 +99,7 @@
             </div>
         </div>
     </div>
+
     <script>
         function showHidePlafon() {
             var jenisSelect = document.getElementById("jenis");

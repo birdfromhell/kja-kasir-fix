@@ -2,7 +2,7 @@
     <div class="nk-sidebar-element nk-sidebar-head">
         <div class="nk-sidebar-brand">
             <a href="{{ url('app/dashboard') }}" class="logo-link nk-sidebar-logo">
-                <img src="{{ asset('images/OW.png') }}" alt="Deskripsi Gambar" style="margin-right: 100px;">
+                <img src="{{ asset('images/logo-sidebar.png') }}" alt="Deskripsi Gambar" style="margin-right: 100px;">
             </a>
         </div>
         <div class="nk-menu-trigger mr-n2">

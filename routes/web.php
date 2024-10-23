@@ -48,8 +48,10 @@ Route::get('/', function () {
     return redirect('/app/user/login');
 });
 
-Route::get('/app/dashboard', [UsersController::class, 'home'])->name('home')->middleware(['auth', 'verified']);
 Route::get('/app/user/login', [UsersController::class, 'login'])->name('login');
+Route::get('/app/dashboard', [UsersController::class, 'home'])->name('home')->middleware(['auth', 'verified']);
+Route::get('/app/dashboard/mobile', [UsersController::class, 'homeMobile'])->name('home.mobile')->middleware(['auth', 'verified']);
+
 
 Route::post('/loginuser', [UsersController::class, 'loginUser']);
 

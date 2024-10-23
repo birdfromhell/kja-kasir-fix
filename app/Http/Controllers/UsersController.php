@@ -102,10 +102,10 @@ class UsersController extends Controller
         }
     }
 
-    public function home()
+    public function home(Request $request)
     {
         try {
-            return $this->usersRepository->home();
+            return $this->usersRepository->home($request);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error loading home view.');
         }

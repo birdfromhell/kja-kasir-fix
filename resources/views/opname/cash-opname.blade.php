@@ -37,86 +37,68 @@
                     </script>
                 @endif
 
-                <div class="iq-header-title d-flex justify-content-between align-items-center">
-                    <h4 class="card-title">Cash Opname</h4>
-                    <div class="iq-email-to-list">
-                        <div class="iq-email-search d-flex">
-                            <form class="position-relative" action="/cash-opnem/print" id="searchForm">
-                                <div class="form-group mb-0">
-                                    <input type="text" class="form-control" id="search" name="search" placeholder="Search..." oninput="filterTable()">
-                                    <a class="search-link" href="#" onclick="submitForm(); return false;">
-                                        <i class="ri-search-line"></i>
-                                    </a>
-                                </div>
-                            </form>
-                            <ul class="ml-3 d-flex">
-                                <li class="mr-2"><button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#tipeModal">Update</button></li>
-                                <li><button type="button" class="btn btn-outline-primary" onclick="window.location.href='/cash-opnem/print'">Print</button></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
-                            <div class="iq-card-header d-flex justify-content-between">
-                                <div class="iq-header-title">
-                                    <h4 class="card-title">Cash Opname</h4>
-                                </div>
-                                <div class="iq-card-header-toolbar d-flex align-items-center">
-                                    <div class="dropdown">
-                                        <span class="dropdown-toggle text-primary" id="dropdownMenuButton5" data-toggle="dropdown">
-                                            <i class="ri-more-2-fill"></i>
-                                        </span>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#"><i class="ri-eye-fill mr-2"></i>View</a>
-                                            <a class="dropdown-item" href="#"><i class="ri-delete-bin-6-fill mr-2"></i>Delete</a>
-                                            <a class="dropdown-item" href="#"><i class="ri-pencil-fill mr-2"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i class="ri-printer-fill mr-2"></i>Print</a>
-                                            <a class="dropdown-item" href="#"><i class="ri-file-download-fill mr-2"></i>Download</a>
+                <div class="nk-content">
+                    <div class="container-fluid">
+                        <div class="nk-content-inner">
+                            <div class="nk-content-body">
+                                <div class="nk-block-head nk-block-head-sm">
+                                    <div class="nk-block-between">
+                                        <div class="nk-block-head-content">
+                                            <h3 class="nk-block-title page-title">Cash Opname</h3>
+                                        </div>
+                                        <div class="nk-block-head-content">
+                                            <div class="toggle-wrap nk-block-tools-toggle">
+                                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#tipeModal">Update</button>
+                                                <button type="button" class="btn btn-outline-primary" onclick="window.location.href='/app/cash-opnem/print'">Print</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="iq-card-body" style="margin-top: 10px">
-                                <div class="table-responsive">
-                                    <table class="table mb-0 table-borderless">
-                                        <thead class="thead-light">
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Pecahan</th>
-                                            <th>Kertas</th>
-                                            <th>Logam</th>
-                                            <th>Jumlah</th>
-                                            <th>Total</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach ($data as $index => $row)
-                                            <tr>
-                                                <td>{{ $index + 1 }}</td>
-                                                <td>{{ $row->pecahan }}</td>
-                                                <td>{{ $row->kertas }}</td>
-                                                <td>{{ $row->logam }}</td>
-                                                <td>{{ $row->jumlah }}</td>
-                                                <td>{{ $row->total }}</td>
-                                                <td>
-                                                    <ul class="nk-tb-actions gx-1 my-n1">
-                                                        <li class="mr-n1">
-                                                            <a href="/cash-opnem/edit/{{ $row->id }}" class="btn btn-icon btn-trigger"><em class="icon ni ni-edit"></em></a>
-                                                        </li>
-                                                        <li class="mr-n1">
-                                                            <a href="/cash-opnem/delete/{{ $row->id }}" class="btn btn-icon btn-trigger"><em class="icon ni ni-trash"></em></a>
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+
+                                <div class="nk-block">
+                                    <div class="card card-bordered">
+                                        <div class="card-inner-group">
+                                            <div class="card-inner p-0">
+                                                <div class="nk-tb-list">
+                                                    <div class="nk-tb-item nk-tb-head">
+                                                        <div class="nk-tb-col"><span>#</span></div>
+                                                        <div class="nk-tb-col"><span>Pecahan</span></div>
+                                                        <div class="nk-tb-col"><span>Kertas</span></div>
+                                                        <div class="nk-tb-col"><span>Logam</span></div>
+                                                        <div class="nk-tb-col"><span>Jumlah</span></div>
+                                                        <div class="nk-tb-col"><span>Total</span></div>
+                                                        <div class="nk-tb-col"><span>Aksi</span></div>
+                                                    </div>
+
+                                                    @foreach ($data as $index => $row)
+                                                        <div class="nk-tb-item">
+                                                            <div class="nk-tb-col">{{ $index + 1 }}</div>
+                                                            <div class="nk-tb-col">{{ $row->pecahan }}</div>
+                                                            <div class="nk-tb-col">{{ $row->kertas }}</div>
+                                                            <div class="nk-tb-col">{{ $row->logam }}</div>
+                                                            <div class="nk-tb-col">{{ $row->jumlah }}</div>
+                                                            <div class="nk-tb-col">{{ $row->total }}</div>
+                                                            <div class="nk-tb-col">
+                                                                <ul class="nk-tb-actions gx-1 my-n1">
+                                                                    <li class="mr-n1">
+                                                                        <a href="/app/cash-opnem/edit/{{ $row->id }}" class="btn btn-icon btn-trigger"><em class="icon ni ni-edit"></em></a>
+                                                                    </li>
+                                                                    <li class="mr-n1">
+                                                                        <a href="/app/cash-opnem/delete/{{ $row->id }}" class="btn btn-icon btn-trigger"><em class="icon ni ni-trash"></em></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+
+{{--                                <div class="d-flex justify-content-end mt-3">--}}
+{{--                                    {{ $data->links() }}--}}
+{{--                                </div>--}}
                             </div>
                         </div>
                     </div>
@@ -125,7 +107,7 @@
                 <div class="form-group row">
                     <div class="modal fade bd-example-modal-xxl" tabindex="-1" role="dialog" id="tipeModal">
                         <div class="modal-dialog modal-xxl" role="document">
-                            <form id="formTambahBarang" action="/cash-opnem/update" method="post">
+                            <form id="formTambahBarang" action="/app/cash-opnem/update" method="post">
                                 @csrf
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -208,22 +190,14 @@
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("search");
             filter = input.value.toUpperCase();
-            table = document.querySelector(".table");
-            tr = table.getElementsByTagName("tr");
+            table = document.querySelector(".nk-tb-list");
+            tr = table.getElementsByClassName("nk-tb-item");
 
-            for (i = 0; i < tr.length; i++) {
-                tdPecahan = tr[i].getElementsByTagName("td")[1];
-                tdKertas = tr[i].getElementsByTagName("td")[2];
-                tdLogam = tr[i].getElementsByTagName("td")[3];
-                if (tdPecahan && tdKertas && tdLogam) {
-                    txtValuePecahan = tdPecahan.textContent || tdPecahan.innerText;
-                    txtValueKertas = tdKertas.textContent || tdKertas.innerText;
-                    txtValueLogam = tdLogam.textContent || tdLogam.innerText;
-                    if (
-                        txtValuePecahan.toUpperCase().indexOf(filter) > -1 ||
-                        txtValueKertas.toUpperCase().indexOf(filter) > -1 ||
-                        txtValueLogam.toUpperCase().indexOf(filter) > -1
-                    ) {
+            for (i = 1; i < tr.length; i++) {
+                td = tr[i].getElementsByClassName("nk-tb-col")[1]; // Assuming Pecahan is in the second column
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
                         tr[i].style.display = "";
                     } else {
                         tr[i].style.display = "none";

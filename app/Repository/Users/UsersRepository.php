@@ -169,7 +169,49 @@ class UsersRepository
             $sj = session('sj');
             $timeDiff2 = session('timeDiff2');
 
-            return view('layout.dashboard', compact('pb', 'sj', 'timeDiff1', 'timeDiff2'));
+
+            return view('layout.dashboard.dashboard', compact('pb', 'sj', 'timeDiff1', 'timeDiff2'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error loading home view.');
+        }
+    }
+
+    public function homeMobile()
+    {
+        try {
+            $pb = PenerimaanBarang::latest()
+                ->where('status', 'Permohonan')
+                ->first();
+
+            $sj = SuratJalan::latest()
+                ->where('status', 'Permohonan')
+                ->first();
+
+            if ($pb !== null) {
+                $createdTime = Carbon::parse($pb->created_at);
+                $currentTime = now();
+                $timeDiff1 = $createdTime->diffForHumans($currentTime);
+                session(['pb' => $pb, 'timeDiff1' => $timeDiff1]);
+            } else {
+                session(['pb' => null, 'timeDiff1' => null]);
+            }
+
+            if ($sj !== null) {
+                $createdTime = Carbon::parse($sj->created_at);
+                $currentTime = now();
+                $timeDiff2 = $createdTime->diffForHumans($currentTime);
+                session(['sj' => $sj, 'timeDiff2' => $timeDiff2]);
+            } else {
+                session(['sj' => null, 'timeDiff2' => null]);
+            }
+
+            $pb = session('pb');
+            $timeDiff1 = session('timeDiff1');
+            $sj = session('sj');
+            $timeDiff2 = session('timeDiff2');
+
+
+            return view('layout.dashboard.dashboard-mobile', compact('pb', 'sj', 'timeDiff1', 'timeDiff2'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error loading home view.');
         }
@@ -217,7 +259,7 @@ class UsersRepository
     public function changePassword(Request $request, $validateData)
     {
         try {
-            // Validate the input data            
+            // Validate the input data
             $user = auth()->user();
 
             if (Hash::check($validateData['oldPassword'], $user->password)) {

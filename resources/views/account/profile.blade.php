@@ -11,7 +11,10 @@
                                     <div class="nk-block-head nk-block-head-lg">
                                         <div class="nk-block-between">
                                             <div class="nk-block-head-content">
-                                                <h4 class="nk-block-title">Profile Dan Perusahaan</h4>
+                                                <h4 class="nk-block-title">Personal Information</h4>
+                                                <div class="nk-block-des">
+                                                    <p>Basic info, like your name and address, that you use on our Platform.</p>
+                                                </div>
                                             </div>
                                             <div class="nk-block-head-content align-self-start d-lg-none">
                                                 <a href="#" class="toggle btn btn-icon btn-trigger mt-n1" data-target="userAside"><em class="icon ni ni-menu-alt-r"></em></a>
@@ -24,36 +27,36 @@
                                             <div class="data-head">
                                                 <h6 class="overline-title">Basics</h6>
                                             </div>
-                                            <form action="/akun-update/{{ Auth::user()->id }}" method="get" id="profile-form">
+                                            <form action="/akun-update/{{ Auth::user()->id ?? '' }}" method="get" id="profile-form">
                                                 @csrf
                                                 <div class="data-item">
                                                     <div class="data-col">
                                                         <span class="data-label">Full Name</span>
-                                                        <input type="text" class="form-control" name="name" value="{{ old('name', Auth::user()->name) }}">
+                                                        <input type="text" class="form-control" name="name" value="{{ old('name', Auth::user()->name ?? '') }}">
                                                     </div>
                                                 </div>
                                                 <div class="data-item">
                                                     <div class="data-col">
                                                         <span class="data-label">Email</span>
-                                                        <input type="email" class="form-control" name="email" value="{{ old('email', Auth::user()->email) }}">
+                                                        <input type="email" class="form-control" name="email" value="{{ old('email', Auth::user()->email ?? '') }}">
                                                     </div>
                                                 </div>
                                                 <div class="data-item">
                                                     <div class="data-col">
                                                         <span class="data-label">Phone Number</span>
-                                                        <input type="tel" class="form-control" name="phone" value="{{ old('phone', Auth::user()->phone) }}">
+                                                        <input type="tel" class="form-control" name="phone" value="{{ old('phone', Auth::user()->phone ?? '') }}">
                                                     </div>
                                                 </div>
                                                 <div class="data-item">
                                                     <div class="data-col">
                                                         <span class="data-label">Date of Birth</span>
-                                                        <input type="date" class="form-control" name="dob" value="{{ old('dob', Auth::user()->dob) }}">
+                                                        <input type="date" class="form-control" name="dob" value="{{ old('dob', Auth::user()->dob ?? '') }}">
                                                     </div>
                                                 </div>
                                                 <div class="data-item">
                                                     <div class="data-col">
                                                         <span class="data-label">Address</span>
-                                                        <textarea class="form-control" name="address" rows="3">{{ old('address', Auth::user()->address) }}</textarea>
+                                                        <textarea class="form-control" name="address" rows="3">{{ old('address', Auth::user()->address ?? '') }}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="data-item">
@@ -67,13 +70,13 @@
                                     <div class="nk-block" id="accountSettings" style="display: none;">
                                         <!-- Account Settings Form -->
                                         <div class="iq-card-body">
-                                            <form action="/perusahaan-update/{{ Auth::user()->perusahaan->id }}" method="get" id="company-form">
+                                            <form action="/perusahaan-update/{{ Auth::user()->perusahaan->id ?? '' }}" method="get" id="company-form">
                                                 @method('post')
                                                 @csrf
                                                 <div class="row align-items-center">
                                                     <div class="form-group col-sm-12">
                                                         <label for="kode_perusahaan">Kode Perusahaan:</label>
-                                                        <input type="text" class="form-control" id="kode_perusahaan" name="kode_perusahaan" value="{{ Auth::user()->kode_perusahaan }}" readonly>
+                                                        <input type="text" class="form-control" id="kode_perusahaan" name="kode_perusahaan" value="{{ Auth::user()->kode_perusahaan ?? '' }}" readonly>
                                                     </div>
                                                     <div class="form-group col-sm-8">
                                                         <label for="nama_perusahaan">Nama Perusahaan:</label>
@@ -107,11 +110,11 @@
                                         <div class="card-inner">
                                             <div class="user-card">
                                                 <div class="user-avatar bg-primary">
-                                                    <span>{{ substr(Auth::user()->name, 0, 2) }}</span>
+                                                    <span>{{ substr(Auth::user()->name ?? '', 0, 2) }}</span>
                                                 </div>
                                                 <div class="user-info">
-                                                    <span class="lead-text">{{ Auth::user()->name }}</span>
-                                                    <span class="sub-text">{{ Auth::user()->email }}</span>
+                                                    <span class="lead-text">{{ Auth::user()->name ?? '' }}</span>
+                                                    <span class="sub-text">{{ Auth::user()->email ?? '' }}</span>
                                                 </div>
                                                 <div class="user-action">
                                                     <div class="dropdown">
@@ -198,7 +201,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: 'GET',
-                            url: '/akun-update/{{ Auth::user()->id }}',
+                            url: '/akun-update/{{ Auth::user()->id ?? '' }}',
                             data: formData,
                             success: function(response) {
                                 Swal.fire({
@@ -237,7 +240,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: 'GET',
-                            url: '/perusahaan-update/{{ Auth::user()->perusahaan->id }}',
+                            url: '/perusahaan-update/{{ Auth::user()->perusahaan->id ?? '' }}',
                             data: formData,
                             success: function(response) {
                                 Swal.fire({

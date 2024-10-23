@@ -36,6 +36,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\DetectDevice::class,
         ],
 
         'api' => [
@@ -65,6 +66,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'check-kehadiran' => \App\Http\Middleware\CheckKehadiran::class,
-        'AdminvDev' => \App\Http\Middleware\AdminvDev::class
+        'AdminvDev' => \App\Http\Middleware\AdminvDev::class,
     ];
 }

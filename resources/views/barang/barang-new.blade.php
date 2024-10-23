@@ -155,102 +155,84 @@
                         </div>
                     </div>
                 </div>
-
                     <div class="form-group row">
                         <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" id="tipeModal">
                             <div class="modal-dialog modal-xl" role="document">
-                                <form id="formTambahBarang">
+                                <form id="formTambahBarang" action="/app/barang/insert" method="POST">
                                     @csrf
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Tambah Barang : </h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                                                    onchange="">
+                                            <h5 class="modal-title">Tambah Barang</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body" id="akunBaruContainer">
-                                            <!-- Bidang formulir Akun awal -->
-                                            <div class="form-group row">
-                                                <label class="control-label col-sm-2 align-self-center mb-0"
-                                                       for="email">Nama
-                                                    Barang:</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="nama_barang"
-                                                           name="nama_barang" placeholder="Masukkan Nama Barang">
+                                        <div class="modal-body">
+                                            <div class="row g-3">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="nama_barang">Nama Barang</label>
+                                                        <div class="form-control-wrap">
+                                                            <input type="text" class="form-control" id="nama_barang" name="nama_barang" placeholder="Masukkan Nama Barang">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="satuan">Satuan</label>
+                                                        <div class="form-control-wrap">
+                                                            <input type="text" class="form-control" id="satuan" name="satuan" placeholder="Masukkan Satuan">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="kategori">Kategori</label>
+                                                        <div class="form-control-wrap">
+                                                            <select class="form-control" id="kategori" name="kategori" required>
+                                                                <option value="" selected disabled>Silahkan Pilih kategori</option>
+                                                                @foreach ($kategori as $item)
+                                                                    <option value="{{ $item->kode_kategori }}">{{ $item->kode_kategori }} - {{ $item->kategori_barang }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="kelompok">Kelompok Barang</label>
+                                                        <div class="form-control-wrap">
+                                                            <select class="form-control" id="kelompok" name="kelompok" required>
+                                                                <option value="" selected disabled>Pilih Kategori terlebih dahulu</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="harga_beli">Harga Beli</label>
+                                                        <div class="form-control-wrap">
+                                                            <input type="number" class="form-control" id="harga_beli" name="harga_beli" placeholder="Masukkan Harga Beli" value="0">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="perusahaan">Perusahaan</label>
+                                                        <div class="form-control-wrap">
+                                                            <select class="form-control" id="perusahaan" name="perusahaan" required>
+                                                                @foreach ($perusahaan as $item)
+                                                                    <option value="{{ $item->kode_perusahaan }}">{{ $item->kode_perusahaan }} - {{ $item->nama_perusahaan }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <label class="control-label col-sm-2 align-self-center mb-0"
-                                                       for="pwd1">Satuan:</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="satuan" name="satuan"
-                                                           placeholder="Masukkan Satuan">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="control-label col-sm-2 align-self-center mb-0"
-                                                       for="pwd1">Kategori:</label>
-                                                <div class="col-sm-10">
-                                                    <select class="form-control" id="kategori" name="kategori" required>
-                                                        <option value="" selected disabled>
-                                                            Silahkan Pilih kategori
-                                                        </option>
-                                                        @foreach ($kategori as $item)
-                                                            <option value="{{ $item->kode_kategori }}">
-                                                                {{ $item->kode_kategori }} - {{ $item->kategori_barang }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="control-label col-sm-2 align-self-center mb-0"
-                                                       for="kelompok">Kelompok
-                                                    Barang:</label>
-                                                <div class="col-sm-10">
-                                                    <select class="form-control" id="kelompok" name="kelompok" required>
-                                                        <option value="" selected disabled>Pilih Kategori terlebih dahulu
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="control-label col-sm-2 align-self-center mb-0"
-                                                       for="pwd1">Harga Beli:</label>
-                                                <div class="col-sm-10">
-                                                    <input type="number" class="form-control" id="harga_beli"
-                                                           name="harga_beli" placeholder="Masukkan Harga Beli" value="0">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="control-label col-sm-2 align-self-center mb-0"
-                                                       for="email">Perusahaan:</label>
-                                                <div class="col-sm-10">
-                                                    <select class="form-control" id="perusahaan" name="perusahaan" required>
-                                                        @foreach ($perusahaan as $item)
-                                                            @if ($item->jenis == 'Supplier')
-                                                                <option value="{{ $item->kode_perusahaan }}">
-                                                                    {{ $item->kode_perusahaan }} -
-                                                                    {{ $item->nama_perusahaan }}
-                                                                </option>
-                                                            @endif
-                                                            @if ($item->jenis == 'Konsumen')
-                                                                <option value="{{ $item->kode_perusahaan }}">
-                                                                    {{ $item->kode_perusahaan }} -
-                                                                    {{ $item->nama_perusahaan }}
-                                                                </option>
-                                                            @endif
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <!-- Bidang formulir Akun yang dapat diulang akan ditambahkan di sini secara dinamis -->
                                         </div>
-                                        <!-- disini -->
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary" id="btnTambahBarang">Tambah
-                                            </button>
+                                            <button type="submit" class="btn btn-primary">Tambah</button>
+                                            <button type="reset" class="btn btn-danger">Reset</button>
                                         </div>
                                     </div>
                                 </form>

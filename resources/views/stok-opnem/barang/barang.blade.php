@@ -58,13 +58,13 @@
                             <ul>
                                 <li>
                                     <button type="button" class="btn btn-outline-primary"
-                                        onclick="window.location.href='/stok-opnem/barang/{{ $barang_id }}/print'">
+                                        onclick="window.location.href='/app/stok-opnem/barang/{{ $barang_id }}/print'">
                                         Print
                                     </button>
                                     <div></div>
                                 </li>
                             </ul>
-                            <form class="position-relative" action="/kategori" id="searchForm">
+                            <form class="position-relative" action="/app/kategori" id="searchForm">
                                 <div class="form-group mb-0">
                                     <input type="text" class="form-control" id="search" name="search"
                                         placeholder="Search..." oninput="filterTable()">

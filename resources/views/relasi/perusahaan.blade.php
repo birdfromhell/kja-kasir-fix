@@ -48,108 +48,89 @@
                         <div class="card card-bordered">
                             <div class="card-inner-group">
                                 <div class="card-inner p-0">
-                                    <div class="nk-tb-list">
-                                        <div class="nk-tb-item nk-tb-head">
-                                            <div class="nk-tb-col nk-tb-col-check">
-                                                <div class="custom-control custom-control-sm custom-checkbox notext">
-                                                    <input type="checkbox" class="custom-control-input" id="pid">
-                                                    <label class="custom-control-label" for="pid"></label>
-                                                </div>
-                                            </div>
-                                            <div class="nk-tb-col tb-col-sm"><span>Nama Perusahaan</span></div>
-                                            <div class="nk-tb-col"><span>Jenis</span></div>
-                                            <div class="nk-tb-col"><span>Alamat Kantor</span></div>
-                                            <div class="nk-tb-col"><span>Alamat Gudang</span></div>
-                                            <div class="nk-tb-col"><span>Nama Pimpinan</span></div>
-                                            <div class="nk-tb-col"><span>No. Telepon</span></div>
-                                            <div class="nk-tb-col"><span>Plafon Kredit/Debit</span></div>
-                                            <div class="nk-tb-col"><span>Aksi</span></div>
-                                            <div class="nk-tb-col nk-tb-col-tools">
-                                                <ul class="nk-tb-actions gx-1 my-n1">
-                                                    <li class="mr-n1">
-                                                        <div class="dropdown">
-                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
-                                                               data-toggle="dropdown"><em
-                                                                    class="icon ni ni-more-h"></em></a>
-                                                            <div class="dropdown-menu dropdown-menu-right">
-                                                                <ul class="link-list-opt no-bdr">
-                                                                    <li><a href="#"><em
-                                                                                class="icon ni ni-edit"></em><span>Edit Selected</span></a>
-                                                                    </li>
-                                                                    <li><a href="#"><em
-                                                                                class="icon ni ni-trash"></em><span>Remove Selected</span></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div><!-- .nk-tb-item -->
-                                        @foreach ($data as $row)
-                                            <div class="nk-tb-item">
+                                    <!-- Add this div to create a scrollable container -->
+                                    <div class="table-responsive">
+                                        <div class="nk-tb-list">
+                                            <div class="nk-tb-item nk-tb-head">
                                                 <div class="nk-tb-col nk-tb-col-check">
-                                                    <div
-                                                        class="custom-control custom-control-sm custom-checkbox notext">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                               id="pid{{ $row->id }}">
-                                                        <label class="custom-control-label"
-                                                               for="pid{{ $row->id }}"></label>
+                                                    <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                        <input type="checkbox" class="custom-control-input" id="pid">
+                                                        <label class="custom-control-label" for="pid"></label>
                                                     </div>
                                                 </div>
-                                                <div class="nk-tb-col tb-col-sm">
-                                                    <span class="tb-product">
-                                                        <span class="title">{{ $row->nama_perusahaan }}</span>
-                                                    </span>
-                                                </div>
-                                                <div class="nk-tb-col">
-                                                    <span class="tb-sub">{{ $row->jenis }}</span>
-                                                </div>
-                                                <div class="nk-tb-col">
-                                                    <span class="tb-sub">{{ $row->alamat_kantor }}</span>
-                                                </div>
-                                                <div class="nk-tb-col">
-                                                    <span class="tb-sub">{{ $row->alamat_gudang }}</span>
-                                                </div>
-                                                <div class="nk-tb-col">
-                                                    <span class="tb-sub">{{ $row->nama_pimpinan }}</span>
-                                                </div>
-                                                <div class="nk-tb-col">
-                                                    <span class="tb-sub">{{ $row->no_telepon }}</span>
-                                                </div>
-                                                <div class="nk-tb-col">
-                                                    <span class="tb-sub">
-                                                        @if ($row->jenis == 'Supplier')
-                                                            Rp {{ $row->plafon_debit }} (Debit)
-                                                        @elseif ($row->jenis == 'Konsumen')
-                                                            Rp {{ $row->plafon_kredit }} (Kredit)
-                                                        @else
-                                                            -
-                                                        @endif
-                                                    </span>
-                                                </div>
-                                                <div class="nk-tb-col nk-tb-col-tools">
-                                                    <ul class="nk-tb-actions gx-1 my-n1">
-                                                        <li class="mr-n1">
-                                                            <a href="{{ url('/app/relasi/edit/' . $row->id) }}"
-                                                               class="btn btn-icon btn-trigger"><em
-                                                                    class="icon ni ni-edit"></em></a>
-                                                        </li>
-                                                        <li class="mr-n1">
-                                                            <form action="{{ url('/app/relasi/delete/' . $row->id) }}"
-                                                                  method="POST" style="display: inline;"
-                                                                  class="delete-form">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="button"
-                                                                        class="btn btn-icon btn-trigger delete-button">
-                                                                    <em class="icon ni ni-trash"></em></button>
-                                                            </form>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                <div class="nk-tb-col tb-col-sm"><span>Nama Perusahaan</span></div>
+                                                <div class="nk-tb-col"><span>Jenis</span></div>
+                                                <div class="nk-tb-col"><span>Alamat Kantor</span></div>
+                                                <div class="nk-tb-col"><span>Alamat Gudang</span></div>
+                                                <div class="nk-tb-col"><span>Nama Pimpinan</span></div>
+                                                <div class="nk-tb-col"><span>No. Telepon</span></div>
+                                                <div class="nk-tb-col"><span>Plafon Kredit/Debit</span></div>
+                                                <div class="nk-tb-col"><span>Aksi</span></div>
                                             </div><!-- .nk-tb-item -->
-                                        @endforeach
+                                            @foreach ($data as $row)
+                                                <div class="nk-tb-item">
+                                                    <div class="nk-tb-col nk-tb-col-check">
+                                                        <div class="custom-control custom-control-sm custom-checkbox notext">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                   id="pid{{ $row->id }}">
+                                                            <label class="custom-control-label"
+                                                                   for="pid{{ $row->id }}"></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="nk-tb-col tb-col-sm">
+                                                        <span class="tb-product">
+                                                            <span class="title">{{ $row->nama_perusahaan }}</span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="nk-tb-col">
+                                                        <span class="tb-sub">{{ $row->jenis }}</span>
+                                                    </div>
+                                                    <div class="nk-tb-col">
+                                                        <span class="tb-sub">{{ $row->alamat_kantor }}</span>
+                                                    </div>
+                                                    <div class="nk-tb-col">
+                                                        <span class="tb-sub">{{ $row->alamat_gudang }}</span>
+                                                    </div>
+                                                    <div class="nk-tb-col">
+                                                        <span class="tb-sub">{{ $row->nama_pimpinan }}</span>
+                                                    </div>
+                                                    <div class="nk-tb-col">
+                                                        <span class="tb-sub">{{ $row->no_telepon }}</span>
+                                                    </div>
+                                                    <div class="nk-tb-col">
+                                                        <span class="tb-sub">
+                                                            @if ($row->jenis == 'Supplier')
+                                                                Rp {{ $row->plafon_debit }} (Debit)
+                                                            @elseif ($row->jenis == 'Konsumen')
+                                                                Rp {{ $row->plafon_kredit }} (Kredit)
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </span>
+                                                    </div>
+                                                    <div class="nk-tb-col nk-tb-col-tools">
+                                                        <ul class="nk-tb-actions gx-1 my-n1">
+                                                            <li class="mr-n1">
+                                                                <a href="{{ url('/app/relasi/edit/' . $row->id) }}"
+                                                                   class="btn btn-icon btn-trigger"><em
+                                                                        class="icon ni ni-edit"></em></a>
+                                                            </li>
+                                                            <li class="mr-n1">
+                                                                <form action="{{ url('/app/relasi/delete/' . $row->id) }}"
+                                                                      method="POST" style="display: inline;"
+                                                                      class="delete-form">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="button"
+                                                                            class="btn btn-icon btn-trigger delete-button">
+                                                                        <em class="icon ni ni-trash"></em></button>
+                                                                </form>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div><!-- .nk-tb-item -->
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +153,7 @@
     <script>
         $(document).ready(function () {
             $('.delete-button').on('click', function () {
-                var form = $(this).closest('form'); // Mendapatkan form terdekat
+                var form = $(this).closest('form');
 
                 Swal.fire({
                     title: 'Konfirmasi',
@@ -185,8 +166,8 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             url: form.attr('action'),
-                            type: 'GET', // Menggunakan POST untuk mengirim data
-                            data: form.serialize(), // Menyertakan data dari form
+                            type: 'GET',
+                            data: form.serialize(),
                             success: function (response) {
                                 Swal.fire({
                                     title: 'Sukses!',
@@ -195,7 +176,7 @@
                                     timer: 3000,
                                     showConfirmButton: false
                                 }).then(() => {
-                                    location.reload(); // Reload halaman setelah sukses
+                                    location.reload();
                                 });
                             },
                             error: function (xhr) {
@@ -217,4 +198,14 @@
             });
         });
     </script>
+
+    <style>
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .nk-tb-list {
+            min-width: 1000px; /* Adjust this value based on your table's minimum width */
+        }
+    </style>
 @endsection

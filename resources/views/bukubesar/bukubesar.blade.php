@@ -1,6 +1,35 @@
 @extends('layout.app')
 @section('content')
-    <div class="nk-content">
+    <style>
+        @media (max-width: 767px) {
+            .nk-block-between {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nk-block-head-content {
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+            .toggle-wrap {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .btn {
+                width: 100%;
+            }
+            .nk-tb-list {
+                overflow-x: auto;
+            }
+            .nk-tb-item {
+                min-width: 600px;
+            }
+            .nk-tb-col {
+                white-space: nowrap;
+            }
+        }
+    </style>
+    <div class="nk-content" style="margin-top: 75px">
         <div class="container-fluid">
             <div class="nk-content-inner">
                 <div class="nk-content-body">
