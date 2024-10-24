@@ -6,6 +6,8 @@ use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
+        Schema::defaultStringLength(191);
+
+        if(config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
 
         VerifyEmail::toMailUsing(function ($notifiable, $url) {
             return (new MailMessage)
