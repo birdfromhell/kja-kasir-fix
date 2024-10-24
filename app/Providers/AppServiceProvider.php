@@ -27,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
         Schema::defaultStringLength(191);
 
+        if(config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
+
         VerifyEmail::toMailUsing(function ($notifiable, $url) {
             return (new MailMessage)
                 ->subject('Selamat datang di KJA Kasir')
