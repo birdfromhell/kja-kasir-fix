@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
 
-    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <title>Erka Solution Group</title>
 
-    <link rel="stylesheet" href="{{ asset('material/assets/css/dashlite.css?ver=2.9.0') }}">
-    <link id="skin-default" rel="stylesheet" href="{{ asset('material/assets/css/theme.css?ver=2.9.0') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dashboard/css/dashlite.css?ver=2.90') }}">
+    <link id="skin-default" rel="stylesheet" href="{{ asset('assets/dashboard/css/theme.css?ver=2.9.0') }}">
 
     <!-- Load jQuery terlebih dahulu -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -34,9 +34,9 @@
     </div>
 </div>
 
-<script src="{{ asset('material/assets/js/bundle.js?ver=2.9.0') }}"></script>
-<script src="{{ asset('material/assets/js/scripts.js?ver=2.9.0') }}"></script>
-<script src="{{ asset('material/assets/js/charts/chart-ecommerce.js?ver=2.9.0') }}"></script>
+<script src="{{ asset('assets/dashboard/js/bundle.js?ver=2.9.0') }}"></script>
+<script src="{{ asset('assets/dashboard/js/scripts.js?ver=2.9.0') }}"></script>
+<script src="{{ asset('assets/dashboard/js/charts/chart-ecommerce.js?ver=2.9.0') }}"></script>
 
 <!-- Tambahkan script AJAX Anda di sini -->
 <script>

@@ -26,6 +26,7 @@ use App\Http\Controllers\SubBukuBesarController;
 use App\Http\Controllers\SuratJalanController;
 use App\Http\Controllers\UjiCobaController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\LandingPageController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -44,9 +45,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/setting', [UsersController::class, 'settingAplikasi']);
 
 //user
-Route::get('/', function () {
-    return redirect('/app/user/login');
-});
+Route::get('/', [LandingPageController::class, 'index']);
 
 Route::get('/app/user/login', [UsersController::class, 'login'])->name('login');
 Route::get('/app/dashboard', [UsersController::class, 'home'])->name('home')->middleware(['auth', 'verified']);

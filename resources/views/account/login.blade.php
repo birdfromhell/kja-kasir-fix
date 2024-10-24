@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | ERKA SOLUTION GROUP</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/kjakasirlogo.png') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/dashboard/images/logo-clear.png') }}" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -223,7 +223,7 @@
         <div class="login-card">
             <!-- Logo -->
             <div class="logo">
-                <img src="{{ asset('assets/images/kjakasirlogo.png') }}" alt="Logo" style="width: 100%; height: auto; border-radius: 0.75rem;">
+                <img src="{{ asset('assets/dashboard/images/logo.png') }}" alt="Logo" style="width: 100%; height: auto; border-radius: 0.75rem;">
             </div>
 
             <!-- Header -->

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Register | ERKA SOLUTION GROUP</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/kjakasirlogo.png') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/dashboard/images/logo.png') }}" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -38,7 +38,7 @@
     height: 120px;
     margin: 0 auto 1rem; /* Margin dikurangi */
     background: #fff;
-   
+
     border-radius: 15px; /* Sudut melengkung */
     display: flex;
     justify-content: center;
@@ -199,19 +199,19 @@
 <body>
     <div class="card">
         <div class="brand-logo">
-            <img class="logo-img" src="{{ asset('assets/images/kjakasirlogo.png')}}" alt="logo">
+            <img class="logo-img" src="{{ asset('assets/dashboard/images/logo.png') }}" alt="logo">
         </div>
         <div class="nk-block-head">
             <h4 class="nk-block-title">Register</h4>
             <p class="subtitle">ERKA SOLUTION GROUP</p>
         </div>
-        
+
         @if (session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
             </div>
         @endif
-        
+
         <form id="register" action="/app/user/register" method="POST">
             @csrf
             <div class="form-group">
@@ -311,7 +311,7 @@
             }
 
             progressBar.style.width = (strength * 25) + '%';
-            
+
             if (strength == 0) {
                 progressBar.style.backgroundColor = '#e1e1e1';
             } else if (strength == 1) {

@@ -9,8 +9,8 @@
 
             <div class="nk-header-brand d-xl-none">
                 <a href="{{ url('app/dashboard') }}" class="logo-link">
-                    <img class="logo-light logo-img" src="{{ asset('images/logo-clear.png') }}" srcset="{{ asset('images/logo-clear.png') }} 2x" alt="logo">
-                    <img class="logo-dark logo-img" src="{{ asset('images/logo-clear.png') }}" srcset="{{ asset('images/logo-clear.png') }} 2x" alt="logo-dark">
+                    <img class="logo-light logo-img" src="{{ asset('assets/dashboard/images/logo-clear.png') }}" srcset="{{ asset('images/logo-clear.png') }} 2x" alt="logo">
+                    <img class="logo-dark logo-img" src="{{ asset('assets/dashboard/images/logo-clear.png') }}" srcset="{{ asset('images/logo-clear.png') }} 2x" alt="logo-dark">
                 </a>
             </div>
 
