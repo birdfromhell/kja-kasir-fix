@@ -14,6 +14,19 @@ class Barang extends Model
         '_token',
     ];
 
+    protected $fillable = [
+        'barang_id',
+        'nama_barang',
+        'user_id',
+        'satuan',
+        'kategori',
+        'kelompok',
+        'harga_beli',
+        'Perusahaan',
+        'stok',
+        'harga_jual',
+    ];
+
     // Relasi dengan Perusahaan
     public function perusahaan()
     {

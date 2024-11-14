@@ -45,8 +45,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/setting', [UsersController::class, 'settingAplikasi']);
 
 //user
-Route::get('/', [LandingPageController::class, 'index']);
+//Route::get('/', [LandingPageController::class, 'index']);
 
+Route::get('/', function (){
+    return redirect('/app/user/login');
+});
 Route::get('/app/user/login', [UsersController::class, 'login'])->name('login');
 Route::get('/app/dashboard', [UsersController::class, 'home'])->name('home')->middleware(['auth', 'verified']);
 Route::get('/app/dashboard/mobile', [UsersController::class, 'homeMobile'])->name('home.mobile')->middleware(['auth', 'verified']);

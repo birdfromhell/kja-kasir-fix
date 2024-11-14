@@ -133,14 +133,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label class="form-label" for="kode_kategori">Kode Kategori</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control" id="kode_kategori" name="kode_kategori" placeholder="Masukkan Kode Kategori">
-                                                        </div>
-                                                    </div>
-                                                </div>
+{{--                                                <div class="col-12">--}}
+{{--                                                    <div class="form-group">--}}
+{{--                                                        <label class="form-label" for="kode_kategori">Kode Kategori</label>--}}
+{{--                                                        <div class="form-control-wrap">--}}
+{{--                                                            <input type="text" class="form-control" id="kode_kategori" name="kode_kategori" placeholder="Masukkan Kode Kategori">--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
                                             </div>
                                         </div>
                                         <div class="modal-footer">

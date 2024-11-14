@@ -36,6 +36,18 @@ class BarangRepository
     /**
      * Show the form for creating a new resource.
      */
+    function generateBarangId()
+    {
+        $lastBarang = Barang::orderBy('barang_id', 'desc')->first();
+        if (!$lastBarang) {
+            return 'BRG-001';
+        }
+
+        $lastIdNumber = (int) substr($lastBarang->barang_id, 4);
+        $nextIdNumber = $lastIdNumber + 1;
+        return 'BRG-' . str_pad($nextIdNumber, 3, '0', STR_PAD_LEFT);
+    }
+
     public function create()
     {
         try {
@@ -59,25 +71,18 @@ class BarangRepository
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(array $validatedData)
     {
-        // Validasi data yang dikirim dari form
-        $validatedData = $request->validate([
-            'nama_barang' => 'required|string',
-            'satuan' => 'required|string',
-            'kategori' => 'required|string',
-            'kelompok' => 'required|string',
-            'harga_beli' => 'required|numeric',
-            'perusahaan' => 'required|string',
-        ]);
-
         try {
             $stokDefault = 0;
             $hargaJualDefault = $validatedData['harga_beli'] * 1.1; // Harga jual = 110% dari harga beli
             $id = auth()->user();
             $ids = $id->id;
+            $barangId = $this->generateBarangId(); // Generate a unique barang_id
+
             // Simpan data barang ke dalam database menggunakan model
             Barang::create([
+                'barang_id' => $barangId,
                 'nama_barang' => $validatedData['nama_barang'],
                 'user_id' => $ids,
                 'satuan' => $validatedData['satuan'],
@@ -88,6 +93,7 @@ class BarangRepository
                 'stok' => $stokDefault,
                 'harga_jual' => $hargaJualDefault,
             ]);
+
             // Redirect ke halaman lain atau tampilkan pesan sukses jika diperlukan
             return redirect('/app/barang')->with('success', 'Barang berhasil ditambahkan.');
         } catch (\Exception $e) {
