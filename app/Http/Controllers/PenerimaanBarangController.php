@@ -21,6 +21,7 @@ use App\Http\Requests\UpdatePenerimaanBarangRequest;
 use App\Repository\PenerimaanBarang\PenerimaanBarangRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PenerimaanBarangController extends Controller
 {
@@ -67,13 +68,13 @@ class PenerimaanBarangController extends Controller
     public function print($id_po, $id_pb)
     {
 
-        // $po = PurchaseOrder::where('id_po', $id_po)->first();
-        // $pb = PenerimaanBarang::where('id_pb', $id_pb)->first();
-        // $perusahaan = $pb->nama_perusahaan;
+        // $PO = PurchaseOrder::where('id_po', $id_po)->first();
+        // $PB = PenerimaanBarang::where('id_pb', $id_pb)->first();
+        // $perusahaan = $PB->nama_perusahaan;
         // $perusahaanData = Perusahaan::where('nama_perusahaan', $perusahaan)->first();
         // $detail = []; // Initialize $detail as an empty array
         // $barang = []; // Initialize $barang as an empty array
-        // $supplier = $po->nama_perusahaan;
+        // $supplier = $PO->nama_perusahaan;
         // $alamatsupplier = $perusahaan->alamat_gudang ?? null;
 
         try {
@@ -82,7 +83,7 @@ class PenerimaanBarangController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
 
-        // return view('barang.barangmasuk.pb.print', compact('pb', 'perusahaan', 'details', 'detaillagi', 'detail', 'po', 'supplier', 'alamatsupplier', 'perusahaanData'));
+        // return view('barang.barangmasuk.PB.print', compact('PB', 'perusahaan', 'details', 'detaillagi', 'detail', 'PO', 'supplier', 'alamatsupplier', 'perusahaanData'));
 
     }
 

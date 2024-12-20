@@ -204,7 +204,7 @@ class OrderPenjualanRepository
             $PerusahaanOptions = Barang::select('barangs.Perusahaan as barang_id', 'barangs.nama_barang', 'perusahaans.kode_perusahaan as Perusahaan_id', 'perusahaans.nama_perusahaan as Perusahaan_nama')
                 ->leftJoin('perusahaans', 'barangs.Perusahaan', '=', 'perusahaans.kode_perusahaan')
                 ->get();
-                
+
             return view('barang.barangkeluar.op.orderpenjualan', compact('barang', 'Perusahaan', 'PerusahaanOptions', 'OrderPenjualanId', 'tanggalHariIni', 'termin'));
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
@@ -259,7 +259,7 @@ class OrderPenjualanRepository
                 }
             }
 
-            // $jatuh_tempo = $termin ? Carbon::parse($request->input('tanggal_op'))->addDays(Termin::where('kode_termin', $termin)->first()->jatuh_tempo)->toDateString() : Carbon::parse($request->input('tanggal_op'))->addDays($jatuh_tempo)->toDateString();            
+            // $jatuh_tempo = $termin ? Carbon::parse($request->input('tanggal_op'))->addDays(Termin::where('kode_termin', $termin)->first()->jatuh_tempo)->toDateString() : Carbon::parse($request->input('tanggal_op'))->addDays($jatuh_tempo)->toDateString();
             // $tgltermin = Termin::where('kode_termin', $termin)->first()->toDateString();
             // dd($tgltermin);
             // $opline = opline::latest()->first();
@@ -295,7 +295,7 @@ class OrderPenjualanRepository
                 return back()->with('error', 'Failed to add data');
             }
 
-            $pb = session('pb');
+            $pb = session('PB');
             $timeDiff = session('timeDiff');
 
             return redirect('/dataOP')->with('success', 'SO <strong>' . $id_so . '</strong> berhasil ditambah');

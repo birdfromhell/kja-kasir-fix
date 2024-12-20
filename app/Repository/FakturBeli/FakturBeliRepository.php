@@ -64,7 +64,7 @@ class FakturBeliRepository
             ]);
             $perusahaan = PenerimaanBarang::where('id_pb', $id_pb)->first();
             $pb = PenerimaanBarang::where('id_pb', $validatedData['id_pb'])->first();
-            // $perusahaan = $pb->nama_perusahaan;
+            // $perusahaan = $PB->nama_perusahaan;
             $jatuh_tempo = $pb->jatuh_tempo;
             $po = $pb->id_po;
 
@@ -294,8 +294,8 @@ class FakturBeliRepository
     {
 
         // $fb = faktur_beli::where('id_fb', $id_fb)->first();
-        // $pb = PenerimaanBarang::where('id_pb', $id_pb)->first();
-        // $perusahaan = $pb->nama_perusahaan;
+        // $PB = PenerimaanBarang::where('id_pb', $id_pb)->first();
+        // $perusahaan = $PB->nama_perusahaan;
         // // Use first() or get() to retrieve the data from the database
         // $perusahaanData = Perusahaan::where('nama_perusahaan', $perusahaan)->first();
 
@@ -303,13 +303,13 @@ class FakturBeliRepository
         // $detail = []; // Initialize $detail as an empty array
         // $barang = []; // Initialize $barang as an empty array
 
-        // $details = detail_pb::where('id_pb', $pb->id_pb)->with('barang')->latest()->first();
+        // $details = detail_pb::where('id_pb', $PB->id_pb)->with('barang')->latest()->first();
         // if ($details) {
-        //     $detaillagi = detail_pb::where('id_po', $pb->id_po)->get();
+        //     $detaillagi = detail_pb::where('id_po', $PB->id_po)->get();
         //     $detail[] = $detaillagi;
         // }
 
-        // return view('barang.barangmasuk.faktur.print', compact('fb', 'pb', 'detail', 'barang', 'details', 'detaillagi', 'perusahaan', 'perusahaanData'));
+        // return view('barang.barangmasuk.faktur.print', compact('fb', 'PB', 'detail', 'barang', 'details', 'detaillagi', 'perusahaan', 'perusahaanData'));
 
         try {
             $fb = faktur_beli::where('id_fb', $id_fb)->first();
@@ -320,7 +320,7 @@ class FakturBeliRepository
             $supplier = $purchaseOrders->nama_perusahaan;
             $perusahaan = Perusahaan::where('nama_perusahaan', $supplier)->first();
             $perusahaankita = Perusahaan::where('kode_perusahaan', $user->kode_perusahaan)->first();
-            // $perusahaan = $pb->perusahaan;
+            // $perusahaan = $PB->perusahaan;
             // $alamatGudang = $perusahaan->alamat_gudang;
             $detail = []; // Initialize $detail as an empty array
             $barang = []; // Initialize $barang as an empty array

@@ -243,7 +243,7 @@
                 @endphp
                 @foreach ($detail as $detaillagi)
                     @foreach ($detaillagi as $details)
-                        @if (isset($detaillagi['id_po']) && $detaillagi['id_po'] == $po->id_po)
+                        @if (isset($detaillagi['id_po']) && $detaillagi['id_po'] == $PO->id_po)
                             @php
                                 $detailTotal += $detaillagi['total_harga'];
                             @endphp

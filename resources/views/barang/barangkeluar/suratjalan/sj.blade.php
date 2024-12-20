@@ -1,18 +1,5 @@
-@extends('layout.admin')
-
-@section('active-barang-keluar', 'active')
-
-@section('active-sj', 'active')
-
-@section('judul', 'Barang Keluar')
-
-@section('link', '/SuratJalan')
-
-@section('sub-judul', 'Barang Keluar')
-
-@section('aksi-judul', 'Surat Jalan')
-
-@section('barangkeluar')
+@extends('layout.app')
+@section('content')
     <style>
         .card.mantap {
             flex: 0 0 calc(33.333% - 20px);

@@ -60,7 +60,7 @@ class PenerimaanBarangRepository
                 }
             }
 
-            return view('barang.barangmasuk.pb.dataPB', compact('purchaseOrders', 'detailTotalpo', 'detailBarangpo', 'detailTotalpb', 'detailBarangpb', 'detailpb', 'detailpo', 'PenerimaanBarang', 'perusahaan'));
+            return view('barang.barangmasuk.pb.view-data', compact('purchaseOrders', 'detailTotalpo', 'detailBarangpo', 'detailTotalpb', 'detailBarangpb', 'detailpb', 'detailpo', 'PenerimaanBarang', 'perusahaan'));
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -91,13 +91,13 @@ class PenerimaanBarangRepository
     public function print($id_po, $id_pb)
     {
 
-        // $po = PurchaseOrder::where('id_po', $id_po)->first();
-        // $pb = PenerimaanBarang::where('id_pb', $id_pb)->first();
-        // $perusahaan = $pb->nama_perusahaan;
+        // $PO = PurchaseOrder::where('id_po', $id_po)->first();
+        // $PB = PenerimaanBarang::where('id_pb', $id_pb)->first();
+        // $perusahaan = $PB->nama_perusahaan;
         // $perusahaanData = Perusahaan::where('nama_perusahaan', $perusahaan)->first();
         // $detail = []; // Initialize $detail as an empty array
         // $barang = []; // Initialize $barang as an empty array
-        // $supplier = $po->nama_perusahaan;
+        // $supplier = $PO->nama_perusahaan;
         // $alamatsupplier = $perusahaan->alamat_gudang ?? null;
 
         try {
@@ -130,7 +130,7 @@ class PenerimaanBarangRepository
             return response()->json(['error' => $e->getMessage()], 400);
         }
 
-        // return view('barang.barangmasuk.pb.print', compact('pb', 'perusahaan', 'details', 'detaillagi', 'detail', 'po', 'supplier', 'alamatsupplier', 'perusahaanData'));
+        // return view('barang.barangmasuk.PB.print', compact('PB', 'perusahaan', 'details', 'detaillagi', 'detail', 'PO', 'supplier', 'alamatsupplier', 'perusahaanData'));
 
     }
 
@@ -171,9 +171,9 @@ class PenerimaanBarangRepository
             }
 
             if ($purchaseOrders->isEmpty()) {
-                return redirect('/dataPB')->with('error', 'Data purchase order tidak ditemukan');
+                return redirect('/app/penerimaanbarang/data')->with('error', 'Data purchase order tidak ditemukan');
             } else {
-                return view('barang.barangmasuk.pb.penerimaanbarang', compact('purchaseOrders', 'detailTotal', 'detailBarang', 'detail', 'perusahaan', 'PenerimaanBarangId', 'tanggalHariIni', 'barang', 'PerusahaanOptions', 'perusahaan', 'detailDiskon'));
+                return view('barang.barangmasuk.pb.create', compact('purchaseOrders', 'detailTotal', 'detailBarang', 'detail', 'perusahaan', 'PenerimaanBarangId', 'tanggalHariIni', 'barang', 'PerusahaanOptions', 'perusahaan', 'detailDiskon'));
             }
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
@@ -196,7 +196,7 @@ class PenerimaanBarangRepository
 
 
             $pb = $request->input('result');
-            //dd($pb);
+            //dd($PB);
             $selectedItem = json_decode($pb, true);
             // dd($selectedItem);
             $id = auth()->user();
@@ -342,7 +342,7 @@ class PenerimaanBarangRepository
             $perusahaan = $purchaseOrder->kode_perusahaan;
 
             $pb = $validatedData['result'];
-            //dd($pb);
+            //dd($PB);
             $selectedItem = json_decode($pb, true);
             // dd($selectedItem);
 
@@ -598,7 +598,7 @@ class PenerimaanBarangRepository
         try {
             $purchaseOrder = PurchaseOrder::all();
 
-            return view('ujicoba.pb', compact('purchaseOrder'));
+            return view('ujicoba.PB', compact('purchaseOrder'));
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }

@@ -150,9 +150,9 @@ class UsersRepository
                 $createdTime = Carbon::parse($pb->created_at);
                 $currentTime = now();
                 $timeDiff1 = $createdTime->diffForHumans($currentTime);
-                session(['pb' => $pb, 'timeDiff1' => $timeDiff1]);
+                session(['PB' => $pb, 'timeDiff1' => $timeDiff1]);
             } else {
-                session(['pb' => null, 'timeDiff1' => null]);
+                session(['PB' => null, 'timeDiff1' => null]);
             }
 
             if ($sj !== null) {
@@ -164,7 +164,7 @@ class UsersRepository
                 session(['sj' => null, 'timeDiff2' => null]);
             }
 
-            $pb = session('pb');
+            $pb = session('PB');
             $timeDiff1 = session('timeDiff1');
             $sj = session('sj');
             $timeDiff2 = session('timeDiff2');
@@ -191,9 +191,9 @@ class UsersRepository
                 $createdTime = Carbon::parse($pb->created_at);
                 $currentTime = now();
                 $timeDiff1 = $createdTime->diffForHumans($currentTime);
-                session(['pb' => $pb, 'timeDiff1' => $timeDiff1]);
+                session(['PB' => $pb, 'timeDiff1' => $timeDiff1]);
             } else {
-                session(['pb' => null, 'timeDiff1' => null]);
+                session(['PB' => null, 'timeDiff1' => null]);
             }
 
             if ($sj !== null) {
@@ -205,7 +205,7 @@ class UsersRepository
                 session(['sj' => null, 'timeDiff2' => null]);
             }
 
-            $pb = session('pb');
+            $pb = session('PB');
             $timeDiff1 = session('timeDiff1');
             $sj = session('sj');
             $timeDiff2 = session('timeDiff2');
@@ -231,9 +231,9 @@ class UsersRepository
                 $createdTime = Carbon::parse($pb->created_at);
                 $currentTime = now();
                 $timeDiff1 = $createdTime->diffForHumans($currentTime);
-                session(['pb' => $pb, 'timeDiff1' => $timeDiff1]);
+                session(['PB' => $pb, 'timeDiff1' => $timeDiff1]);
             } else {
-                session(['pb' => null, 'timeDiff1' => null]);
+                session(['PB' => null, 'timeDiff1' => null]);
             }
 
             if ($sj !== null) {
@@ -245,7 +245,7 @@ class UsersRepository
                 session(['sj' => null, 'timeDiff2' => null]);
             }
 
-            $pb = session('pb');
+            $pb = session('PB');
             $timeDiff1 = session('timeDiff1');
             $sj = session('sj');
             $timeDiff2 = session('timeDiff2');

@@ -42,8 +42,8 @@ class PerusahaanController extends Controller
                 'alamat_gudang' => 'required',
                 'nama_pimpinan' => 'required',
                 'no_telepon' => 'required',
-                'plafon_debit' => 'nullable',
-                'plafon_kredit' => 'nullable',
+                'plafon_debit' => $request->jenis == 'Supplier' ? 'required|numeric' : 'nullable',
+                'plafon_kredit' => $request->jenis == 'Konsumen' ? 'required|numeric' : 'nullable',
             ]);
 
             // Simpan data perusahaan

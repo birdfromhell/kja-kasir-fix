@@ -134,7 +134,7 @@
             <div>
                 <div class="text-muted">No. Faktur: {{ $fb->id_fb }}</div>
                 <div class="text-muted">Tanggal: {{ $fb->tanggal_fb }} </div>
-                <div class="text-muted">Jatuh Tempo: {{ $pb->jatuh_tempo }}</div>
+                <div class="text-muted">Jatuh Tempo: {{ $PB->jatuh_tempo }}</div>
             </div>
             <!--
             <div>

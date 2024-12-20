@@ -12,7 +12,7 @@
                             </div>
                             <div class="nk-block-head-content">
                                 <div class="toggle-wrap nk-block-tools-toggle">
-                                    <button type="button" class="btn btn-outline-primary" onclick="window.location.href='/orderPenjualan'">Tambah</button>
+                                    <button type="button" class="btn btn-outline-primary" onclick="window.location.href='/app/orderpenjualan/tambah'">Tambah</button>
                                 </div>
                             </div>
                         </div>

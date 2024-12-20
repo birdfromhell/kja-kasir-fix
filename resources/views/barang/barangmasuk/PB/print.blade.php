@@ -70,10 +70,10 @@
                 <div class="text-muted"><strong>PT {{ Auth::user()->perusahaan->nama_perusahaan }}</strong></div>
             </div>
             <div>
-                <div class="text-muted">No. PB: {{ $pb->id_pb }}</div>
-                <div class="text-muted">Tanggal:{{ $pb->tanggal_pb }} </div>
-                <div class="text-muted">No. SJ Supplier: {{ $pb->surat_jalan }} </div>
-                <div class="text-muted">Jatuh Tempo: {{ $pb->jatuh_tempo }} </div>
+                <div class="text-muted">No. PB: {{ $PB->id_pb }}</div>
+                <div class="text-muted">Tanggal:{{ $PB->tanggal_pb }} </div>
+                <div class="text-muted">No. SJ Supplier: {{ $PB->surat_jalan }} </div>
+                <div class="text-muted">Jatuh Tempo: {{ $PB->jatuh_tempo }} </div>
             </div>
             <!--
             <div>

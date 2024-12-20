@@ -109,7 +109,7 @@
                 </div>
                 <div class="iq-card-body">
                     <p>Input Penjualan</p>
-                    <form class="form-horizontal" action="/orderPenjualan/create" method="POST" id="soForm">
+                    <form class="form-horizontal" action="/app/orderpenjualan/create" method="GET" id="soForm">
                         @csrf
                         <div class="form-group row">
                             <label class="control-label col-sm-2 align-self-center mb-0" for="tanggal_op">ID Surat Order
@@ -246,7 +246,7 @@
 
                 var method = 'get'; // Changed method to POST
                 var action = 'Order Penjualan';
-                var url = '/orderPenjualan/create';
+                var url = '/app/orderpenjualan/create';
 
                 Swal.fire({
                     title: 'warning',
@@ -269,7 +269,7 @@
                                         id_op // Added space before action
                                 }).then(() => { // Corrected syntax for then function
                                     window.location.href =
-                                        '/dataOP' // Update URL without reloading
+                                        '/app/orderpenjualan/data' // Update URL without reloading
                                 });
                             },
                             error: function(xhr, status, error) {

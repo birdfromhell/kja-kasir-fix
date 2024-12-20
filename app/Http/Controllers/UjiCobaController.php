@@ -60,9 +60,9 @@ class UjiCobaController extends Controller
     public function pb()
     {
         try {
-            return view('ujicoba.pb');
+            return view('ujicoba.PB');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error loading pb view.');
+            return redirect()->back()->with('error', 'Error loading PB view.');
         }
     }
 }

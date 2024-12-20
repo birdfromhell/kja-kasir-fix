@@ -18,14 +18,14 @@ class PurchaseOrderRepository
     public function index($id)
     {
         if ($id === null) {
-            return redirect('/dataPO')->with('error', 'Terjadi Kesalahan');
+            return redirect('/app/purchaseorder/data')->with('error', 'Terjadi Kesalahan');
         }
         try {
             $purchaseOrders = PurchaseOrder::paginate(20);
             $perusahaan = Perusahaan::all();
             $detailTotal = 0;
             $detailBarang = 0;
-            $detail = []; // Initialize $detail as an empty array
+            $detail = [];
 
             foreach ($purchaseOrders as $purchaseOrder) {
                 $details = detail_po::where('id_po', $purchaseOrder->id_po)->first();
@@ -35,16 +35,16 @@ class PurchaseOrderRepository
                 }
             }
 
-            return view('barang.barangmasuk.po.dataPO', compact('purchaseOrders', 'detailTotal', 'detailBarang', 'detail', 'perusahaan'));
+            return view('barang.barangmasuk.po.view-data', compact('purchaseOrders', 'detailTotal', 'detailBarang', 'detail', 'perusahaan'));
         } catch (Exception $e) {
-            return redirect('/dataPO')->with('error', 'Error retrieving purchase orders.');
+            return redirect('/app/purchaseorder/data')->with('error', 'Error retrieving purchase orders.');
         }
     }
+
     public function updateStatus(Request $request, $id)
     {
         try {
             $status = $request->get('status');
-            // dd($status);
             if ($status == 'Approve' || $status == 'Decline') {
                 PurchaseOrder::where('id_po', $id)->update(['status' => $status]);
                 return array(
@@ -74,8 +74,8 @@ class PurchaseOrderRepository
             $detailBarang = 0;
             $hargaAfterDiskon = 0;
             $totalHargaSemua = 0;
-            $detail = []; // Initialize $detail as an empty array
-            $barang = []; // Initialize $barang as an empty array
+            $detail = [];
+            $barang = [];
             $kodeBarangArray = [];
 
             $details = detail_po::where('id_po', $purchaseOrders->id_po)->with('barang')->latest()->first();
@@ -88,16 +88,15 @@ class PurchaseOrderRepository
                 }
             }
 
-            return view('barang.barangmasuk.po.print', compact('purchaseOrders', 'detailTotal', 'detailBarang', 'detail', 'perusahaan', 'totalHargaSemua',  'barang', 'kodeBarangArray', 'perusahaan', 'perusahaankita'));
+            return view('barang.barangmasuk.po.print', compact('purchaseOrders', 'detailTotal', 'detailBarang', 'detail', 'perusahaan', 'totalHargaSemua', 'barang', 'kodeBarangArray', 'perusahaan', 'perusahaankita'));
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
-            // return redirect('/dataPO')->with('error', 'Error printing purchase order.');
         }
     }
+
     public function edit(Request $request, $id)
     {
         try {
-
             $purchaseOrder = PurchaseOrder::where('id_po', $id)->first();
 
             if (!$purchaseOrder) {
@@ -111,11 +110,6 @@ class PurchaseOrderRepository
             if (!$barang) {
                 return redirect()->back()->with('error', 'Barang tidak ditemukan.');
             }
-
-            // $harga_jual = $ceklagi->harga_jual;
-            // $jumlah_harga = $harga_jual * $request->jumlah_barang;
-            // $total_bayar = $jumlah_harga - ($request->diskon / 100) * $jumlah_harga;
-
 
             $purchaseOrder->update([
                 'tanggal_po' => $request->nama_barang,
@@ -132,15 +126,10 @@ class PurchaseOrderRepository
     {
         try {
             $data = detail_po::find($id);
-
-            // Validasi data yang dikirim dari form
-
             $data->update($validatedData);
-
             $kategori = $data->kategori_barang;
 
             return redirect('/kategori')->with('update', 'Kategori Barang <strong>' . $kategori . '</strong> berhasil diupdate.');
-            //
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -150,30 +139,21 @@ class PurchaseOrderRepository
     {
         try {
             $latestPurchaseOrder = PurchaseOrder::latest()->first();
-
-            // Calculate the next ID
             $nextId = $latestPurchaseOrder ? ($latestPurchaseOrder->id + 1) : 1;
-
-            // Format the ID for the purchase order
             $idFormatted = str_pad($nextId, 4, '0', STR_PAD_LEFT);
             $purchaseOrderId = 'PO-' . $idFormatted;
             $termin = Termin::all();
-
             $tanggalHariIni = Carbon::now()->setTimezone('Asia/Jakarta')->toDateString();
             $barang = Barang::all();
             $Perusahaan = Perusahaan::all();
-            $termin = Termin::all();
-            // Build a list of Perusahaan options
             $PerusahaanOptions = Barang::select('barangs.Perusahaan as barang_id', 'barangs.nama_barang', 'perusahaans.kode_perusahaan as Perusahaan_id', 'perusahaans.nama_perusahaan as Perusahaan_nama')
                 ->leftJoin('perusahaans', 'barangs.Perusahaan', '=', 'perusahaans.kode_perusahaan')
                 ->get();
 
-            return view('barang.barangmasuk.po.purchaseorder', compact('barang', 'Perusahaan', 'PerusahaanOptions', 'purchaseOrderId', 'tanggalHariIni', 'termin'));
+            return view('barang.barangmasuk.po.create', compact('barang', 'Perusahaan', 'PerusahaanOptions', 'purchaseOrderId', 'tanggalHariIni', 'termin'));
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
-        // Find the latest purchase order
-
     }
 
     public function CreatepurchaseOrder(Request $request)
@@ -181,51 +161,46 @@ class PurchaseOrderRepository
         try {
             $selectedItemsArray = $request->input('selectedItems');
             $selectedItemsArrayArray = json_decode($selectedItemsArray, true);
-            // dd($selectedItemsArrayArray);
             $id = auth()->user();
 
             $request->validate([
-                'tanggal_po' => 'required',
-                'kode_perusahaan' => 'required',
+                'tanggal_po' => 'required|date',
+                'kode_perusahaan' => 'required|string|max:255',
+                'termin' => 'nullable|string|max:255',
+                'jatuh_tempo' => 'nullable|date',
+                'tanggal_termin' => 'required|date',
+                'selectedItems' => 'required|array',
+                'selectedItems.*.barang_id' => 'required|string',
+                'selectedItems.*.nama_barang' => 'required|string',
+                'selectedItems.*.quantity' => 'required|integer|min:1',
+                'selectedItems.*.price' => 'required|numeric|min:0',
+                'selectedItems.*.discount' => 'nullable|numeric|min:0',
+                'selectedItems.*.discountpersen' => 'nullable|numeric|min:0',
+                'selectedItems.*.total' => 'required|numeric|min:0',
             ]);
 
+            if ($request->filled('termin') && $request->filled('jatuh_tempo')) {
+                return redirect()->back()->with('error', 'Jatuh tempo harap tidak diisi dua-duanya');
+            }
 
-            $termin = $request->input('termin');
-            $jatuh_tempo = $request->input('jatuh_tempo');
-            $tanggal_termin = $request->input('tanggal_termin');
-            // dd($tanggal_termin);
+            if (!$request->filled('termin') && !$request->filled('jatuh_tempo')) {
+                return redirect()->back()->with('error', 'Jatuh tempo diisi salah satunya yang sudah ada atau buat baru');
+            }
+
+            $pusinglo = Perusahaan::where('kode_perusahaan', $request->kode_perusahaan)->first();
+
+            if ($request->filled('termin')) {
+                $termin = Termin::where('kode_termin', $request->input('termin'))->first();
+                $tanggal_termin = Carbon::parse($request->input('tanggal_po'))->addDays($termin->jatuh_tempo)->toDateString();
+            } else {
+                $tanggal_termin = $request->input('tanggal_termin');
+            }
+
             $poline = po_line::create([
                 'user_id' => $id->id,
                 'hariini' => now()->toDateString(),
             ]);
             $id_po = $poline->id_po;
-
-            //fix
-
-            $pusinglo = Perusahaan::where('kode_perusahaan', $request->kode_perusahaan)->first();
-
-            if ($termin && $jatuh_tempo) {
-                return redirect()->back()->with('error', 'Jatuh tempo harap tidak diisi dua-duanya');
-            } else {
-                if (!$termin && !$jatuh_tempo) {
-                    return redirect()->back()->with('error', 'Jatuh tempo diisi salah satunya yang sudah ada atau buat baru ');
-                }
-            }
-
-            if ($termin || $jatuh_tempo) {
-                if ($jatuh_tempo) {
-                    Termin::create([
-                        'jatuh_tempo' => $jatuh_tempo,
-                        'tanggal_termin' => $tanggal_termin,
-                    ]);
-                }
-                if ($termin) {
-                    $tanggal_termin = $termin ? Carbon::parse($request->input('tanggal_po'))->addDays(Termin::where('kode_termin', $termin)->first()->jatuh_tempo)->toDateString() : $jatuh_tempo = $request->input('jatuh_tempo');
-                }
-            }
-            // $tgltermin = Termin::where('kode_termin', $termin)->first()->toDateString();
-            // dd($tgltermin);
-            // $poline = po_line::latest()->first();
 
             $purchaseOrder = PurchaseOrder::create([
                 'id_po' => $poline->id_po,
@@ -233,78 +208,56 @@ class PurchaseOrderRepository
                 'tanggal_po' => $request->tanggal_po,
                 'kode_perusahaan' => $pusinglo->kode_perusahaan,
                 'nama_perusahaan' => $pusinglo->nama_perusahaan,
-                'detail_po' => $poline->id_detailpo,
                 'jatuh_tempo' => $tanggal_termin,
             ]);
 
-            if ($purchaseOrder && $poline->id_po !== null) {
-                foreach ($selectedItemsArrayArray as $selectedItem) {
-                    $satuan = Barang::where('barang_id', $selectedItem['barang_id'])->first();
-                    detail_po::create([
-                        'id_po' => $poline->id_po, // Provide the id_po value here
-                        'id_detail_po' => $poline->id_detailpo,
-                        'barang_id' => $selectedItem['barang_id'],
-                        'nama_barang' => $selectedItem['nama_barang'],
-                        'satuan' => $satuan->satuan,
-                        'stok' => $selectedItem['quantity'],
-                        'harga' => $selectedItem['price'],
-                        'potongan' => $selectedItem['discount'] ?? 0,
-                        'diskon' => $selectedItem['discountpersen'] ?? 0,
-                        'total_harga' => $selectedItem['total'],
-                    ]);
-                }
-            } else {
-                return back()->with('error', 'Failed to add data');
+            foreach ($selectedItemsArrayArray as $selectedItem) {
+                detail_po::create([
+                    'id_po' => $poline->id_po,
+                    'barang_id' => $selectedItem['barang_id'],
+                    'nama_barang' => $selectedItem['nama_barang'],
+                    'satuan' => $selectedItem['satuan'],
+                    'stok' => $selectedItem['quantity'],
+                    'harga' => $selectedItem['price'],
+                    'potongan' => $selectedItem['discount'] ?? 0,
+                    'diskon' => $selectedItem['discountpersen'] ?? 0,
+                    'total_harga' => $selectedItem['total'],
+                ]);
             }
-            $pb = session('pb');
-            $timeDiff = session('timeDiff');
 
-            return redirect('/dataPO')->with('success', 'PO <strong>' . $id_po . '</strong> berhasil ditambah');
+            return redirect('app/purchaseorder/data')->with('success', 'PO <strong>' . $id_po . '</strong> berhasil ditambah');
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
     public function CreatepurchaseOrderSeeder($validatedData)
     {
-        // dd($validatedData);
         try {
             $selectedItemsArray = $validatedData['selectedItems'];
             $selectedItemsArrayArray = json_decode($selectedItemsArray, true);
-            // dd($selectedItemsArrayArray);
             $id = auth()->user();
             if ($id === null) {
                 $id = $validatedData['id'];
             }
-            // dd($id);
+
             $termin = $validatedData['termin'];
             $jatuh_tempo = $validatedData['jatuh_tempo'];
             $tanggal_termin = $validatedData['tanggal_termin'];
-            // dd($tanggal_termin);
+
             $poline = po_line::create([
                 'user_id' => $id,
                 'hariini' => now()->toDateString(),
             ]);
             $id_po = $poline->id_po;
 
-            //fix
-
             $pusinglo = Perusahaan::where('kode_perusahaan', $validatedData['kode_perusahaan'])->first();
 
-
-            if ($termin || $jatuh_tempo) {
-                if ($jatuh_tempo) {
-                    Termin::create([
-                        'jatuh_tempo' => $jatuh_tempo,
-                        'tanggal_termin' => $tanggal_termin,
-                    ]);
-                }
-                if ($termin) {
-                    $tanggal_termin = $termin ? Carbon::parse($validatedData['tanggal_po'])->addDays(Termin::where('kode_termin', $termin)->first()->jatuh_tempo)->toDateString() : $jatuh_tempo = $validatedData['jatuh_tempo'];
-                }
+            if ($termin) {
+                $tanggal_termin = Carbon::parse($validatedData['tanggal_po'])->addDays(Termin::where('kode_termin', $termin)->first()->jatuh_tempo)->toDateString();
+            } else {
+                $tanggal_termin = $jatuh_tempo;
             }
-            // $tgltermin = Termin::where('kode_termin', $termin)->first()->toDateString();
-            // dd($tgltermin);
-            // $poline = po_line::latest()->first();
 
             $purchaseOrder = PurchaseOrder::create([
                 'id_po' => $poline->id_po,
@@ -312,17 +265,15 @@ class PurchaseOrderRepository
                 'tanggal_po' => $validatedData['tanggal_po'],
                 'kode_perusahaan' => $pusinglo->kode_perusahaan,
                 'nama_perusahaan' => $pusinglo->nama_perusahaan,
-                'detail_po' => $poline->id_detailpo,
                 'jatuh_tempo' => $tanggal_termin,
             ]);
 
             foreach ($selectedItemsArrayArray as $selectedItem) {
-                $satuan = Barang::where('barang_id', $selectedItem['barang_id'])->first();
                 detail_po::create([
-                    'id_po' => $poline->id_po, // Provide the id_po value here                    
+                    'id_po' => $poline->id_po,
                     'barang_id' => $selectedItem['barang_id'],
                     'nama_barang' => $selectedItem['nama_barang'],
-                    'satuan' => $satuan->satuan,
+                    'satuan' => $selectedItem['satuan'],
                     'stok' => $selectedItem['quantity'],
                     'harga' => $selectedItem['price'],
                     'potongan' => $selectedItem['discount'] ?? 0,

@@ -233,7 +233,7 @@
                 var id_po = $('#po').val();
                 var kode_perusahaan = $('#kode_perusahaan').val();
                 var termin = $('#termin').val();
-                var jatuh_tempo = $('#jatuh_tempo').val();
+                var jatuh_tempo = $('#jatuh_tempo').val() || '2024-12-31'; // Set default value if empty
                 var tanggal_termin = $('#tanggal_termin').val();
                 var selectedItems = $('#selectedItemsInput').val();
 
@@ -247,13 +247,15 @@
                     selectedItems: selectedItems
                 };
 
-                var method = 'get'; // Changed method to POST
-                var action = 'Purchase Order';
-                var url = '/purchaseOrder/create';
+                console.log(formData);
+
+                var method = 'POST';
+                var action = 'create';
+                var url = '/app/purchaseorder/create';
 
                 Swal.fire({
-                    title: 'warning',
-                    title: "Apakah anda yakin?",
+                    title: 'Warning',
+                    text: "Apakah anda yakin?",
                     showCancelButton: true,
                     confirmButtonText: "Yakin",
                     cancelButtonText: "Batal"
@@ -267,18 +269,15 @@
                                 Swal.fire({
                                     title: 'Success',
                                     icon: 'success',
-                                    text: 'Berhasil membuat ' +
-                                        action + ' dengan id : ' +
-                                        id_po // Added space before action
-                                }).then(() => { // Corrected syntax for then function
-                                    window.location.href =
-                                        '/dataPO' // Update URL without reloading
+                                    text: 'Berhasil membuat ' + action + ' dengan id : ' + id_po
+                                }).then(() => {
+                                    window.location.href = '/app/purchaseorder/data';
                                 });
                             },
                             error: function(xhr, status, error) {
                                 Swal.fire({
                                     title: 'Error',
-                                    text: 'Failed to update status: ' + error,
+                                    text: 'Failed to create ' + action + ': ' + error,
                                     icon: 'error'
                                 });
                             }
@@ -392,7 +391,7 @@
                 <div class="form-group row">
                     <div class="col-sm-6">
                     <label for="quantityInput${barang.id}">Kuantitas:</label>
-                    <input type="number" class="form-control mantap quantity-input" id="quantityInput${barang.id}" min="0" placeholder="Masukkan Kuantitas">
+                        <input type="number" class="form-control mantap quantity-input" id="quantityInput${barang.id}" min="0" placeholder="Masukkan Kuantitas">
                 </div>
                 <div class="col-sm-6">
                     <label for="priceInput${barang.id}">Harga:</label>

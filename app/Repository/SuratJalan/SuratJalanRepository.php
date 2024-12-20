@@ -150,7 +150,7 @@ class SuratJalanRepository
             }
 
             if ($SuratOrders->isEmpty()) {
-                return redirect('/dataSJ')->with('error', 'Data purchase order tidak ditemukan');
+                return redirect('/app/suratjalan/data')->with('error', 'Data purchase order tidak ditemukan');
             } else {
                 return view('barang.barangkeluar.suratjalan.sj', compact('SuratOrders', 'detailTotal', 'detailBarang', 'detail', 'perusahaan', 'SuratJalanId', 'tanggalHariIni', 'barang', 'PerusahaanOptions', 'perusahaan'));
             }
@@ -258,7 +258,7 @@ class SuratJalanRepository
 
             if ($lur) {
                 if (is_array($selectedItem)) {
-                    //cuman karena ini kan ngirim kalo itu kan ngambil terus ngirim, berarti problemnya di ngambilnya 
+                    //cuman karena ini kan ngirim kalo itu kan ngambil terus ngirim, berarti problemnya di ngambilnya
                     foreach ($selectedItem as $item) {
                         if (isset($item['id'])) {
                             $detail_so = detail_op::where('id', $item['id'])->where('id_so', $validateData['ID_SO'])->first();

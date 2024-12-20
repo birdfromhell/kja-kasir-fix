@@ -139,7 +139,7 @@
                 <span>
                     <div class="text-muted">: {{ $fb->id_fb }}</div>
                     <div class="text-muted">: {{ $fb->tanggal_fb }} </div>
-                    <div class="text-muted">: {{ $pb->jatuh_tempo }}</div>
+                    <div class="text-muted">: {{ $PB->jatuh_tempo }}</div>
                 </span>
             </div>
         </div> --}}
@@ -151,7 +151,7 @@
             <div>
                 <div class="text-muted">No. Faktur: {{ $fb->id_fb }}</div>
                 <div class="text-muted">Tanggal: {{ $fb->tanggal_fb }} </div>
-                <div class="text-muted">Jatuh Tempo: {{ $pb->jatuh_tempo }}</div>
+                <div class="text-muted">Jatuh Tempo: {{ $PB->jatuh_tempo }}</div>
             </div>
             <!--
             <div>
@@ -165,7 +165,7 @@
         </div>
         <div style="display: flex; justify-content: space-between;">
             <div>
-                {{-- <div class="text-muted" style="font-weight: bold;">Supplier : {{ $pb->nama_perusahaan }}</div>
+                {{-- <div class="text-muted" style="font-weight: bold;">Supplier : {{ $PB->nama_perusahaan }}</div>
                 <div class="text-muted">Alamat : {{ $perusahaan->alamat_gudang }}</div> --}}
             </div>
             <p></p>

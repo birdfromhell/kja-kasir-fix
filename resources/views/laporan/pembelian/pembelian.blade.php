@@ -236,7 +236,7 @@
                                 }).then((willAdd) => {
                                     if (willAdd) {
                                         $.ajax({
-                                            url: "/kelompok-insert",
+                                            url: "/app/kelompok/insert",
                                             type: "POST",
                                             data: $("#formTambahKelompok").serialize(),
                                             success: function(response) {
@@ -245,7 +245,7 @@
                                                     icon: 'success',
                                                     text: 'Kelompok berhasil ditambahkan!'
                                                 }).then((value) => {
-                                                    window.location.href = "/kelompok";
+                                                    window.location.href = "/app/kelompok";
                                                 });
                                             },
                                             error: function(xhr, status, error) {

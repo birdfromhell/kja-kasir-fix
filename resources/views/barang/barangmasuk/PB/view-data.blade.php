@@ -12,7 +12,7 @@
                             </div>
                             <div class="nk-block-head-content">
                                 <div class="toggle-wrap nk-block-tools-toggle">
-                                    <button type="button" class="btn btn-outline-primary" onclick="window.location.href='/PenerimaanBarang'">Tambah</button>
+                                    <button type="button" class="btn btn-outline-primary" onclick="window.location.href='/app/penerimaanbarang/tambah'">Tambah</button>
                                 </div>
                             </div>
                         </div>
@@ -176,7 +176,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: 'GET',
-                            url: '/dataPB/' + action + '/' + id,
+                            url: '/app/penerimaanbarang/' + action + '/' + id,
                             data: {
                                 status: action,
                                 id: id

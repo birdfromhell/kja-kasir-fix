@@ -175,7 +175,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('darkmode', [UjiCobaController::class, 'darkmode']);
             Route::get('dropdown', [UjiCobaController::class, 'dropdown']);
             Route::get('checkbox', [UjiCobaController::class, 'checkbox']);
-            Route::get('pb', [UjiCobaController::class, 'pb']);
+            Route::get('PB', [UjiCobaController::class, 'pb']);
         });
 
         // BukuBesarController
@@ -195,14 +195,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
         // PurchaseOrderController
-        Route::prefix('purchaseorder')->group(function () {
-            Route::get('/', [PurchaseOrderController::class, 'purchaseOrder']);
-            Route::get('create', [PurchaseOrderController::class, 'CreatepurchaseOrder']);
-            Route::get('data', [PurchaseOrderController::class, 'index']);
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::prefix('purchaseorder')->group(function () {
+            Route::get('/tambah', [PurchaseOrderController::class, 'purchaseOrder']);
+            Route::post('/create', [PurchaseOrderController::class, 'CreatepurchaseOrder'])
+            ->name('purchaseorder.create');
+            Route::get('/data', [PurchaseOrderController::class, 'index'])
+            ->name('purchaseorder.data');
             Route::get('data/edit/{id}', [PurchaseOrderController::class, 'edit']);
             Route::get('data/laporan', [PurchaseOrderController::class, 'laporan']);
             Route::get('data/print/laporan/{id_po}', [PurchaseOrderController::class, 'print']);
-            Route::get('data/update-status/{id}', [PurchaseOrderController::class, 'status']);
+           Route::get('data/update-status/{id}', [PurchaseOrderController::class, 'status']);
         });
 
         // DetailPoController
@@ -210,8 +213,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // PenerimaanBarangController
         Route::prefix('penerimaanbarang')->group(function () {
-            Route::get('/', [PenerimaanBarangController::class, 'PenerimaanBarang']);
-            Route::get('create', [PenerimaanBarangController::class, 'CreatePenerimaanBarang']);
+            Route::get('/tambah', [PenerimaanBarangController::class, 'PenerimaanBarang']);
+            Route::post('create', [PenerimaanBarangController::class, 'CreatePenerimaanBarang']);
             Route::get('data', [PenerimaanBarangController::class, 'index']);
             Route::get('data/laporan', [PenerimaanBarangController::class, 'laporan']);
             Route::get('data/edit/{id}', [PenerimaanBarangController::class, 'edit']);
@@ -235,7 +238,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // OrderPenjualanController
         Route::prefix('orderpenjualan')->group(function () {
-            Route::get('/', [OrderPenjualanController::class, 'OrderPenjualan']);
+            Route::get('/tambah', [OrderPenjualanController::class, 'OrderPenjualan']);
             Route::get('laporan', [OrderPenjualanController::class, 'laporan']);
             Route::get('create', [OrderPenjualanController::class, 'CreateOrderPenjualan']);
             Route::get('data', [OrderPenjualanController::class, 'index']);
@@ -249,7 +252,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // SuratJalanController
         Route::prefix('suratjalan')->group(function () {
-            Route::get('/', [SuratJalanController::class, 'SuratJalan']);
+            Route::get('tambah', [SuratJalanController::class, 'SuratJalan']);
             Route::get('create', [SuratJalanController::class, 'CreateSuratJalan']);
             Route::get('data', [SuratJalanController::class, 'index']);
             Route::get('data/laporan', [SuratJalanController::class, 'laporan']);
@@ -312,5 +315,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('print', [CashOpnameController::class, 'print']);
         });
     });
-}
-);
+});
+});

@@ -109,7 +109,7 @@
                     </a>
                     <ul class="nk-menu-sub">
                         <li class="nk-menu-item">
-                            <a href="{{ url('app/orderpenjualan') }}" class="nk-menu-link"><span class="nk-menu-text">Surat Order Penjualan(SO)</span></a>
+                            <a href="{{ url('app/orderpenjualan/data') }}" class="nk-menu-link"><span class="nk-menu-text">Surat Order Penjualan(SO)</span></a>
                         </li>
                         <li class="nk-menu-item">
                             <a href="{{ url('app/suratjalan/data') }}" class="nk-menu-link"><span class="nk-menu-text">Surat Jalan (SJ)</span></a>

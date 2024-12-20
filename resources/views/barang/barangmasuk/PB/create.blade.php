@@ -106,7 +106,7 @@
                 </div>
                 <div class="iq-card-body">
                     <p>Input Pembelian</p>
-                    <form class="form-horizontal" action="/PenerimaanBarang/create" method="POST">
+                    <form class="form-horizontal" action="/app/penerimaanbarang/create" method="GET">
                         @csrf
                         <div class="form-group row">
                             <label class="control-label col-sm-2 align-self-center mb-0" for="tanggal_pb">ID Penerimaan
@@ -489,7 +489,7 @@
                     event.preventDefault();
                     var tanggal_po = $('#tanggal_po').val();
                     var id_po = $('#ID_PO').val();
-                    var pb = $('#pb').val();
+                    var pb = $('#PB').val();
                     var tanggal_pb = $('#tanggal_pb').val();
                     var surat_jalan = $('#surat_jalan').val();
                     var jatuh_tempo = $('#jatuh_tempo').val();
@@ -506,9 +506,9 @@
                         result: result
                     };
 
-                    var method = 'GET'; // Changed method to POST
+                    var method = 'POST'; // Changed method to POST
                     var action = 'Penerimaan Barang';
-                    var url = '/PenerimaanBarang/create';
+                    var url = '/app/penerimaanbarang/create';
 
                     Swal.fire({
                         title : 'warning',
