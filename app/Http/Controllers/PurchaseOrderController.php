@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\StorePurchaseOrderRequest;
 use App\Http\Requests\UpdatePurchaseOrderRequest;
+use App\Models\detail_pb;
 use App\Repository\PurchaseOrder\PurchaseOrderRepository;
 
 class PurchaseOrderController extends Controller
@@ -55,45 +56,45 @@ class PurchaseOrderController extends Controller
      * Show the form for creating a new resource.
      */
     public function create(Request $request)
-{
-    try {
-        // Add more robust validation
-        $validatedData = $request->validate([
-            'nama_supplier' => 'required',
-            'barang' => 'required',
-            // Add other necessary validation rules
-        ]);
+    {
+        try {
+            // Add more robust validation
+            $validatedData = $request->validate([
+                'nama_supplier' => 'required',
+                'barang' => 'required',
+                // Add other necessary validation rules
+            ]);
 
-        // Log the incoming request for debugging
-        \Log::info('Purchase Order Create Request:', $request->all());
+            // Log the incoming request for debugging
+            \Log::info('Purchase Order Create Request:', $request->all());
 
-        // Use the repository or direct model creation
-        $purchaseOrder = $this->purchaseOrderRepository->CreatepurchaseOrder($request);
+            // Use the repository or direct model creation
+            $purchaseOrder = $this->purchaseOrderRepository->CreatepurchaseOrder($request);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Purchase Order berhasil dibuat',
-            'data' => $purchaseOrder
-        ]);
-    } catch (\Illuminate\Validation\ValidationException $e) {
-        // Handle validation errors
-        return response()->json([
-            'success' => false,
-            'message' => 'Validation Error',
-            'errors' => $e->errors()
-        ], 422);
-    } catch (\Exception $e) {
-        // Log the full exception
-        \Log::error('Purchase Order Create Error: ' . $e->getMessage());
-        \Log::error('Exception Trace: ' . $e->getTraceAsString());
-        
+            return response()->json([
+                'success' => true,
+                'message' => 'Purchase Order berhasil dibuat',
+                'data' => $purchaseOrder
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Handle validation errors
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation Error',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e) {
+            // Log the full exception
+            \Log::error('Purchase Order Create Error: ' . $e->getMessage());
+            \Log::error('Exception Trace: ' . $e->getTraceAsString());
 
-        return response()->json([
-            'success' => false,
-            'message' => $e->getMessage()
-        ], 500);
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
-}
     /**
      * Store a newly created resource in storage.
      */
@@ -109,11 +110,11 @@ class PurchaseOrderController extends Controller
             'selectedItems' => 'required|array',            // Pastikan selectedItems adalah array
             'selectedItems.*' => 'required|string',         // Setiap item dalam array selectedItems harus berupa string
         ]);
-    
+
         try {
             // Proses untuk menyimpan data setelah validasi berhasil
             $purchaseOrder = new PurchaseOrder(); // Asumsi PurchaseOrder adalah model untuk menyimpan data pesanan
-    
+
             $purchaseOrder->tanggal_po = $request->tanggal_po;
             $purchaseOrder->kode_perusahaan = $request->kode_perusahaan;
             $purchaseOrder->termin = $request->termin;
@@ -122,15 +123,17 @@ class PurchaseOrderController extends Controller
             // Menyimpan data lain seperti selectedItems jika perlu
             // Misalnya: mengonversi selectedItems menjadi sesuatu yang bisa disimpan (misalnya serialized atau JSON)
             $purchaseOrder->selected_items = json_encode($request->selectedItems);
-    
+
             $purchaseOrder->save(); // Simpan data
-    
+
+
+
+
             // Jika berhasil, kembalikan response sukses
             return response()->json([
                 'message' => 'Purchase Order berhasil disimpan.',
                 'data' => $purchaseOrder
             ], 200);
-    
         } catch (\Exception $e) {
             // Tangani error jika terjadi saat menyimpan data
             return response()->json([
@@ -176,12 +179,12 @@ class PurchaseOrderController extends Controller
         try {
             // Find the Purchase Order
             $purchaseOrder = PurchaseOrder::findOrFail($id);
-    
+
             // Update the status
             $purchaseOrder->update([
                 'status' => $data['status']
             ]);
-    
+
             return true;
         } catch (\Exception $e) {
             throw $e;
@@ -209,42 +212,61 @@ class PurchaseOrderController extends Controller
     public function CreatepurchaseOrder(Request $request)
     {
         \Log::info('Purchase Order Creation Request:', $request->all());
-    
+
         try {
             // Validate input
             $validatedData = $request->validate([
-                'nama_supplier' => 'required',
-                'tanggal' => 'required|date',
+                'nama_perusahaan' => 'required',
+                'tanggal_po' => 'required|date',
                 'jatuh_tempo' => 'required|date',
                 // Add other necessary validation rules
             ]);
-    
+            $detail_po = rand(1, 9999);
             // Use DB transaction for better error handling
             DB::beginTransaction();
             try {
                 // Directly create the purchase order or use repository
                 $purchaseOrder = PurchaseOrder::create([
-                    'nama_supplier' => $request->nama_supplier,
-                    'tanggal' => $request->tanggal,
+                    'id_po' => $request->id_po,
+                    'nama_perusahaan' => $request->nama_perusahaan,
+                    'tanggal_po' => $request->tanggal_po,
                     'jatuh_tempo' => $request->jatuh_tempo,
-                    'status' => 'pending', // Default status
-                    'user_id' => auth()->id(), // Add user who created the PO
+                    'status' => 'Permohonan', // Default status
+                    'user' => auth()->id(), // Add user who created the PO
+                    'kode_perusahaan' => $request->kode_perusahaan,
+                    'detail_po' => $detail_po,
                     // Add other necessary fields
                 ]);
-    
+
+                $items = json_decode($request->selectedItems, true);
+                foreach ($items as $item) {
+                    detail_po::create([
+                        'id_po' => $purchaseOrder->id_po,
+                        'barang_id' => $item['barang_id'],
+                        'nama_barang' => $item['nama_barang'],
+                        'satuan' => $item['satuan'],
+                        'stok' => $item['quantity'],
+                        'harga' => $item['price'],
+                        'diskon' => $item['discountpersen'],
+                        'potongan' => $item['discount'],
+                        'total_harga' => $item['total'],
+                    ]);
+                }
+
                 DB::commit();
-    
+
                 // Return success response
                 return response()->json([
                     'success' => true,
                     'message' => 'Purchase Order berhasil dibuat',
                     'data' => $purchaseOrder
                 ]);
+                // return redirect()->route('purchaseorder.data');
             } catch (\Exception $e) {
                 DB::rollBack();
                 \Log::error('Purchase Order Creation Error (DB): ' . $e->getMessage());
                 \Log::error('Error Trace: ' . $e->getTraceAsString());
-    
+
                 return response()->json([
                     'success' => false,
                     'message' => 'Gagal membuat Purchase Order: ' . $e->getMessage()
@@ -253,19 +275,18 @@ class PurchaseOrderController extends Controller
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Handle validation errors
             \Log::error('Validation Error: ' . json_encode($e->errors()));
-    
+
             return response()->json([
                 'success' => false,
                 'message' => 'Validation Error',
                 'errors' => $e->errors()
             ], 422);
         }
-    
     }
 
-        
 
-        
+
+
     public function status(Request $request, $id)
     {
         try {
@@ -274,15 +295,17 @@ class PurchaseOrderController extends Controller
                 'id' => $id,
                 'request_data' => $request->all()
             ]);
-    
+
             // Validate the request if needed
             $validatedData = $request->validate([
-                'status' => 'required|in:pending,approved,rejected'
+                'status' => 'required|in:Permohonan,Approve,Decline'
             ]);
-    
+
             // Perform the status update
-            $result = $this->purchaseOrderRepository->updateStatus($id, $validatedData);
-    
+            $result = $this->purchaseOrderRepository->updateStatus($id, [
+                'status' => $validatedData['status']
+            ]);
+
             if ($result) {
                 return response()->json([
                     'success' => true,
@@ -298,7 +321,7 @@ class PurchaseOrderController extends Controller
             // Log the full exception
             \Log::error('Status Update Error: ' . $e->getMessage());
             \Log::error('Exception Trace: ' . $e->getTraceAsString());
-    
+
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()

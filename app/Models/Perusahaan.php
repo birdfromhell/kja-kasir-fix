@@ -51,4 +51,9 @@ class Perusahaan extends Model
             $perusahaan->updated_at = now()->addHours(7);
         });
     }
+
+    public function getallperusahaan()
+    {
+        return $this->all();
+    }
 }

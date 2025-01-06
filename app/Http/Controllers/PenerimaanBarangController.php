@@ -99,16 +99,64 @@ class PenerimaanBarangController extends Controller
     public function createPenerimaanBarang(Request $request)
     {
         try {
-
             $validatedData = $request->validate([
                 'ID_PO' => 'required',
                 'tanggal_pb' => 'required|date',
                 'surat_jalan' => 'required|string',
                 'ket' => 'required|string',
-                'result' => 'required'
+                'result' => 'required', // Menambahkan validasi untuk data modal
             ]);
-            // dd($validatedData);
-            return $this->penerimaaanbarangRepository->createPenerimaanBarang($request);
+
+            $purchaseOrder = PurchaseOrder::where('id_po', $validatedData['ID_PO'])->first();
+            $perusahaan = $purchaseOrder->kode_perusahaan;
+
+            $selectedItems = json_decode($validatedData['result'], true); // Mengambil data hasil dari modal
+            $id = auth()->user();
+            $ids = $id->id;
+
+            $lur = pb_line::create([
+                'user_id' => $ids,
+                'hariini' => $validatedData['tanggal_pb'],
+            ]);
+
+            if ($purchaseOrder) {
+                $user = auth()->user()->name;
+
+                PenerimaanBarang::create([
+                    'id_pb' => $lur->id_pb,
+                    'id_po' => $validatedData['ID_PO'],
+                    'user' => $user,
+                    'tanggal_pb' => $validatedData['tanggal_pb'],
+                    'surat_jalan' => $validatedData['surat_jalan'],
+                    'ket' => $validatedData['ket'],
+                    'jatuh_tempo' => $purchaseOrder->jatuh_tempo,
+                    'kode_perusahaan' => $purchaseOrder->kode_perusahaan,
+                    'nama_perusahaan' => $purchaseOrder->nama_perusahaan,
+                ]);
+                foreach ($selectedItems as $item) {
+                    detail_pb::create([
+                        'id_po' => $purchaseOrder->id_po,
+                        'id_pb' => $lur->id_pb,
+                        'barang_id' => $item['kode_barang'],
+                        'nama_barang' => $item['nama_barang'],
+                        'stok' => $item['quantity'],
+                        'harga' => $item['harga'],
+                        'potongan' => $item['potongan'],
+                        'diskon' => $item['diskon'],
+
+                    ]);
+                }
+            } else {
+                return response()->json(['error' => 'Purchase Order not found'], 404);
+            }
+            $latestPenerimaanBarang = PenerimaanBarang::latest()->first();
+            PurchaseOrder::where('id_po', $validatedData['ID_PO'])->update(['id_pb' => $latestPenerimaanBarang->id_pb]);
+            return response()->json([
+                'success' => true,
+                'message' => 'penerimaan barang berhasil dibuat',
+                'data' => $lur->id_pb
+            ]);
+            return redirect()->route('penerimaanbarang.data')->with('success', 'PB berhasil ditambah');
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }

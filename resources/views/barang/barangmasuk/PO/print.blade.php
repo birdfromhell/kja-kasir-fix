@@ -106,7 +106,7 @@
         <div style="display: flex; justify-content: space-between; align-items: flex-start;">
             <div style="flex: 80%;">
                 <span>
-                    {{-- <div class="text-muted">{{ Auth::user()->username }}</div> --}}
+{{--                     <div class="text-muted">{{ Auth::user()->username }}</div>--}}
                     <div class="text-muted"><strong>{{ Auth::user()->perusahaan->nama_perusahaan }}</strong></div>
                     <div class="text-muted">{{ $perusahaankita->alamat_gudang }}</div>
                 </span>

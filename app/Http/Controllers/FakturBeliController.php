@@ -41,10 +41,10 @@ class FakturBeliController extends Controller
     }
 
     public function createfb(Request $request, $id_pb)
-    {        
-        
+    {
+
         try {
-            return $this->fakturbeliRepository->createfb($request, $id_pb);       
+            return $this->fakturbeliRepository->createfb($request, $id_pb);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -53,7 +53,7 @@ class FakturBeliController extends Controller
     public function print($id_fb, $id_pb)
     {
         try {
-            return $this->fakturbeliRepository->print($id_fb, $id_pb);         
+            return $this->fakturbeliRepository->print($id_fb, $id_pb);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -107,7 +107,7 @@ class FakturBeliController extends Controller
     public function status($status, $id)
     {
         try {
-            return $this->fakturbeliRepository->status($status, $id);        
+            return $this->fakturbeliRepository->status($status, $id);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }

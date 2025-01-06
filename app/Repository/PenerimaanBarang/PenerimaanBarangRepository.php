@@ -109,19 +109,19 @@ class PenerimaanBarangRepository
             $po = PurchaseOrder::where('id_po', $id_po)->first();
             $pb = PenerimaanBarang::where('id_pb', $id_pb)->first();
 
-            // $alamatGudang = $perusahaan->alamat_gudang;
-            $detail = []; // Initialize $detail as an empty array
-            $barang = []; // Initialize $barang as an empty array
+            $detaillagi = []; // Default inisialisasi
+            $detail = []; // Default inisialisasi
+            $barang = []; // Default inisialisasi
 
             $alamatsupplier = $perusahaan->alamat_gudang ?? null;
 
             $details = detail_pb::where('id_pb', $pb->id_pb)->with('barang')->latest()->first();
+            $detailpb = detail_po::where('id_po', $po->id_po)->get();
             if ($details) {
                 $detaillagi = detail_pb::where('id_po', $pb->id_po)->get();
                 $detail[] = $detaillagi;
-                $kodeBarangArray = $details->barang->kode_barang;
                 foreach ($detaillagi as $detailItem) {
-                    $barang = Barang::where('barang_id', $detailItem->barang_id)->first();
+                    $barang[] = Barang::where('barang_id', $detailItem->barang_id)->first();
                 }
             }
 
@@ -543,13 +543,16 @@ class PenerimaanBarangRepository
                 //     }
                 // }
                 PenerimaanBarang::where('id_pb', $id)->update(['status' => $status]);
-                return redirect('/dataPB')->with('status', 'Data berhasil di setujui');
+                return redirect()->route('penerimaanbarang.data')->with('status', 'Data berhasil di setujui');
+
             }
             if ($status == 'Decline') {
                 PenerimaanBarang::where('id_pb', $id)->update(['status' => $status]);
-                return redirect('/dataPB')->with('status', 'Data berhasil di tolak');
+                return redirect()->route('penerimaanbarang.data')->with('status', 'Data berhasil di tolak');
+
             } else {
-                return redirect('/dataPB')->with('error', 'Terjadi kesalahan');
+                return redirect()->route('penerimaanbarang.data')->with('error', 'terjadi kesalahan');
+
             }
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);

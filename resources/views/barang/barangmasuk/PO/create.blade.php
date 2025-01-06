@@ -1,63 +1,63 @@
 @extends('layout.app')
 @section('content')
     <style>
-    .cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    }
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
 
-    .card {
-    background-color: #fff;
-    border: 1px solid #007bff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    cursor: pointer;
-    margin-bottom: 20px;
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-    max-width: 350px;
-    max-height: 500px;
-    padding: 20px;
-    }
+        .card {
+            background-color: #fff;
+            border: 1px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            max-width: 350px;
+            max-height: 500px;
+            padding: 20px;
+        }
 
-    .card:hover {
-    transform: translateY(-10px);
-    }
+        .card:hover {
+            transform: translateY(-10px);
+        }
 
-    .card-body {
-    padding: 0;
-    }
+        .card-body {
+            padding: 0;
+        }
 
-    .card-title {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    color: #007bff;
-    }
+        .card-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #007bff;
+        }
 
-    .card-text {
-    color: #000000;
-    }
+        .card-text {
+            color: #000000;
+        }
 
-    .form-group.mantap label {
-    margin-bottom: 0.5rem;
-    color: #007bff;
-    }
+        .form-group.mantap label {
+            margin-bottom: 0.5rem;
+            color: #007bff;
+        }
 
-    .form-control.mantap {
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    padding: 0.5rem;
-    transition: border-color 0.3s ease;
-    }
+        .form-control.mantap {
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 0.5rem;
+            transition: border-color 0.3s ease;
+        }
 
-    .form-control.mantap:focus {
-    border-color: #007bff;
-    outline: none;
-    }
+        .form-control.mantap:focus {
+            border-color: #007bff;
+            outline: none;
+        }
     </style>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <div id="content-page" class="content-page" style="margin-top: 75px">
@@ -133,8 +133,8 @@
                                     <option value="" selected disabled> </option>
                                     @foreach ($Perusahaan as $p)
                                         @if ($p->jenis == 'Supplier')
-                                            <option value="{{ $p->kode_perusahaan }}">{{ $p->kode_perusahaan }} -
-                                                {{ $p->nama_perusahaan }}</option>
+                                            <option value="{{ $p->kode_perusahaan }}">
+                                                {{ $p->kode_perusahaan }}-{{ $p->nama_perusahaan }}</option>
                                         @endif
                                     @endforeach
                                 </select>
@@ -232,6 +232,19 @@
                 var tanggal_po = $('#tanggal_po').val();
                 var id_po = $('#po').val();
                 var kode_perusahaan = $('#kode_perusahaan').val();
+
+                var selectedOptionText = $('#kode_perusahaan option:selected').text().trim();
+                console.log("Selected Option Text:", selectedOptionText);
+
+                // Ambil nama supplier setelah tanda "-"
+                var nama_perusahaan = '';
+                if (selectedOptionText && selectedOptionText.includes('-')) {
+                    var parts = selectedOptionText.split('-');
+                    // Ambil bagian ketiga dari split array dan trim spasi ekstra
+                    nama_perusahaan = parts.length > 2 ? parts[2].trim() : '';
+                }
+                console.log("Parsed Nama Supplier:", nama_perusahaan);
+
                 var termin = $('#termin').val();
                 var jatuh_tempo = $('#jatuh_tempo').val() || '2024-12-31'; // Set default value if empty
                 var tanggal_termin = $('#tanggal_termin').val();
@@ -239,8 +252,10 @@
 
                 var formData = {
                     _token: csrfToken,
+                    id_po: id_po,
                     tanggal_po: tanggal_po,
                     kode_perusahaan: kode_perusahaan,
+                    nama_perusahaan: nama_perusahaan,
                     termin: termin,
                     jatuh_tempo: jatuh_tempo,
                     tanggal_termin: tanggal_termin,
@@ -269,15 +284,18 @@
                                 Swal.fire({
                                     title: 'Success',
                                     icon: 'success',
-                                    text: 'Berhasil membuat ' + action + ' dengan id : ' + id_po
+                                    text: 'Berhasil membuat ' + action +
+                                        ' dengan id : ' + id_po
                                 }).then(() => {
-                                    window.location.href = '/app/purchaseorder/data';
+                                    window.location.href =
+                                        '/app/purchaseorder/data';
                                 });
                             },
                             error: function(xhr, status, error) {
                                 Swal.fire({
                                     title: 'Error',
-                                    text: 'Failed to create ' + action + ': ' + error,
+                                    text: 'Failed to create ' + action + ': ' +
+                                        error,
                                     icon: 'error'
                                 });
                             }

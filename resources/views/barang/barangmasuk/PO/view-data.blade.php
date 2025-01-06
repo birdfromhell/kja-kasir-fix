@@ -12,7 +12,8 @@
                             </div>
                             <div class="nk-block-head-content">
                                 <div class="toggle-wrap nk-block-tools-toggle">
-                                    <button type="button" class="btn btn-outline-primary" onclick="window.location.href='/app/purchaseorder/tambah'">Tambah</button>
+                                    <button type="button" class="btn btn-outline-primary"
+                                        onclick="window.location.href='/app/purchaseorder/tambah'">Tambah</button>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +46,8 @@
                                                 <div class="nk-tb-col">{{ $po->tanggal_po }}</div>
                                                 <div class="nk-tb-col">{{ $po->nama_perusahaan }}</div>
                                                 <div class="nk-tb-col">
-                                                    <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#detailpo{{ $po->id_po }}">
+                                                    <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
+                                                        data-bs-target="#detailModal{{ $po->id_po }}">
                                                         Detail
                                                     </button>
                                                 </div>
@@ -87,16 +89,41 @@
                                                 <div class="nk-tb-col">{{ $po->jatuh_tempo }}</div>
                                                 <div class="nk-tb-col">
                                                     @if ($po->status == 'Permohonan')
-                                                        <button class="btn btn-outline-primary btn-sm btn-status" data-id="{{ $po->id_po }}" data-action="Approve">Approve</button>
-                                                        <button class="btn btn-outline-warning btn-sm btn-status" data-id="{{ $po->id_po }}" data-action="Decline">Decline</button>
+
+                                                            <button class="btn btn-outline-primary btn-sm btn-status"
+                                                                data-id="{{ $po->id_po }}"
+                                                                data-action="Approve"
+                                                                data-url="{{ route('purchaseorder.data') }}/update-status/{{ $po->id_po }}"
+                                                                >Approve</button>
+
+
+                                                            <button class="btn btn-outline-warning btn-sm btn-status"
+                                                                data-id="{{ $po->id_po }}"
+                                                                data-action="Decline"
+                                                                data-url="{{ route('purchaseorder.data') }}/update-status/{{ $po->id_po }}"
+                                                                >Decline</button>
+
                                                     @endif
                                                     @if ($po->status == 'Approve')
-                                                        <button class="btn btn-outline-warning btn-sm btn-status" data-id="{{ $po->id_po }}" data-action="Decline">Decline</button>
+
+                                                            <button class="btn btn-outline-warning btn-sm btn-status"
+                                                                data-id="{{ $po->id_po }}"
+                                                                data-action="Decline"
+                                                                data-url="{{ route('purchaseorder.data') }}/update-status/{{ $po->id_po }}"
+                                                                >Decline</button>
+
                                                     @endif
                                                     @if ($po->status == 'Decline')
-                                                        <button class="btn btn-outline-primary btn-sm btn-status" data-id="{{ $po->id_po }}" data-action="Approve">Approve</button>
+
+                                                            <button class="btn btn-outline-primary btn-sm btn-status"
+                                                                data-id="{{ $po->id_po }}"
+                                                                data-action="Approve"
+                                                                data-url="{{ route('purchaseorder.data') }}/update-status/{{ $po->id_po }}"
+                                                                >Approve</button>
+
                                                     @endif
-                                                    <button class="btn btn-outline-info btn-sm btn-print" data-id="{{ $po->id_po }}" data-action="Print">Print</button>
+                                                    <button class="btn btn-outline-info btn-sm btn-print"
+                                                        data-id="{{ $po->id_po }}" data-action="Print">Print</button>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -116,7 +143,8 @@
 
     @foreach ($purchaseOrders as $po)
         <!-- Detail Modal for each PO -->
-        <div class="modal fade" id="detailModal{{ $po->id_po }}" tabindex="-1" aria-labelledby="detailModalLabel{{ $po->id_po }}" aria-hidden="true">
+        <div class="modal fade" id="detailModal{{ $po->id_po }}" tabindex="-1"
+            aria-labelledby="detailModalLabel{{ $po->id_po }}" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -126,34 +154,34 @@
                     <div class="modal-body">
                         <table class="table">
                             <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Barang ID</th>
-                                <th>Nama Barang</th>
-                                <th>Kuantitas</th>
-                                <th>Harga</th>
-                                <th>Diskon (%)</th>
-                                <th>Potongan</th>
-                                <th>Total</th>
-                            </tr>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Barang ID</th>
+                                    <th>Nama Barang</th>
+                                    <th>Kuantitas</th>
+                                    <th>Harga</th>
+                                    <th>Diskon (%)</th>
+                                    <th>Potongan</th>
+                                    <th>Total</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            @foreach ($detail as $detaillagi)
-                                @foreach ($detaillagi as $details)
-                                    @if ($details['id_po'] == $po->id_po)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $details['barang_id'] ?? 'N/A' }}</td>
-                                            <td>{{ $details['nama_barang'] ?? 'N/A' }}</td>
-                                            <td>{{ $details['stok'] ?? 'N/A' }}</td>
-                                            <td>{{ $details['harga'] ?? 'N/A' }}</td>
-                                            <td>{{ $details['diskon'] ?? 'N/A' }}</td>
-                                            <td>{{ $details['potongan'] ?? 'N/A' }}</td>
-                                            <td>{{ $details['total_harga'] ?? 'N/A' }}</td>
-                                        </tr>
-                                    @endif
+                                @foreach ($detail as $detaillagi)
+                                    @foreach ($detaillagi as $details)
+                                        @if ($details['id_po'] == $po->id_po)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $details['barang_id'] ?? 'N/A' }}</td>
+                                                <td>{{ $details['nama_barang'] ?? 'N/A' }}</td>
+                                                <td>{{ $details['stok'] ?? 'N/A' }}</td>
+                                                <td>{{ $details['harga'] ?? 'N/A' }}</td>
+                                                <td>{{ $details['diskon'] ?? 'N/A' }}</td>
+                                                <td>{{ $details['potongan'] ?? 'N/A' }}</td>
+                                                <td>{{ $details['total_harga'] ?? 'N/A' }}</td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
                                 @endforeach
-                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -168,6 +196,7 @@
             $('.btn-status').click(function() {
                 var id = $(this).data('id');
                 var action = $(this).data('action');
+                var url = $(this).data('url');
 
                 Swal.fire({
                     title: "Do you want to save the changes?",
@@ -177,7 +206,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: 'GET',
-                            url: '/dataPO/update-status/' + id,
+                            url: url,
                             data: {
                                 status: action
                             },
@@ -185,7 +214,8 @@
                                 Swal.fire({
                                     title: 'Success',
                                     icon: 'success',
-                                    text: 'Berhasil mengubah status menjadi ' + action
+                                    text: 'Berhasil mengubah status menjadi ' +
+                                        action
                                 });
                                 setTimeout(function() {
                                     location.reload();
@@ -212,7 +242,7 @@
                     confirmButtonText: "Print",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = '/dataPO/print/laporan/' + id;
+                        window.location.href = 'purchaseorder/data/print/laporan/' + id;
                     }
                 });
             });

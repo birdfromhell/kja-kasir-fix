@@ -47,7 +47,7 @@ Route::get('/setting', [UsersController::class, 'settingAplikasi']);
 //user
 //Route::get('/', [LandingPageController::class, 'index']);
 
-Route::get('/', function (){
+Route::get('/', function () {
     return redirect('/app/user/login');
 });
 Route::get('/app/user/login', [UsersController::class, 'login'])->name('login');
@@ -195,125 +195,125 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
         // PurchaseOrderController
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::prefix('purchaseorder')->group(function () {
-            Route::get('/tambah', [PurchaseOrderController::class, 'purchaseOrder']);
-            Route::post('/create', [PurchaseOrderController::class, 'CreatepurchaseOrder'])
-            ->name('purchaseorder.create');
-            Route::get('/data', [PurchaseOrderController::class, 'index'])
-            ->name('purchaseorder.data');
-            Route::get('data/edit/{id}', [PurchaseOrderController::class, 'edit']);
-            Route::get('data/laporan', [PurchaseOrderController::class, 'laporan']);
-            Route::get('data/print/laporan/{id_po}', [PurchaseOrderController::class, 'print']);
-           Route::get('data/update-status/{id}', [PurchaseOrderController::class, 'status']);
-        });
+        Route::middleware(['auth', 'verified'])->group(function () {
+            Route::prefix('purchaseorder')->group(function () {
+                Route::get('/tambah', [PurchaseOrderController::class, 'purchaseOrder']);
+                Route::post('/create', [PurchaseOrderController::class, 'CreatepurchaseOrder'])
+                    ->name('purchaseorder.create');
+                Route::get('/data', [PurchaseOrderController::class, 'index'])
+                    ->name('purchaseorder.data');
+                Route::get('data/edit/{id}', [PurchaseOrderController::class, 'edit']);
+                Route::get('data/laporan', [PurchaseOrderController::class, 'laporan']);
+                Route::get('data/print/laporan/{id_po}', [PurchaseOrderController::class, 'print']);
+                Route::get('data/update-status/{id}', [PurchaseOrderController::class, 'status']);
+            });
 
-        // DetailPoController
-        Route::post('datapo/detailpo/edit/{id_po}', [DetailPoController::class, 'edit']);
+            // DetailPoController
+            Route::post('datapo/detailpo/edit/{id_po}', [DetailPoController::class, 'edit']);
 
-        // PenerimaanBarangController
-        Route::prefix('penerimaanbarang')->group(function () {
-            Route::get('/tambah', [PenerimaanBarangController::class, 'PenerimaanBarang']);
-            Route::post('create', [PenerimaanBarangController::class, 'CreatePenerimaanBarang']);
-            Route::get('data', [PenerimaanBarangController::class, 'index']);
-            Route::get('data/laporan', [PenerimaanBarangController::class, 'laporan']);
-            Route::get('data/edit/{id}', [PenerimaanBarangController::class, 'edit']);
-            Route::get('data/faktur/{id}', [PenerimaanBarangController::class, 'faktur']);
-            Route::get('data/{status}/{id}', [PenerimaanBarangController::class, 'status']);
-            Route::get('laporan/print/{id_po}/{id_pb}', [PenerimaanBarangController::class, 'print']);
-        });
+            // PenerimaanBarangController
+            Route::prefix('penerimaanbarang')->group(function () {
+                Route::get('data/tambah', [PenerimaanBarangController::class, 'PenerimaanBarang']);
+                Route::post('create', [PenerimaanBarangController::class, 'CreatePenerimaanBarang']);
+                Route::get('data', [PenerimaanBarangController::class, 'index'])->name('penerimaanbarang.data');
+                Route::get('data/laporan', [PenerimaanBarangController::class, 'laporan']);
+                Route::get('data/edit/{id}', [PenerimaanBarangController::class, 'edit']);
+                Route::get('data/faktur/{id}', [PenerimaanBarangController::class, 'faktur']);
+                Route::get('data/{status}/{id}', [PenerimaanBarangController::class, 'status']);
+                Route::get('data/laporan/print/{id_po}/{id_pb}', [PenerimaanBarangController::class, 'print']);
+            });
 
-        // DetailPbController
-        Route::get('datapb/detailpb/edit/{id}', [DetailPbController::class, 'edit']);
+            // DetailPbController
+            Route::get('datapb/detailpb/edit/{id}', [DetailPbController::class, 'edit']);
 
-        // FakturBeliController
-        Route::prefix('fakturbeli')->group(function () {
-            Route::get('data', [FakturBeliController::class, 'index']);
-            Route::get('data/laporan', [FakturBeliController::class, 'laporan']);
-            Route::get('data/edit/{id}', [FakturBeliController::class, 'edit']);
-            Route::get('data/{status}/{id}', [FakturBeliController::class, 'status']);
-            Route::get('{id}/create', [FakturBeliController::class, 'createfb']);
-            Route::get('print/{id_fb}/{id_pb}', [FakturBeliController::class, 'print']);
-        });
+            // FakturBeliController
+            Route::prefix('fakturbeli')->group(function () {
+                Route::get('data', [FakturBeliController::class, 'index']);
+                Route::get('data/laporan', [FakturBeliController::class, 'laporan']);
+                Route::get('data/edit/{id}', [FakturBeliController::class, 'edit']);
+                Route::get('data/{status}/{id}', [FakturBeliController::class, 'status']);
+                Route::get('{id}/create', [FakturBeliController::class, 'createfb']);
+                Route::get('data/print/{id_fb}/{id_pb}', [FakturBeliController::class, 'print']);
+            });
 
-        // OrderPenjualanController
-        Route::prefix('orderpenjualan')->group(function () {
-            Route::get('/tambah', [OrderPenjualanController::class, 'OrderPenjualan']);
-            Route::get('laporan', [OrderPenjualanController::class, 'laporan']);
-            Route::get('create', [OrderPenjualanController::class, 'CreateOrderPenjualan']);
-            Route::get('data', [OrderPenjualanController::class, 'index']);
-            Route::get('data/edit/{id}', [OrderPenjualanController::class, 'edit']);
-            Route::get('data/update-status/{id}', [OrderPenjualanController::class, 'status']);
-            Route::get('data/print/laporan/{id_po}', [OrderPenjualanController::class, 'print']);
-        });
+            // OrderPenjualanController
+            Route::prefix('orderpenjualan')->group(function () {
+                Route::get('/tambah', [OrderPenjualanController::class, 'OrderPenjualan']);
+                Route::get('laporan', [OrderPenjualanController::class, 'laporan']);
+                Route::get('create', [OrderPenjualanController::class, 'CreateOrderPenjualan']);
+                Route::get('data', [OrderPenjualanController::class, 'index']);
+                Route::get('data/edit/{id}', [OrderPenjualanController::class, 'edit']);
+                Route::get('data/update-status/{id}', [OrderPenjualanController::class, 'status']);
+                Route::get('data/print/laporan/{id_po}', [OrderPenjualanController::class, 'print']);
+            });
 
-        // DetailOpController
-        Route::post('dataop/detailop/edit/{id}', [DetailOpController::class, 'edit']);
+            // DetailOpController
+            Route::post('dataop/detailop/edit/{id}', [DetailOpController::class, 'edit']);
 
-        // SuratJalanController
-        Route::prefix('suratjalan')->group(function () {
-            Route::get('tambah', [SuratJalanController::class, 'SuratJalan']);
-            Route::get('create', [SuratJalanController::class, 'CreateSuratJalan']);
-            Route::get('data', [SuratJalanController::class, 'index']);
-            Route::get('data/laporan', [SuratJalanController::class, 'laporan']);
-            Route::get('data/edit/{id}', [SuratJalanController::class, 'edit']);
-            Route::get('data/{status}/{id}', [SuratJalanController::class, 'status']);
-            Route::get('laporan/print/{id_so}/{id_sj}', [SuratJalanController::class, 'print']);
-        });
+            // SuratJalanController
+            Route::prefix('suratjalan')->group(function () {
+                Route::get('tambah', [SuratJalanController::class, 'SuratJalan']);
+                Route::get('create', [SuratJalanController::class, 'CreateSuratJalan']);
+                Route::get('data', [SuratJalanController::class, 'index']);
+                Route::get('data/laporan', [SuratJalanController::class, 'laporan']);
+                Route::get('data/edit/{id}', [SuratJalanController::class, 'edit']);
+                Route::get('data/{status}/{id}', [SuratJalanController::class, 'status']);
+                Route::get('laporan/print/{id_so}/{id_sj}', [SuratJalanController::class, 'print']);
+            });
 
-        // FakturJualController
-        Route::prefix('fakturjual')->group(function () {
-            Route::get('data', [FakturJualController::class, 'index']);
-            Route::get('{id}/create', [FakturJualController::class, 'createfj']);
-            Route::get('print/{id_fj}/{id_sj}', [FakturJualController::class, 'print']);
-        });
+            // FakturJualController
+            Route::prefix('fakturjual')->group(function () {
+                Route::get('data', [FakturJualController::class, 'index']);
+                Route::get('{id}/create', [FakturJualController::class, 'createfj']);
+                Route::get('print/{id_fj}/{id_sj}', [FakturJualController::class, 'print']);
+            });
 
-        // JurnalController
-        Route::prefix('jurnal')->group(function () {
-            Route::get('{id_sj}', [JurnalController::class, 'jurnal']);
-            Route::get('{id_sj}/create', [JurnalController::class, 'create']);
-            Route::get('input-lain', [JurnalController::class, 'inputlain']);
-            Route::post('input-lain', [JurnalController::class, 'jurnallain']);
-        });
+            // JurnalController
+            Route::prefix('jurnal')->group(function () {
+                Route::get('{id_sj}', [JurnalController::class, 'jurnal']);
+                Route::get('{id_sj}/create', [JurnalController::class, 'create']);
+                Route::get('input-lain', [JurnalController::class, 'inputlain']);
+                Route::post('input-lain', [JurnalController::class, 'jurnallain']);
+            });
 
-        // StokOpnemBarangController
-        Route::prefix('stok-opnem/barang/{barang_id}')->group(function () {
-            Route::get('/', [StokOpnemBarangController::class, 'index']);
-            Route::get('print', [StokOpnemBarangController::class, 'print']);
-            Route::post('print', [StokOpnemBarangController::class, 'print']);
-        });
+            // StokOpnemBarangController
+            Route::prefix('stok-opnem/barang/{barang_id}')->group(function () {
+                Route::get('/', [StokOpnemBarangController::class, 'index']);
+                Route::get('print', [StokOpnemBarangController::class, 'print']);
+                Route::post('print', [StokOpnemBarangController::class, 'print']);
+            });
 
-        // PembayaranController
-        Route::prefix('pembayaran')->group(function () {
-            Route::get('/', [PembayaranController::class, 'index']);
-            Route::get('{id_user}/{id_bayar}', [PembayaranController::class, 'createtahap1']);
-            Route::get('data', [PembayaranController::class, 'dataPayment']);
-        });
+            // PembayaranController
+            Route::prefix('pembayaran')->group(function () {
+                Route::get('/', [PembayaranController::class, 'index']);
+                Route::get('{id_user}/{id_bayar}', [PembayaranController::class, 'createtahap1']);
+                Route::get('data', [PembayaranController::class, 'dataPayment']);
+            });
 
-        Route::prefix('autojurnal/{user_id}/{id_bayar}')->group(function () {
-            Route::get('/', [PembayaranController::class, 'indextahap2']);
-            Route::get('set', [PembayaranController::class, 'createtahap2']);
-        });
+            Route::prefix('autojurnal/{user_id}/{id_bayar}')->group(function () {
+                Route::get('/', [PembayaranController::class, 'indextahap2']);
+                Route::get('set', [PembayaranController::class, 'createtahap2']);
+            });
 
-        // LaporanController
-        Route::prefix('laporan')->group(function () {
-            Route::get('neraca', [LaporanController::class, 'neraca']);
-            Route::get('laba-rugi', [LaporanController::class, 'labarugi']);
-            Route::post('laba-rugi', [LaporanController::class, 'labarugiwithtgl']);
-            Route::get('bukubesar/{no_akun}', [RiwayatBukuBesarController::class, 'index']);
-            Route::post('bukubesar/{no_akun}', [RiwayatBukuBesarController::class, 'index']);
-            Route::get('pembelian', [LaporanController::class, 'pembelian']);
-            Route::get('pembelian/print', [LaporanController::class, 'printpembelian']);
-            Route::get('penjualan', [LaporanController::class, 'penjualan']);
-            Route::get('penjualan/print', [LaporanController::class, 'printpenjualan']);
-        });
+            // LaporanController
+            Route::prefix('laporan')->group(function () {
+                Route::get('neraca', [LaporanController::class, 'neraca']);
+                Route::get('laba-rugi', [LaporanController::class, 'labarugi']);
+                Route::post('laba-rugi', [LaporanController::class, 'labarugiwithtgl']);
+                Route::get('bukubesar/{no_akun}', [RiwayatBukuBesarController::class, 'index']);
+                Route::post('bukubesar/{no_akun}', [RiwayatBukuBesarController::class, 'index']);
+                Route::get('pembelian', [LaporanController::class, 'pembelian']);
+                Route::get('pembelian/print', [LaporanController::class, 'printpembelian']);
+                Route::get('penjualan', [LaporanController::class, 'penjualan']);
+                Route::get('penjualan/print', [LaporanController::class, 'printpenjualan']);
+            });
 
-        // CashOpnameController
-        Route::prefix('cash-opnem')->group(function () {
-            Route::get('/', [CashOpnameController::class, 'data']);
-            Route::post('update', [CashOpnameController::class, 'update']);
-            Route::get('print', [CashOpnameController::class, 'print']);
+            // CashOpnameController
+            Route::prefix('cash-opnem')->group(function () {
+                Route::get('/', [CashOpnameController::class, 'data']);
+                Route::post('update', [CashOpnameController::class, 'update']);
+                Route::get('print', [CashOpnameController::class, 'print']);
+            });
         });
     });
-});
 });

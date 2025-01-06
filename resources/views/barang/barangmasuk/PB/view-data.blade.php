@@ -12,7 +12,7 @@
                             </div>
                             <div class="nk-block-head-content">
                                 <div class="toggle-wrap nk-block-tools-toggle">
-                                    <button type="button" class="btn btn-outline-primary" onclick="window.location.href='/app/penerimaanbarang/tambah'">Tambah</button>
+                                    <button type="button" class="btn btn-outline-primary" onclick="window.location.href='/app/penerimaanbarang/data/tambah'">Tambah</button>
                                 </div>
                             </div>
                         </div>
@@ -141,9 +141,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($detailpb as $detaillagi)
+                                @foreach ($detailpb as $detaillagi)
                                 @foreach ($detaillagi as $details)
                                     @if ($details['id_pb'] == $pb->id_pb)
+                                    {{-- @php
+                                        dd($details);
+                                    @endphp --}}
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $details['barang_id'] ?? 'N/A' }}</td>
@@ -176,7 +179,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: 'GET',
-                            url: '/app/penerimaanbarang/' + action + '/' + id,
+                            url: '/app/penerimaanbarang/data/' + action + '/' + id,
                             data: {
                                 status: action,
                                 id: id
@@ -213,7 +216,7 @@
                     confirmButtonText: "Print",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = '/laporan/print/' + id2 + '/' + id;
+                        window.location.href = 'penerimaanbarang/data/laporan/print/' + id2 + '/' + id;
                     }
                 });
             });
@@ -227,7 +230,7 @@
                     confirmButtonText: "Invoice",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = '/faktur/' + id;
+                        window.location.href = 'penerimaanbarang/data/faktur/' + id;
                     }
                 });
             });

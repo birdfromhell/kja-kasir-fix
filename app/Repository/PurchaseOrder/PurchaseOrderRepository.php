@@ -41,24 +41,26 @@ class PurchaseOrderRepository
         }
     }
 
-    public function updateStatus(Request $request, $id)
+    public function updateStatus($id, array $data)
     {
         try {
-            $status = $request->get('status');
-            if ($status == 'Approve' || $status == 'Decline') {
+            $status = $data['status'] ?? null; // Ambil status dari data input
+            if (in_array($status, ['Approve', 'Decline'])) {
                 PurchaseOrder::where('id_po', $id)->update(['status' => $status]);
-                return array(
+                return [
                     'status' => 'success',
-                    'message' => 'successfully update status'
-                );
+                    'message' => 'Successfully updated status to ' . $status
+                ];
             } else {
-                return array(
+                return [
                     'status' => 'error',
-                    'message' => 'Internal server rusak ' + $status
-                );
+                    'message' => 'Invalid status: ' . $status
+                ];
             }
-        } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 400);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to update status: ' . $e->getMessage()
+            ], 500);
         }
     }
 
@@ -74,8 +76,8 @@ class PurchaseOrderRepository
             $detailBarang = 0;
             $hargaAfterDiskon = 0;
             $totalHargaSemua = 0;
-            $detail = [];
-            $barang = [];
+            $detail = []; // Initialize $detail as an empty array
+            $barang = []; // Initialize $barang as an empty array
             $kodeBarangArray = [];
 
             $details = detail_po::where('id_po', $purchaseOrders->id_po)->with('barang')->latest()->first();
@@ -88,9 +90,10 @@ class PurchaseOrderRepository
                 }
             }
 
-            return view('barang.barangmasuk.po.print', compact('purchaseOrders', 'detailTotal', 'detailBarang', 'detail', 'perusahaan', 'totalHargaSemua', 'barang', 'kodeBarangArray', 'perusahaan', 'perusahaankita'));
+            return view('barang.barangmasuk.po.print', compact('purchaseOrders', 'detailTotal', 'detailBarang', 'detail', 'perusahaan', 'totalHargaSemua',  'barang', 'kodeBarangArray', 'perusahaan', 'perusahaankita'));
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
+            // return redirect('/dataPO')->with('error', 'Error printing purchase order.');
         }
     }
 

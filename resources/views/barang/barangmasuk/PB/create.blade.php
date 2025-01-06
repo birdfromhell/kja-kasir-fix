@@ -176,7 +176,8 @@
                                                         id="detailpb{{ $purchaseOrder->id_po }}" tabindex="-1"
                                                         role="dialog" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                                        <div class="modal-dialog modal-lg modal-dialog-centered"
+                                                            role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="exampleModalLabel">Detail
@@ -205,7 +206,11 @@
                                                                             @foreach ($detaillagi as $details)
                                                                                 @if ($details['id_po'] == $purchaseOrder->id_po)
                                                                                     @php
-                                                                                        $total = $details['total_harga'] * (1 - $details['potongan'] / 100);
+                                                                                        $total =
+                                                                                            $details['total_harga'] *
+                                                                                            (1 -
+                                                                                                $details['potongan'] /
+                                                                                                    100);
                                                                                     @endphp
                                                                                     <tr>
                                                                                         <td>{{ $no++ }}</td>
@@ -266,7 +271,8 @@
                                                         id="dataPO{{ $purchaseOrder->id_po }}" tabindex="-1"
                                                         role="dialog" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                                        <div class="modal-dialog modal-lg modal-dialog-centered"
+                                                            role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="exampleModalLabel">
@@ -321,12 +327,28 @@
                                                                                         @foreach ($details as $detaillagi)
                                                                                             @if ($detaillagi['id_po'] == $po->id_po)
                                                                                                 @php
-                                                                                                    $detailBarang += $detaillagi['stok'];
-                                                                                                    $detailTotal += $detaillagi['total_harga'];
-                                                                                                    if ($detaillagi['potongan'] == 0) {
-                                                                                                        $detailDiskon = '-';
+                                                                                                    $detailBarang +=
+                                                                                                        $detaillagi[
+                                                                                                            'stok'
+                                                                                                        ];
+                                                                                                    $detailTotal +=
+                                                                                                        $detaillagi[
+                                                                                                            'total_harga'
+                                                                                                        ];
+                                                                                                    if (
+                                                                                                        $detaillagi[
+                                                                                                            'potongan'
+                                                                                                        ] == 0
+                                                                                                    ) {
+                                                                                                        $detailDiskon =
+                                                                                                            '-';
                                                                                                     } else {
-                                                                                                        $detailDiskon = 1 - $detaillagi['potongan'] / 100;
+                                                                                                        $detailDiskon =
+                                                                                                            1 -
+                                                                                                            $detaillagi[
+                                                                                                                'potongan'
+                                                                                                            ] /
+                                                                                                                100;
                                                                                                     }
                                                                                                 @endphp
                                                                                             @endif
@@ -395,49 +417,51 @@
                                                         @foreach ($detaillagi as $details)
                                                             @if ($details['id_po'] == $purchaseOrder->id_po)
                                                                 @php
-                                                                    $total = $details['total_harga'] * (1 - $details['potongan'] / 100);
+                                                                    $total =
+                                                                        $details['total_harga'] *
+                                                                        (1 - $details['potongan'] / 100);
                                                                 @endphp
                                                                 <tr>
                                                                     <td>
                                                                         <input type="text"
-                                                                            class="form-control id-input" name=""
+                                                                            class="form-control id-input" name="id_barang"
                                                                             value="{{ $details['id'] ?? 'N/A' }}"
                                                                             readonly>
                                                                     </td>
                                                                     <td>
                                                                         <input type="text" class="form-control "
-                                                                            name=""
+                                                                            name="kode_barang"
                                                                             value="{{ $details['barang_id'] ?? 'N/A' }}"
                                                                             readonly>
                                                                     </td>
                                                                     <td>
                                                                         <input type="text" class="form-control"
-                                                                            name=""
+                                                                            name="nama_barang"
                                                                             value="{{ $details['nama_barang'] ?? 'N/A' }}"
                                                                             readonly>
                                                                     </td>
                                                                     <td>
                                                                         <input type="text"
                                                                             class="form-control quantity-input"
-                                                                            name=""
+                                                                            name="stok_barang"
                                                                             value="{{ $details['stok'] ?? 'N/A' }}">
                                                                     </td>
                                                                     <td hidden>
                                                                         <input type="text"
                                                                             class="form-control harga-input"
-                                                                            name=""
+                                                                            name="harga_barang"
                                                                             value="{{ $details['harga'] ?? 'N/A' }}">
                                                                     </td>
                                                                     <td hidden>
                                                                         <input type="text"
                                                                             class="form-control diskon-input"
-                                                                            name=""
+                                                                            name="diskon_barang"
                                                                             value="{{ $details['diskon'] ?? 'N/A' }}">
                                                                     </td>
                                                                     <td hidden>
                                                                         <input type="text"
                                                                             class="form-control potongan-input"
-                                                                            name=""
+                                                                            name="potongan_barang"
                                                                             value="{{ $details['potongan'] ?? 'N/A' }}">
                                                                     </td>
                                                                 </tr>
@@ -481,185 +505,203 @@
             </div>
         </div>
     </div>
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                var csrfToken = $('meta[name="csrf-token"]').attr('content');
-                $('#pbFormSubmit').click(function(event) {
-                    event.preventDefault();
-                    var tanggal_po = $('#tanggal_po').val();
-                    var id_po = $('#ID_PO').val();
-                    var pb = $('#PB').val();
-                    var tanggal_pb = $('#tanggal_pb').val();
-                    var surat_jalan = $('#surat_jalan').val();
-                    var jatuh_tempo = $('#jatuh_tempo').val();
-                    var ket = $('#ket').val();
-                    var result = $('#result').val();
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            $('#pbFormSubmit').click(function(event) {
+                event.preventDefault();
+                var tanggal_po = $('#tanggal_po').val();
+                var id_po = $('#ID_PO').val();
+                var pb = $('#PB').val();
+                var tanggal_pb = $('#tanggal_pb').val();
+                var surat_jalan = $('#surat_jalan').val();
+                var jatuh_tempo = $('#jatuh_tempo').val();
+                var ket = $('#ket').val();
 
-                    var formData = {
-                        _token: csrfToken,
-                        ID_PO: id_po,
-                        tanggal_pb: tanggal_pb,
-                        surat_jalan: surat_jalan,
-                        jatuh_tempo: jatuh_tempo,
-                        ket: ket,
-                        result: result
+                // Ambil data dari modal
+                var modalData = [];
+                $('.modal .quantity-input').each(function() {
+                    var item = {
+                        kode_barang: $(this).closest('tr').find('input[name="kode_barang"]')
+                            .val(),
+                        nama_barang: $(this).closest('tr').find('input[name="nama_barang"]')
+                            .val(),
+                        quantity: $(this).val(),
+                        harga: $(this).closest('tr').find('input[name="harga_barang"]').val(),
+                        diskon: $(this).closest('tr').find('input[name="diskon_barang"]').val(),
+                        potongan: $(this).closest('tr').find('input[name="potongan_barang"]')
+                            .val(),
                     };
-
-                    var method = 'POST'; // Changed method to POST
-                    var action = 'Penerimaan Barang';
-                    var url = '/app/penerimaanbarang/create';
-
-                    Swal.fire({
-                        title : 'warning',
-                        title: "Apakah anda yakin?",
-                        showCancelButton: true,
-                        confirmButtonText: "Yakin",
-                        cancelButtonText: "Batal"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                type: method,
-                                url: url,
-                                data: formData,
-                                success: function(response) {
-                                    Swal.fire({
-                                        title: 'Success',
-                                        icon: 'success',
-                                        text: 'Berhasil membuat ' +
-                                            action + ' dengan id : ' +
-                                            pb // Added space before action
-                                    }).then(() => { // Corrected syntax for then function
-                                        window.location.href = '/dataPB' // Update URL without reloading
-                                    });
-                                },
-                                error: function(xhr, status, error) {
-                                    Swal.fire({
-                                        title: 'Error',
-                                        text: 'Failed to update status: ' + error,
-                                        icon: 'error'
-                                    });
-                                }
-                            });
-                        }
-                    });
-                });
-            });
-        </script>
-        <script>
-            function ambilIDPO(id_po) {
-                var ada = sessionStorage.getItem('ID_PO');
-                if (ada == !null) {
-                    sessionStorage.removeItem('ID_PO');
-                }
-                sessionStorage.setItem('ID_PO', id_po);
-                document.getElementById('ID_PO').value = id_po;
-                $('#poModal').modal('hide');
-            }
-            document.addEventListener("DOMContentLoaded", function() {
-                const modalTableBody = document.getElementById('modalTableBody');
-                const submitModalBtn = document.getElementById('submitModal');
-
-                function setSessionData(data) {
-                    sessionStorage.setItem('selectedItems', JSON.stringify(data));
-                }
-
-                $(document).on('click', '#submitModal', function(event) {
-                    event.preventDefault();
-                    console.log("Button Clicked");
-                    const id_po = sessionStorage.getItem('ID_PO');
-                    setTimeout(function() {
-                        $('#updateQuantity' + id_po).modal('hide');
-                    }, 300);
-                    plisberhasil();
+                    modalData.push(item);
                 });
 
-                function plisberhasil() {
-                    const selectedItems = [];
-                    const rows = modalTableBody.querySelectorAll('tr');
-                    rows.forEach(row => {
-                        const id = row.querySelector('.id-input');
-                        const quantityInput = row.querySelector('.quantity-input');
-                        const hargaInput = row.querySelector('.harga-input');
-                        const diskonInput = row.querySelector('.diskon-input');
-                        const potonganInput = row.querySelector('.potongan-input');
-                        console.log("ID:", id ? id.value : "N/A");
-                        console.log("Quantity:", quantityInput ? quantityInput.value : "N/A");
-                        console.log("Harga:", hargaInput ? hargaInput.value : "N/A");
-                        console.log("Diskon Persen:", diskonInput ? diskonInput.value : "N/A");
-                        console.log("Diskon:", potonganInput ? potonganInput.value : "N/A");
-                        const quantity = quantityInput ? quantityInput.value : 0;
-                        const harga = hargaInput ? hargaInput.value : 0;
-                        const potongan = potonganInput ? potonganInput.value : 0;
-                        const diskon = diskonInput ? diskonInput.value : 0;
-                        if (id !== null) {
-                            selectedItems.push({
-                                id: id ? id.value : null,
-                                quantity,
-                                harga,
-                                diskon,
-                                potongan
-                            });
-                        }
-                    });
-                    const existingData = JSON.parse(sessionStorage.getItem('selectedItems')) || [];
-                    const existingDataMap = new Map(existingData.map(item => [item.id, item]));
-                    selectedItems.forEach(newItem => {
-                        const existingItem = existingDataMap.get(newItem.id);
-                        if (existingItem) {
-                            existingItem.quantity = newItem.quantity;
-                        } else {
-                            existingDataMap.set(newItem.id, newItem);
-                        }
-                    });
-                    const updatedData = Array.from(existingDataMap.values());
-                    sessionStorage.setItem('selectedItems', JSON.stringify(updatedData));
-                    if (selectedItems.length > 0) {
-                        const resultInput = document.getElementById('result');
-                        resultInput.value = JSON.stringify(selectedItems);
+                var formData = {
+                    _token: csrfToken,
+                    ID_PO: id_po,
+                    tanggal_pb: tanggal_pb,
+                    surat_jalan: surat_jalan,
+                    jatuh_tempo: jatuh_tempo,
+                    ket: ket,
+                    result: JSON.stringify(modalData), // Mengirim data modal ke controller
+                };
+                console.log(formData);
+                var method = 'POST'; // Changed method to POST
+                var action = 'Penerimaan Barang';
+                var url = '/app/penerimaanbarang/create';
+
+                Swal.fire({
+                    title: 'warning',
+                    title: "Apakah anda yakin?",
+                    showCancelButton: true,
+                    confirmButtonText: "Yakin",
+                    cancelButtonText: "Batal"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: method,
+                            url: url,
+                            data: formData,
+                            success: function(response) {
+                                Swal.fire({
+                                    title: 'Success',
+                                    icon: 'success',
+                                    text: 'Berhasil membuat ' +
+                                        action + ' dengan id : ' +
+                                        response
+                                        .data // Added space before action
+                                }).then(() => { // Corrected syntax for then function
+                                    window.location.href =
+                                        '/app/penerimaanbarang/data' // Update URL without reloading
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: 'Failed to update status: ' + error,
+                                    icon: 'error'
+                                });
+                            }
+                        });
                     }
-                }
-            });
-
-            $(document).ready(function() {
-                function updateTotalPrice(index) {
-                    var quantity = parseInt($(`input[name="stok[]"]`).eq(index).val()) || 0;
-                    var harga = parseFloat($(`input[name="harga[]"]`).eq(index).val()) || 0;
-                    var diskon = parseFloat($(`input[name="diskon[]"]`).eq(index).val()) || 0;
-                    // Update the total price input field
-                    $(`input[name="total_harga[]"]`).eq(index).val(total);
-                }
-                // Attach event listeners to input fields
-                $(document).on('input', 'input[name^="stok[]"]', `input[name="harga[]"]`, `input[name="diskon[]"]`,
-                    function() {
-                        var index = $(this).closest('tr').index();
-                        updateTotalPrice(index);
-                    });
-                // Trigger initial calculation for existing rows
-                $('input[name^="stok[]"]').each(function(index) {
-                    updateTotalPrice(index);
                 });
             });
-
-            function tampilModal() {
-                var id_po = sessionStorage.getItem('ID_PO');
-                $('#updateQuantity' + id_po).modal('show');
-            }
-
-            function closeModalUpdate(id_po) {
-                $('#updateQuantity' + id_po).modal('hide');
-            }
-
-            function closeModal(id_po) {
-                $('#detailpb' + id_po).modal('hide');
-            }
-
-            function closeModalPO(id_po) {
-                $('#dataPO' + id_po).modal('hide');
-            }
-
-            function submitcuy() {
+        });
+    </script>
+    <script>
+        function ambilIDPO(id_po) {
+            var ada = sessionStorage.getItem('ID_PO');
+            if (ada == !null) {
                 sessionStorage.removeItem('ID_PO');
             }
-        </script>
-    @endsection
+            sessionStorage.setItem('ID_PO', id_po);
+            document.getElementById('ID_PO').value = id_po;
+            $('#poModal').modal('hide');
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            const modalTableBody = document.getElementById('modalTableBody');
+            const submitModalBtn = document.getElementById('submitModal');
+
+            function setSessionData(data) {
+                sessionStorage.setItem('selectedItems', JSON.stringify(data));
+            }
+
+            $(document).on('click', '#submitModal', function(event) {
+                event.preventDefault();
+                console.log("Button Clicked");
+                const id_po = sessionStorage.getItem('ID_PO');
+                setTimeout(function() {
+                    $('#updateQuantity' + id_po).modal('hide');
+                }, 300);
+                plisberhasil();
+            });
+
+            function plisberhasil() {
+                const selectedItems = [];
+                const rows = modalTableBody.querySelectorAll('tr');
+                rows.forEach(row => {
+                    const id = row.querySelector('.id-input');
+                    const quantityInput = row.querySelector('.quantity-input');
+                    const hargaInput = row.querySelector('.harga-input');
+                    const diskonInput = row.querySelector('.diskon-input');
+                    const potonganInput = row.querySelector('.potongan-input');
+                    console.log("ID:", id ? id.value : "N/A");
+                    console.log("Quantity:", quantityInput ? quantityInput.value : "N/A");
+                    console.log("Harga:", hargaInput ? hargaInput.value : "N/A");
+                    console.log("Diskon Persen:", diskonInput ? diskonInput.value : "N/A");
+                    console.log("Diskon:", potonganInput ? potonganInput.value : "N/A");
+                    const quantity = quantityInput ? quantityInput.value : 0;
+                    const harga = hargaInput ? hargaInput.value : 0;
+                    const potongan = potonganInput ? potonganInput.value : 0;
+                    const diskon = diskonInput ? diskonInput.value : 0;
+                    if (id !== null) {
+                        selectedItems.push({
+                            id: id ? id.value : null,
+                            quantity,
+                            harga,
+                            diskon,
+                            potongan
+                        });
+                    }
+                });
+                const existingData = JSON.parse(sessionStorage.getItem('selectedItems')) || [];
+                const existingDataMap = new Map(existingData.map(item => [item.id, item]));
+                selectedItems.forEach(newItem => {
+                    const existingItem = existingDataMap.get(newItem.id);
+                    if (existingItem) {
+                        existingItem.quantity = newItem.quantity;
+                    } else {
+                        existingDataMap.set(newItem.id, newItem);
+                    }
+                });
+                const updatedData = Array.from(existingDataMap.values());
+                sessionStorage.setItem('selectedItems', JSON.stringify(updatedData));
+                if (selectedItems.length > 0) {
+                    const resultInput = document.getElementById('result');
+                    resultInput.value = JSON.stringify(selectedItems);
+                }
+            }
+        });
+
+        $(document).ready(function() {
+            function updateTotalPrice(index) {
+                var quantity = parseInt($(`input[name="stok[]"]`).eq(index).val()) || 0;
+                var harga = parseFloat($(`input[name="harga[]"]`).eq(index).val()) || 0;
+                var diskon = parseFloat($(`input[name="diskon[]"]`).eq(index).val()) || 0;
+                // Update the total price input field
+                $(`input[name="total_harga[]"]`).eq(index).val(total);
+            }
+            // Attach event listeners to input fields
+            $(document).on('input', 'input[name^="stok[]"]', `input[name="harga[]"]`, `input[name="diskon[]"]`,
+                function() {
+                    var index = $(this).closest('tr').index();
+                    updateTotalPrice(index);
+                });
+            // Trigger initial calculation for existing rows
+            $('input[name^="stok[]"]').each(function(index) {
+                updateTotalPrice(index);
+            });
+        });
+
+        function tampilModal() {
+            var id_po = sessionStorage.getItem('ID_PO');
+            $('#updateQuantity' + id_po).modal('show');
+        }
+
+        function closeModalUpdate(id_po) {
+            $('#updateQuantity' + id_po).modal('hide');
+        }
+
+        function closeModal(id_po) {
+            $('#detailpb' + id_po).modal('hide');
+        }
+
+        function closeModalPO(id_po) {
+            $('#dataPO' + id_po).modal('hide');
+        }
+
+        function submitcuy() {
+            sessionStorage.removeItem('ID_PO');
+        }
+    </script>
+@endsection
