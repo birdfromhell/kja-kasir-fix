@@ -150,7 +150,7 @@ class SuratJalanRepository
             }
 
             if ($SuratOrders->isEmpty()) {
-                return redirect('/app/suratjalan/data')->with('error', 'Data purchase order tidak ditemukan');
+                return redirect('/dataSJ')->with('error', 'Data purchase order tidak ditemukan');
             } else {
                 return view('barang.barangkeluar.suratjalan.sj', compact('SuratOrders', 'detailTotal', 'detailBarang', 'detail', 'perusahaan', 'SuratJalanId', 'tanggalHariIni', 'barang', 'PerusahaanOptions', 'perusahaan'));
             }
