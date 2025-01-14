@@ -64,18 +64,18 @@ class SuratJalanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-
-    public function SuratJalan()
-    {
-        try {
-            return $this->suratjalanRepository->SuratJalan();
-        } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 400);
-        }
-    }
     public function store(StoreSuratJalanRequest $request)
     {
-        //
+        try {
+            $validatedData = $request->validated();
+            $suratJalan = new SuratJalan();
+            $suratJalan->fill($validatedData);
+            $suratJalan->save();
+
+            return response()->json(['message' => 'Surat Jalan created successfully'], 201);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Failed to create Surat Jalan'], 400);
+        }
     }
 
     /**
@@ -98,12 +98,13 @@ class SuratJalanController extends Controller
                 // Pastikan jumlah_barang adalah angka
             ]);
 
-            return $this->suratjalanRepository->edit($request, $id);
-        } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 400);
-        }
-        // Validasi input
+            $suratJalan = SuratJalan::findOrFail($id);
+            $suratJalan->update($request->all());
 
+            return response()->json(['message' => 'Surat Jalan updated successfully'], 200);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Failed to update Surat Jalan'], 400);
+        }
     }
 
     public function createSuratJalan(Request $request)
