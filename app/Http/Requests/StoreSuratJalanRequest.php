@@ -11,7 +11,7 @@ class StoreSuratJalanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class StoreSuratJalanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'ID_SO' => 'required',
+            'tanggal_sj' => 'required|date',
+            'nopol' => 'required|string',
+            'nama_supir' => 'required|string',
+            'ket' => 'required|string',
         ];
     }
 }
