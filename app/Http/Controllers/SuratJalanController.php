@@ -28,13 +28,13 @@ class SuratJalanController extends Controller
     protected $suratjalanRepository;
     public function __construct(SuratJalanRepository $suratjalanRepository)
     {
-        $this->.suratjalanRepository = $suratjalanRepository;
+        $this->suratjalanRepository = $suratjalanRepository;
     }
     public function index()
     {
         $id = auth()->user()->id;
         try {
-            return $this->.suratjalanRepository->index($id);
+            return $this->suratjalanRepository->index($id);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -56,7 +56,7 @@ class SuratJalanController extends Controller
     public function print($id_so, $id_sj)
     {
         try {
-            return $this->.suratjalanRepository->print($id_so, $id_sj);
+            return $this->suratjalanRepository->print($id_so, $id_sj);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -68,7 +68,7 @@ class SuratJalanController extends Controller
     public function SuratJalan()
     {
         try {
-            return $this->.suratjalanRepository->SuratJalan();
+            return $this->suratjalanRepository->SuratJalan();
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -98,7 +98,7 @@ class SuratJalanController extends Controller
                 // Pastikan jumlah_barang adalah angka
             ]);
 
-            return $this->.suratjalanRepository->edit($request, $id);
+            return $this->suratjalanRepository->edit($request, $id);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -255,7 +255,7 @@ class SuratJalanController extends Controller
     public function status($status, $id)
     {
         try {
-            return $this->.suratjalanRepository->status($status, $id);
+            return $this->suratjalanRepository->status($status, $id);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
@@ -265,7 +265,7 @@ class SuratJalanController extends Controller
     {
 
         try {
-            return $this->.suratjalanRepository->faktur($id_sj);
+            return $this->suratjalanRepository->faktur($id_sj);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }

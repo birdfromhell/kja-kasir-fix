@@ -333,6 +333,15 @@
                                 id ="sjFormSubmit">Tambah</button>
                             <button type="reset" class="btn iq-bg-danger">Reset</button>
                         </div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                 </div>
                 </form>
             </div>
