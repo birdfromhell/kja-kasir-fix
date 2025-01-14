@@ -502,9 +502,9 @@
                         result: result
                     };
 
-                    var method = 'GET'; // Changed method to POST
+                    var method = 'POST'; // Changed method to POST
                     var action = 'Surat Jalan';
-                    var url = '/SuratJalan/create';
+                    var url = '/app/suratjalan/tambah';
 
                     Swal.fire({
                         title: 'warning',
