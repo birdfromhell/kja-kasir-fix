@@ -16,7 +16,6 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KelompokController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\OrderPenjualanController;
-use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PenerimaanBarangController;
 use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\PurchaseOrderController;
@@ -253,7 +252,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             // SuratJalanController
             Route::prefix('suratjalan')->group(function () {
                 Route::get('tambah', [SuratJalanController::class, 'SuratJalan']);
-                Route::get('create', [SuratJalanController::class, 'CreateSuratJalan']);
+                Route::get('create', [SuratJalanController::class, 'createSuratJalan']);
                 Route::get('data', [SuratJalanController::class, 'index']);
                 Route::get('data/laporan', [SuratJalanController::class, 'laporan']);
                 Route::get('data/edit/{id}', [SuratJalanController::class, 'edit']);

@@ -61,22 +61,22 @@
                 </div>
                 <div class="iq-card-body">
                     <p>Input Surat Jalan</p>
-                    <form class="form-horizontal" action="/SuratJalan/create" method="POST">
+                    <form class="form-horizontal" action="/app/suratjalan/create" method="POST">
                         @csrf
                         <div class="form-group row">
                             <label class="control-label col-sm-2 align-self-center mb-0" for="tanggal_pb">ID Surat Jalan
                                 (SJ)</label>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" id="sj" name="sj" placeholder=""
-                                    value="{{ $SuratJalanId }}" readonly="true">
+                                       value="{{ $SuratJalanId }}" readonly="true">
                             </div>
                             <div class="col-sm-3">
                                 <input type="Date" class="form-control" id="tanggal_sj" name="tanggal_sj"
-                                    placeholder="Masukkan tanggal_sj" value="{{ $tanggalHariIni }}">
+                                       placeholder="Masukkan tanggal_sj" value="{{ $tanggalHariIni }}">
                             </div>
                             <div class="col-sm-2">
                                 <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                                    data-target="#poModal">Surat Order</button>
+                                        data-target="#poModal">Surat Order</button>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -85,15 +85,15 @@
                                 terpilih: </label>
                             <div class="col-sm-7">
                                 <input type="text" class="form-control" id="ID_SO" name="ID_SO" placeholder=""
-                                    readonly="true">
+                                       readonly="true">
                             </div>
                             <div class="col-sm-3">
                                 <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                                    data-target="#updateQuantity" onclick="tampilModal()">Update Quantity</button>
+                                        data-target="#updateQuantity" onclick="tampilModal()">Update Quantity</button>
                             </div>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="result" name="result" placeholder=""
-                                    readonly="true" hidden>
+                                       readonly="true" hidden>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -103,7 +103,7 @@
                                         <div class="modal-header">
                                             <h5 class="modal-title">Surat Order yang tersedia : </h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                                                onchange="">
+                                                    onchange="">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
@@ -118,81 +118,81 @@
                                                             <div class="card-body">
                                                                 <h4 class="card-title">Data SO</h4>
                                                                 <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal"
-                                                                    data-target="#detailpb{{ $so->id_so }}">Detail
+                                                                        data-toggle="modal"
+                                                                        data-target="#detailpb{{ $so->id_so }}">Detail
                                                                     SO</button>
                                                                 <button type="button" class="btn btn-primary"
-                                                                    id="ambilid"
-                                                                    onclick="ambilIDSO('{{ $so->id_so }}')">OK</button>
+                                                                        id="ambilid"
+                                                                        onclick="ambilIDSO('{{ $so->id_so }}')">OK</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="modal fade bd-example-modal-lg"
-                                                        id="detailpb{{ $so->id_so }}" tabindex="-1" role="dialog"
-                                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                         id="detailpb{{ $so->id_so }}" tabindex="-1" role="dialog"
+                                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg modal-dialog-centered"
-                                                            role="document">
+                                                             role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="exampleModalLabel">Detail
                                                                         SO
                                                                     </h5>
                                                                     <button type="button" class="close"
-                                                                        aria-label="Close"
-                                                                        onclick="closeModal('{{ $so->id_so }}')">
+                                                                            aria-label="Close"
+                                                                            onclick="closeModal('{{ $so->id_so }}')">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
                                                                 </div>
                                                                 <table class="table">
                                                                     <thead class="thead-light">
-                                                                        <tr>
-                                                                            <th scope="col">No</th>
-                                                                            <th scope="col">Kode Barang</th>
-                                                                            <th scope="col">Nama Barang</th>
-                                                                            <th scope="col">Kuantitas</th>
-                                                                        </tr>
+                                                                    <tr>
+                                                                        <th scope="col">No</th>
+                                                                        <th scope="col">Kode Barang</th>
+                                                                        <th scope="col">Nama Barang</th>
+                                                                        <th scope="col">Kuantitas</th>
+                                                                    </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        @php
-                                                                            $no = 1;
-                                                                        @endphp
-                                                                        @foreach ($detail as $detaillagi)
-                                                                            @foreach ($detaillagi as $details)
-                                                                                @if ($details['id_so'] == $so->id_so)
-                                                                                    @php
-                                                                                        $total =
-                                                                                            $details['total_harga'] *
-                                                                                            (1 -
-                                                                                                $details['potongan'] /
-                                                                                                    100);
-                                                                                    @endphp
-                                                                                    <tr>
-                                                                                        <td>{{ $no++ }}</td>
-                                                                                        <td>
-                                                                                            <input type="text"
-                                                                                                class="form-control"
-                                                                                                name=""
-                                                                                                value="{{ $details['barang_id'] ?? 'N/A' }}"
-                                                                                                readonly>
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <input type="text"
-                                                                                                class="form-control"
-                                                                                                name=""
-                                                                                                value="{{ $details['nama_barang'] ?? 'N/A' }}"
-                                                                                                readonly>
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <input type="text"
-                                                                                                class="form-control"
-                                                                                                name=""
-                                                                                                value="{{ $details['stok'] ?? 'N/A' }}"
-                                                                                                readonly>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                @endif
-                                                                            @endforeach
+                                                                    @php
+                                                                        $no = 1;
+                                                                    @endphp
+                                                                    @foreach ($detail as $detaillagi)
+                                                                        @foreach ($detaillagi as $details)
+                                                                            @if ($details['id_so'] == $so->id_so)
+                                                                                @php
+                                                                                    $total =
+                                                                                        $details['total_harga'] *
+                                                                                        (1 -
+                                                                                            $details['potongan'] /
+                                                                                                100);
+                                                                                @endphp
+                                                                                <tr>
+                                                                                    <td>{{ $no++ }}</td>
+                                                                                    <td>
+                                                                                        <input type="text"
+                                                                                               class="form-control"
+                                                                                               name=""
+                                                                                               value="{{ $details['barang_id'] ?? 'N/A' }}"
+                                                                                               readonly>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <input type="text"
+                                                                                               class="form-control"
+                                                                                               name=""
+                                                                                               value="{{ $details['nama_barang'] ?? 'N/A' }}"
+                                                                                               readonly>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <input type="text"
+                                                                                               class="form-control"
+                                                                                               name=""
+                                                                                               value="{{ $details['stok'] ?? 'N/A' }}"
+                                                                                               readonly>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            @endif
                                                                         @endforeach
+                                                                    @endforeach
                                                                     </tbody>
                                                                 </table>
                                                                 <div class="modal-footer">
@@ -211,93 +211,93 @@
                             </div>
                             @foreach ($SuratOrders as $so)
                                 <div class="modal fade bd-example-modal-lg" id="updateQuantity{{ $so->id_so }}"
-                                    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
+                                     tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                     aria-hidden="true">
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel"> Update Quantity </h5>
                                                 <button type="button" class="close" aria-label="Close"
-                                                    onclick="closeModalUpdate('{{ $so->id_so }}')">
+                                                        onclick="closeModalUpdate('{{ $so->id_so }}')">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <table class="table" id="modalTableBody">
                                                 <thead class="thead-light">
-                                                    <tr>
-                                                        <th scope="col">No</th>
-                                                        <th scope="col">Kode Barang</th>
-                                                        <th scope="col">Nama Barang</th>
-                                                        <th scope="col">Kuantitas</th>
-                                                    </tr>
+                                                <tr>
+                                                    <th scope="col">No</th>
+                                                    <th scope="col">Kode Barang</th>
+                                                    <th scope="col">Nama Barang</th>
+                                                    <th scope="col">Kuantitas</th>
+                                                </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @php
-                                                        $no = 1;
-                                                    @endphp
-                                                    @foreach ($detail as $detaillagi)
-                                                        @foreach ($detaillagi as $details)
-                                                            @if ($details['id_so'] == $so->id_so)
-                                                                @php
-                                                                    $total =
-                                                                        $details['total_harga'] *
-                                                                        (1 - $details['potongan'] / 100);
-                                                                @endphp
-                                                                <tr>
-                                                                    <td>
-                                                                        <input type="text"
-                                                                            class="form-control id-input" name=""
-                                                                            value="{{ $details['id'] ?? 'N/A' }}"
-                                                                            readonly>
-                                                                    </td>
-                                                                    <td>
-                                                                        <input type="text" class="form-control "
-                                                                            name=""
-                                                                            value="{{ $details['barang_id'] ?? 'N/A' }}"
-                                                                            readonly>
-                                                                    </td>
-                                                                    <td>
-                                                                        <input type="text" class="form-control"
-                                                                            name=""
-                                                                            value="{{ $details['nama_barang'] ?? 'N/A' }}"
-                                                                            readonly>
-                                                                    </td>
-                                                                    <td>
-                                                                        <input type="text"
-                                                                            class="form-control quantity-input"
-                                                                            name=""
-                                                                            value="{{ $details['stok'] ?? 'N/A' }}">
-                                                                    </td>
-                                                                    <td hidden>
-                                                                        <input type="text"
-                                                                            class="form-control harga-input"
-                                                                            name=""
-                                                                            value="{{ $details['harga'] ?? 'N/A' }}"
-                                                                            readonly>
-                                                                    </td>
-                                                                    <td hidden>
-                                                                        <input type="text"
-                                                                            class="form-control diskon-input"
-                                                                            name=""
-                                                                            value="{{ $details['potongan'] ?? 'N/A' }}"
-                                                                            readonly>
-                                                                    </td>
-                                                                    <td hidden>
-                                                                        <input type="text"
-                                                                            class="form-control diskon-persen"
-                                                                            name=""
-                                                                            value="{{ $details['diskon'] ?? 'N/A' }}"
-                                                                            readonly>
-                                                                    </td>
-                                                                </tr>
-                                                            @endif
-                                                        @endforeach
+                                                @php
+                                                    $no = 1;
+                                                @endphp
+                                                @foreach ($detail as $detaillagi)
+                                                    @foreach ($detaillagi as $details)
+                                                        @if ($details['id_so'] == $so->id_so)
+                                                            @php
+                                                                $total =
+                                                                    $details['total_harga'] *
+                                                                    (1 - $details['potongan'] / 100);
+                                                            @endphp
+                                                            <tr>
+                                                                <td>
+                                                                    <input type="text"
+                                                                           class="form-control id-input" name=""
+                                                                           value="{{ $details['id'] ?? 'N/A' }}"
+                                                                           readonly>
+                                                                </td>
+                                                                <td>
+                                                                    <input type="text" class="form-control "
+                                                                           name=""
+                                                                           value="{{ $details['barang_id'] ?? 'N/A' }}"
+                                                                           readonly>
+                                                                </td>
+                                                                <td>
+                                                                    <input type="text" class="form-control"
+                                                                           name=""
+                                                                           value="{{ $details['nama_barang'] ?? 'N/A' }}"
+                                                                           readonly>
+                                                                </td>
+                                                                <td>
+                                                                    <input type="text"
+                                                                           class="form-control quantity-input"
+                                                                           name=""
+                                                                           value="{{ $details['stok'] ?? 'N/A' }}">
+                                                                </td>
+                                                                <td hidden>
+                                                                    <input type="text"
+                                                                           class="form-control harga-input"
+                                                                           name=""
+                                                                           value="{{ $details['harga'] ?? 'N/A' }}"
+                                                                           readonly>
+                                                                </td>
+                                                                <td hidden>
+                                                                    <input type="text"
+                                                                           class="form-control diskon-input"
+                                                                           name=""
+                                                                           value="{{ $details['potongan'] ?? 'N/A' }}"
+                                                                           readonly>
+                                                                </td>
+                                                                <td hidden>
+                                                                    <input type="text"
+                                                                           class="form-control diskon-persen"
+                                                                           name=""
+                                                                           value="{{ $details['diskon'] ?? 'N/A' }}"
+                                                                           readonly>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
                                                     @endforeach
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-primary"
-                                                    id="submitModal">OK</button>
+                                                        id="submitModal">OK</button>
                                             </div>
                                         </div>
                                     </div>
@@ -309,7 +309,7 @@
                             </label>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" id="nopol" name="nopol"
-                                    placeholder="Silahkan masukkan nopol" value="">
+                                       placeholder="Silahkan masukkan nopol" value="">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -317,7 +317,7 @@
                             </label>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" id="nama_supir" name="nama_supir"
-                                    placeholder="Silahkan masukkan nama supir" value="">
+                                       placeholder="Silahkan masukkan nama supir" value="">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -325,12 +325,12 @@
                             </label>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" id="ket" name="ket"
-                                    placeholder="Silahkan masukkan ket, kenapa quantity diubah." value="">
+                                       placeholder="Silahkan masukkan ket, kenapa quantity diubah." value="">
                             </div>
                         </div>
                         <div class="form-group">
                             <button type="submit" onclick="submitcuy()" class="btn btn-primary"
-                                id ="sjFormSubmit">Tambah</button>
+                                    id ="sjFormSubmit">Tambah</button>
                             <button type="reset" class="btn iq-bg-danger">Reset</button>
                         </div>
                 </div>
@@ -495,7 +495,7 @@
 
                     var method = 'GET'; // Changed method to POST
                     var action = 'Surat Jalan';
-                    var url = '/SuratJalan/create';
+                    var url = '/app/suratjalan/create';
 
                     Swal.fire({
                         title: 'warning',
@@ -534,4 +534,4 @@
                 });
             });
         </script>
-    @endsection
+@endsection
