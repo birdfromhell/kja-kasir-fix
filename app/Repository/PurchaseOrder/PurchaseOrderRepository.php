@@ -76,8 +76,8 @@ class PurchaseOrderRepository
             $detailBarang = 0;
             $hargaAfterDiskon = 0;
             $totalHargaSemua = 0;
-            $detail = []; // Initialize $detail as an empty array
-            $barang = []; // Initialize $barang as an empty array
+            $detail = [];
+            $barang = [];
             $kodeBarangArray = [];
 
             $details = detail_po::where('id_po', $purchaseOrders->id_po)->with('barang')->latest()->first();
@@ -90,10 +90,9 @@ class PurchaseOrderRepository
                 }
             }
 
-            return view('barang.barangmasuk.po.print', compact('purchaseOrders', 'detailTotal', 'detailBarang', 'detail', 'perusahaan', 'totalHargaSemua',  'barang', 'kodeBarangArray', 'perusahaan', 'perusahaankita'));
+            return view('barang.barangmasuk.po.print', compact('purchaseOrders', 'detailTotal', 'detailBarang', 'detail', 'perusahaan', 'totalHargaSemua', 'barang', 'kodeBarangArray', 'perusahaan', 'perusahaankita'));
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
-            // return redirect('/dataPO')->with('error', 'Error printing purchase order.');
         }
     }
 

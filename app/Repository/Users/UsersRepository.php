@@ -126,9 +126,9 @@ class UsersRepository
                 return back()->with('error', 'Terjadi Kesalahan');
             }
 
-            if (auth()->user()->email_verified_at === null) {
-                return route('verification', ['error' => 'Email belum terverifikasi, silahkan verifikasi email']);
-            }
+//            if (auth()->user()->email_verified_at === null) {
+//                return route('verification', ['error' => 'Email belum terverifikasi, silahkan verifikasi email']);
+//            }
         } catch (\Exception $e) {
             // return redirect()->back()->with('error', $e->getMessage());
             return response()->json(['error' => $e->getMessage()], 400);

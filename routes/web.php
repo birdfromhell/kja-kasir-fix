@@ -241,7 +241,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get('/tambah', [OrderPenjualanController::class, 'OrderPenjualan']);
                 Route::get('laporan', [OrderPenjualanController::class, 'laporan']);
                 Route::get('create', [OrderPenjualanController::class, 'CreateOrderPenjualan']);
-                Route::get('data', [OrderPenjualanController::class, 'index']);
+                Route::get('data', [OrderPenjualanController::class, 'index'])->name('orderpenjualan.data');
                 Route::get('data/edit/{id}', [OrderPenjualanController::class, 'edit']);
                 Route::get('data/update-status/{id}', [OrderPenjualanController::class, 'status']);
                 Route::get('data/print/laporan/{id_po}', [OrderPenjualanController::class, 'print']);

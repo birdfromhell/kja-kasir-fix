@@ -12,7 +12,9 @@
                             </div>
                             <div class="nk-block-head-content">
                                 <div class="toggle-wrap nk-block-tools-toggle">
-                                    <button type="button" class="btn btn-outline-primary" onclick="window.location.href='/app/orderpenjualan/tambah'">Tambah</button>
+                                    <button type="button" class="btn btn-outline-primary"
+                                            onclick="window.location.href='/app/orderpenjualan/tambah'">Tambah
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -37,15 +39,16 @@
                                             <div class="nk-tb-col"><span>Aksi</span></div>
                                         </div>
 
-                                        @foreach ($OrderPenjualan as $po)
+                                        @foreach ($OrderPenjualan as $op)
                                             <div class="nk-tb-item">
                                                 <div class="nk-tb-col">{{ $loop->iteration }}</div>
-                                                <div class="nk-tb-col"><strong>{{ $po->id_po }}</strong></div>
-                                                <div class="nk-tb-col">{{ $po->user }}</div>
-                                                <div class="nk-tb-col">{{ $po->tanggal_po }}</div>
-                                                <div class="nk-tb-col">{{ $po->nama_perusahaan }}</div>
+                                                <div class="nk-tb-col"><strong>{{ $op->id_po }}</strong></div>
+                                                <div class="nk-tb-col">{{ $op->user }}</div>
+                                                <div class="nk-tb-col">{{ $op->tanggal_po }}</div>
+                                                <div class="nk-tb-col">{{ $op->nama_perusahaan }}</div>
                                                 <div class="nk-tb-col">
-                                                    <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#detailpo{{ $po->id_po }}">
+                                                    <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
+                                                            data-bs-target="#detailModal{{ $op->id_so }}">
                                                         Detail
                                                     </button>
                                                 </div>
@@ -54,7 +57,7 @@
                                                         $totalBarang = 0;
                                                         foreach ($detail as $details) {
                                                             foreach ($details as $detaillagi) {
-                                                                if ($detaillagi['id_po'] == $po->id_po) {
+                                                                if ($detaillagi['id_so'] == $op->id_so) {
                                                                     $totalBarang += $detaillagi['stok'];
                                                                 }
                                                             }
@@ -67,7 +70,7 @@
                                                         $semua = 0;
                                                         foreach ($detail as $details) {
                                                             foreach ($details as $detaillagi) {
-                                                                if ($detaillagi['id_po'] == $po->id_po) {
+                                                                if ($detaillagi['id_so'] == $op->id_so) {
                                                                     $stok = $detaillagi['stok'] ?? 0;
                                                                     $harga = $detaillagi['harga'] ?? 0;
                                                                     $diskon = $detaillagi['diskon'] ?? 0;
@@ -83,20 +86,38 @@
                                                     @endphp
                                                     {{ number_format($semua, 0, ',', '.') }}
                                                 </div>
-                                                <div class="nk-tb-col">{{ $po->status }}</div>
-                                                <div class="nk-tb-col">{{ $po->jatuh_tempo }}</div>
+                                                <div class="nk-tb-col">{{ $op->status }}</div>
+                                                <div class="nk-tb-col">{{ $op->jatuh_tempo }}</div>
                                                 <div class="nk-tb-col">
-                                                    @if ($po->status == 'Permohonan')
-                                                        <button class="btn btn-outline-primary btn-sm btn-status" data-id="{{ $po->id_po }}" data-action="Approve">Approve</button>
-                                                        <button class="btn btn-outline-warning btn-sm btn-status" data-id="{{ $po->id_po }}" data-action="Decline">Decline</button>
+                                                    @if ($op->status == 'Permohonan')
+                                                        <button class="btn btn-outline-primary btn-sm btn-status"
+                                                                data-id="{{ $op->id_so }}"
+                                                                data-action="Approve"
+                                                                data-url="{{ route('orderpenjualan.data') }}/update-status/{{ $op->id_so }}"
+                                                        >Approve</button>
+
+                                                        <button class="btn btn-outline-warning btn-sm btn-status"
+                                                                data-id="{{ $op->id_so }}"
+                                                                data-action="Decline"
+                                                                data-url="{{ route('orderpenjualan.data') }}/update-status/{{ $op->id_so }}"
+                                                        >Decline</button>
                                                     @endif
-                                                    @if ($po->status == 'Approve')
-                                                        <button class="btn btn-outline-warning btn-sm btn-status" data-id="{{ $po->id_po }}" data-action="Decline">Decline</button>
+                                                    @if ($op->status == 'Approve')
+                                                        <button class="btn btn-outline-warning btn-sm btn-status"
+                                                                data-id="{{ $op->id_so }}"
+                                                                data-action="Decline"
+                                                                data-url="{{ route('orderpenjualan.data') }}/update-status/{{ $op->id_so }}"
+                                                        >Decline</button>
                                                     @endif
-                                                    @if ($po->status == 'Decline')
-                                                        <button class="btn btn-outline-primary btn-sm btn-status" data-id="{{ $po->id_po }}" data-action="Approve">Approve</button>
+                                                    @if ($op->status == 'Decline')
+                                                        <button class="btn btn-outline-primary btn-sm btn-status"
+                                                                data-id="{{ $op->id_so }}"
+                                                                data-action="Approve"
+                                                                data-url="{{ route('orderpenjualan.data') }}/update-status/{{ $op->id_so }}"
+                                                        >Approve</button>
                                                     @endif
-                                                    <button class="btn btn-outline-info btn-sm btn-print" data-id="{{ $po->id_po }}" data-action="Print">Print</button>
+                                                    <button class="btn btn-outline-info btn-sm btn-print"
+                                                            data-id="{{ $op->id_so }}" data-action="Print">Print</button>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -114,42 +135,97 @@
         </div>
     </div>
 
-    @foreach ($OrderPenjualan as $po)
+    @foreach ($OrderPenjualan as $op)
         <!-- Detail Modal for each PO -->
-        <div class="modal fade" id="detailModal{{ $po->id_po }}" tabindex="-1" aria-labelledby="detailModalLabel{{ $po->id_po }}" aria-hidden="true">
+        <div class="modal fade" id="detailModal{{ $op->id_so }}" tabindex="-1"
+             aria-labelledby="detailModalLabel{{ $op->id_so }}" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="detailModalLabel{{ $po->id_po }}">Detail PO</h5>
+                        <h5 class="modal-title" id="detailModalLabel{{ $op->id_so }}">Detail PO</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Barang ID</th>
-                                <th>Nama Barang</th>
-                                <th>Kuantitas</th>
-                                <th>Harga</th>
-                                <th>Diskon (%)</th>
-                                <th>Potongan</th>
-                                <th>Total</th>
+                                <th scope="col">No</th>
+                                <th scope="col">Barang ID</th>
+                                <th scope="col">Nama Barang</th>
+                                <th scope="col">Kuantitas</th>
+                                <th scope="col">Harga</th>
+                                <th scope="col">Diskon (%)</th>
+                                <th scope="col">Potongan</th>
+                                <th scope="col">Total</th>
                             </tr>
                             </thead>
                             <tbody>
+                            @php
+                                $no = 1;
+                            @endphp
                             @foreach ($detail as $detaillagi)
                                 @foreach ($detaillagi as $details)
-                                    @if ($details['id_po'] == $po->id_po)
+                                    @if ($details['id_so'] == $op->id_so)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $details['barang_id'] ?? 'N/A' }}</td>
-                                            <td>{{ $details['nama_barang'] ?? 'N/A' }}</td>
-                                            <td>{{ $details['stok'] ?? 'N/A' }}</td>
-                                            <td>{{ $details['harga'] ?? 'N/A' }}</td>
-                                            <td>{{ $details['diskon'] ?? 'N/A' }}</td>
-                                            <td>{{ $details['potongan'] ?? 'N/A' }}</td>
-                                            <td>{{ $details['total_harga'] ?? 'N/A' }}</td>
+                                            <td>
+                                                <input type="text"
+                                                       class="form-control"
+                                                       name="id[]"
+                                                       value="{{ $loop->iteration }}"
+                                                       readonly>
+                                            </td>
+                                            {{-- <td>{{ $no++ }}</td> --}}
+                                            {{-- <td>
+                                                <input type="text" class="form-control"
+                                                    name="id[]"
+                                                    value="{{ $details['id'] ?? 'N/A' }}"
+                                                    readonly>
+                                            </td> --}}
+                                            <td>
+                                                <input type="text"
+                                                       class="form-control"
+                                                       name="barang_id[]"
+                                                       value="{{ $details['barang_id'] ?? 'N/A' }}"
+                                                       readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text"
+                                                       class="form-control"
+                                                       readonly
+                                                       name="nama_barang[]"
+                                                       value="{{ $details['nama_barang'] ?? 'N/A' }}">
+                                            </td>
+                                            <td>
+                                                <input type="number"
+                                                       class="form-control"
+                                                       name="stok[]"
+                                                       value="{{ $details['stok'] ?? 'N/A' }}">
+                                            </td>
+                                            <td>
+                                                <input type="number"
+                                                       class="form-control"
+                                                       name="harga[]"
+                                                       value="{{ $details['harga'] ?? 'N/A' }}">
+                                            </td>
+                                            <td>
+                                                <input type="number"
+                                                       class="form-control"
+                                                       name="diskon[]"
+                                                       value="{{ $details['diskon'] ?? 'N/A' }}">
+                                            </td>
+                                            <td>
+                                                <input type="number"
+                                                       class="form-control"
+                                                       name="potongan[]"
+                                                       value="{{ $details['potongan'] ?? 'N/A' }}">
+                                            </td>
+                                            <td>
+                                                <input type="number"
+                                                       class="form-control"
+                                                       name="total_harga[]"
+                                                       value="{{ $details['total_harga'] ?? 'N/A' }}"
+                                                       readonly>
+                                            </td>
                                         </tr>
                                     @endif
                                 @endforeach
@@ -164,10 +240,11 @@
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('.btn-status').click(function() {
+        $(document).ready(function () {
+            $('.btn-status').click(function () {
                 var id = $(this).data('id');
                 var action = $(this).data('action');
+                var url = $(this).data('url');
 
                 Swal.fire({
                     title: "Do you want to save the changes?",
@@ -177,21 +254,21 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: 'GET',
-                            url: '/dataPO/update-status/' + id,
+                            url: url,
                             data: {
                                 status: action
                             },
-                            success: function(response) {
+                            success: function (response) {
                                 Swal.fire({
                                     title: 'Success',
                                     icon: 'success',
                                     text: 'Berhasil mengubah status menjadi ' + action
                                 });
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     location.reload();
                                 }, 2000);
                             },
-                            error: function(xhr, status, error) {
+                            error: function (xhr, status, error) {
                                 Swal.fire({
                                     title: 'Error',
                                     text: 'Failed to update status: ' + error,
@@ -203,7 +280,7 @@
                 });
             });
 
-            $('.btn-print').click(function() {
+            $('.btn-print').click(function () {
                 var id = $(this).data('id');
 
                 Swal.fire({
@@ -212,7 +289,7 @@
                     confirmButtonText: "Print",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = '/dataPO/print/laporan/' + id;
+                        window.location.href = '/app/orderpenjualan/data/print/laporan/' + id;
                     }
                 });
             });

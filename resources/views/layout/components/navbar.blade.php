@@ -56,7 +56,7 @@
                                 <ul class="link-list">
                                     <li><a href="{{ url('app/user/profile') }}"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
                                     <li><a href="{{ url('/app/setting') }}"><em class="icon ni ni-setting-alt"></em><span>Setting Aplikasi</span></a></li>
-                                    <li><a href="{{ url('app/user/profile#accounbtSettings') }}"><em class="icon ni ni-activity-alt"></em><span>Profile Perusahaan</span></a></li>
+                                    <li><a href="{{ url('app/user/profile#accountSettings') }}"><em class="icon ni ni-activity-alt"></em><span>Profile Perusahaan</span></a></li>
                                     <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
                                 </ul>
                             </div>
@@ -81,76 +81,63 @@
 </div>
 
 @push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var fullscreenButton = document.getElementById('fullscreenButton');
-            var icon = fullscreenButton.querySelector('em');
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const fullscreenButton = document.getElementById('fullscreenButton');
+    const icon = fullscreenButton?.querySelector('em');
 
-            if (!fullscreenButton) {
-                console.error('Fullscreen button not found');
-                return;
-            }
+    if (!fullscreenButton || !icon) {
+        console.error('Fullscreen button or icon not found');
+        return;
+    }
 
-            if (!icon) {
-                console.error('Icon element not found');
-                return;
-            }
-
-            function toggleFullScreen() {
-                if (!document.fullscreenElement &&
-                    !document.mozFullScreenElement &&
-                    !document.webkitFullscreenElement &&
-                    !document.msFullscreenElement) {
-                    if (document.documentElement.requestFullscreen) {
-                        document.documentElement.requestFullscreen();
-                    } else if (document.documentElement.msRequestFullscreen) {
-                        document.documentElement.msRequestFullscreen();
-                    } else if (document.documentElement.mozRequestFullScreen) {
-                        document.documentElement.mozRequestFullScreen();
-                    } else if (document.documentElement.webkitRequestFullscreen) {
-                        document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-                    }
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen()
+                .then(() => {
                     icon.classList.remove('ni-expand');
                     icon.classList.add('ni-shrink');
-                } else {
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen();
-                    } else if (document.msExitFullscreen) {
-                        document.msExitFullscreen();
-                    } else if (document.mozCancelFullScreen) {
-                        document.mozCancelFullScreen();
-                    } else if (document.webkitExitFullscreen) {
-                        document.webkitExitFullscreen();
-                    }
+                    localStorage.setItem('fullscreen', 'true');
+                })
+                .catch((err) => {
+                    console.error('Error attempting to enable fullscreen:', err);
+                });
+        } else {
+            document.exitFullscreen()
+                .then(() => {
                     icon.classList.remove('ni-shrink');
                     icon.classList.add('ni-expand');
-                }
-            }
+                    localStorage.setItem('fullscreen', 'false');
+                })
+                .catch((err) => {
+                    console.error('Error attempting to exit fullscreen:', err);
+                });
+        }
+    }
 
-            fullscreenButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                console.log('Fullscreen button clicked');
-                toggleFullScreen();
+    fullscreenButton.addEventListener('click', function (e) {
+        e.preventDefault();
+        toggleFullScreen();
+    });
+
+    if (localStorage.getItem('fullscreen') === 'true') {
+        document.documentElement.requestFullscreen()
+            .then(() => {
+                icon.classList.remove('ni-expand');
+                icon.classList.add('ni-shrink');
+            })
+            .catch((err) => {
+                console.error('Error re-enabling fullscreen:', err);
             });
+    }
 
-            document.addEventListener('fullscreenchange', updateFullscreenButton);
-            document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
-            document.addEventListener('mozfullscreenchange', updateFullscreenButton);
-            document.addEventListener('MSFullscreenChange', updateFullscreenButton);
-
-            function updateFullscreenButton() {
-                console.log('Fullscreen state changed');
-                if (!document.fullscreenElement &&
-                    !document.webkitIsFullScreen &&
-                    !document.mozFullScreen &&
-                    !document.msFullscreenElement) {
-                    icon.classList.remove('ni-shrink');
-                    icon.classList.add('ni-expand');
-                } else {
-                    icon.classList.remove('ni-expand');
-                    icon.classList.add('ni-shrink');
-                }
-            }
-        });
-    </script>
+    document.addEventListener('fullscreenchange', () => {
+        if (!document.fullscreenElement) {
+            icon.classList.remove('ni-shrink');
+            icon.classList.add('ni-expand');
+            localStorage.setItem('fullscreen', 'false');
+        }
+    });
+});
+</script>
 @endpush

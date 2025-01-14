@@ -230,11 +230,11 @@
     <p>Fitur untuk membeli barang melalui berbagai aksi.</p>
     <button class="pilih-btn" onclick="toggleOptions(this)">Pilih</button>
     <div class="options-menu">
-        <button onclick="window.location.href='{{ url('dataPO') }}'">Purchase Order</button>
+        <button onclick="window.location.href='{{ url('app/purchaseorder/data') }}'">Purchase Order</button>
 
-        <button onclick="window.location.href='{{ url('dataPB') }}'">Penerimaan Barang</button>
+        <button onclick="window.location.href='{{ url('app/penerimaanbarang/data') }}'">Penerimaan Barang</button>
 
-        <button onclick="window.location.href='{{ url('dataFB') }}'">Faktur Beli</button>
+        <button onclick="window.location.href='{{ url('app/fakturbeli/data') }}'">Faktur Beli</button>
     </div>
 </div>
 <!-- Barang Keluar Card -->
@@ -246,9 +246,9 @@
     <p>Fitur untuk menjual barang melalui berbagai aksi.</p>
     <button class="pilih-btn" onclick="toggleOptions(this)">Pilih</button>
     <div class="options-menu">
-        <button onclick="window.location.href='{{ url('suratorderpenjualan') }}'">Surat Order Penjualan</button>
-        <button onclick="window.location.href='{{ url('kategori') }}'">Surat Jalan</button>
-        <button onclick="window.location.href='{{ url('fakturpenjualan') }}'">Faktur Penjualan</button>
+        <button onclick="window.location.href='{{ url('app/orderpenjualan/data') }}'">Surat Order Penjualan</button>
+        <button onclick="window.location.href='{{ url('app/suratjalan/data') }}'">Surat Jalan</button>
+        <button onclick="window.location.href='{{ url('app/fakturjual/data') }}'">Faktur Penjualan</button>
     </div>
 </div>
 
@@ -261,10 +261,10 @@
     <p>Fitur untuk membuat laporan seperti: laporan neraca, laporan laba rugi, dll.</p>
     <button class="pilih-btn" onclick="toggleOptions(this)">Pilih</button>
     <div class="options-menu">
-        <button onclick="window.location.href='{{ url('laporanpembelian') }}'">Laporan Pembelian</button>
-        <button onclick="window.location.href='{{ url('laporanpenjualan') }}'">Laporan Penjualan</button>
-        <button onclick="window.location.href='{{ url('') }}'">Laporan Neraca</button>
-        <button onclick="window.location.href='{{ url('') }}'">Laporan Laba Rugi</button>
+        <button onclick="window.location.href='{{ url('app/laporan/pembelian') }}'">Laporan Pembelian</button>
+        <button onclick="window.location.href='{{ url('app/laporan/penjualan') }}'">Laporan Penjualan</button>
+        <button onclick="window.location.href='{{ url('app/laporan/neraca') }}'">Laporan Neraca</button>
+        <button onclick="window.location.href='{{ url('app/laporan/laba-rugi') }}'">Laporan Laba Rugi</button>
     </div>
 </div>
 </div>

@@ -106,6 +106,9 @@
         });
     </script>
 
+    <!-- @stack('scripts') ini akan menambahkan script tambahan jika ada -->
+    @stack('scripts')
+
 </body>
 
 </html>

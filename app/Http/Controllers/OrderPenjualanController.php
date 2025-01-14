@@ -25,10 +25,12 @@ class OrderPenjualanController extends Controller
      */
 
     protected $orderpenjualanRepository;
+
     public function __construct(OrderPenjualanRepository $orderpenjualanRepository)
     {
         $this->orderpenjualanRepository = $orderpenjualanRepository;
     }
+
     public function index()
     {
         try {
@@ -132,14 +134,34 @@ class OrderPenjualanController extends Controller
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }
+
     public function status(Request $request, $id)
     {
-        // dd($request->input());
         try {
-            return $this->orderpenjualanRepository->updateStatus($request, $id);
+            $validatedData = $request->validate([
+                'status' => 'required|in:Permohonan,Approve,Decline'
+            ]);
+
+            $result = $this->orderpenjualanRepository->updateStatus($id, [
+                'status' => $validatedData['status']
+            ]);
+
+            if ($result) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Status updated successfully'
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Failed to update status'
+                ], 400);
+            }
         } catch (Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
         }
-        // dd($id)
     }
 }

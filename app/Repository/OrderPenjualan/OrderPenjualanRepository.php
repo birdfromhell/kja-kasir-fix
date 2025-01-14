@@ -4,6 +4,7 @@ namespace App\Repository\OrderPenjualan;
 
 use App\Models\detail_op;
 use App\Models\opline;
+use App\Models\PurchaseOrder;
 use App\Models\SuratJalan;
 use App\Models\OrderPenjualan;
 use App\Models\Barang;
@@ -298,30 +299,30 @@ class OrderPenjualanRepository
             $pb = session('PB');
             $timeDiff = session('timeDiff');
 
-            return redirect('/dataOP')->with('success', 'SO <strong>' . $id_so . '</strong> berhasil ditambah');
+            return redirect('/app/orderpenjualan/data')->with('success', 'SO <strong>' . $id_so . '</strong> berhasil ditambah');
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
-    public function updateStatus(Request $request, $id)
+    public function updateStatus($id, array $data)
     {
         try {
-            $status = $request->get('status');
-            // dd($status);
-            if ($status == 'Approve' || $status == 'Decline') {
+            $status = $data['status'] ?? null; // Get status from input data
+            if (in_array($status, ['Approve', 'Decline'])) {
                 OrderPenjualan::where('id_so', $id)->update(['status' => $status]);
-                return array(
+                return [
                     'status' => 'success',
-                    'message' => 'successfully update status'
-                );
+                    'message' => 'Successfully updated status to ' . $status
+                ];
             } else {
-                return array(
+                return [
                     'status' => 'error',
-                    'message' => 'Internal server rusak ' + $status
-                );
+                    'message' => 'Invalid status: ' . $status
+                ];
             }
-        } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 400);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to update status: ' . $e->getMessage()
+            ], 500);
         }
-    }
-}
+    }}
